@@ -1,0 +1,713 @@
+{
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "integer",
+      "enum": [
+        1
+      ]
+    },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+    },
+    "baseRevision": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "summary": {
+      "type": "string",
+      "maxLength": 4000
+    },
+    "questions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 1000
+      },
+      "maxItems": 12
+    },
+    "operations": {
+      "type": "array",
+      "items": {
+        "anyOf": [
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "add_skill"
+                ]
+              },
+              "targetId": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+              },
+              "reason": {
+                "type": "string",
+                "maxLength": 2000
+              },
+              "data": {
+                "$ref": "#/$defs/skill"
+              }
+            },
+            "required": [
+              "id",
+              "type",
+              "targetId",
+              "reason",
+              "data"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "update_skill"
+                ]
+              },
+              "targetId": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+              },
+              "reason": {
+                "type": "string",
+                "maxLength": 2000
+              },
+              "data": {
+                "$ref": "#/$defs/skill"
+              }
+            },
+            "required": [
+              "id",
+              "type",
+              "targetId",
+              "reason",
+              "data"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "add_project"
+                ]
+              },
+              "targetId": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+              },
+              "reason": {
+                "type": "string",
+                "maxLength": 2000
+              },
+              "data": {
+                "$ref": "#/$defs/project"
+              }
+            },
+            "required": [
+              "id",
+              "type",
+              "targetId",
+              "reason",
+              "data"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "update_project"
+                ]
+              },
+              "targetId": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+              },
+              "reason": {
+                "type": "string",
+                "maxLength": 2000
+              },
+              "data": {
+                "$ref": "#/$defs/project"
+              }
+            },
+            "required": [
+              "id",
+              "type",
+              "targetId",
+              "reason",
+              "data"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "add_branch"
+                ]
+              },
+              "targetId": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+              },
+              "reason": {
+                "type": "string",
+                "maxLength": 2000
+              },
+              "data": {
+                "$ref": "#/$defs/branch"
+              }
+            },
+            "required": [
+              "id",
+              "type",
+              "targetId",
+              "reason",
+              "data"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "update_branch"
+                ]
+              },
+              "targetId": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+              },
+              "reason": {
+                "type": "string",
+                "maxLength": 2000
+              },
+              "data": {
+                "$ref": "#/$defs/branch"
+              }
+            },
+            "required": [
+              "id",
+              "type",
+              "targetId",
+              "reason",
+              "data"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "add_event"
+                ]
+              },
+              "targetId": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+              },
+              "reason": {
+                "type": "string",
+                "maxLength": 2000
+              },
+              "data": {
+                "$ref": "#/$defs/event"
+              }
+            },
+            "required": [
+              "id",
+              "type",
+              "targetId",
+              "reason",
+              "data"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "archive_skill"
+                ]
+              },
+              "targetId": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+              },
+              "reason": {
+                "type": "string",
+                "maxLength": 2000
+              },
+              "data": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "id",
+              "type",
+              "targetId",
+              "reason",
+              "data"
+            ],
+            "additionalProperties": false
+          },
+          {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+              },
+              "type": {
+                "type": "string",
+                "enum": [
+                  "archive_project"
+                ]
+              },
+              "targetId": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+              },
+              "reason": {
+                "type": "string",
+                "maxLength": 2000
+              },
+              "data": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "additionalProperties": false
+              }
+            },
+            "required": [
+              "id",
+              "type",
+              "targetId",
+              "reason",
+              "data"
+            ],
+            "additionalProperties": false
+          }
+        ]
+      },
+      "maxItems": 30
+    }
+  },
+  "required": [
+    "version",
+    "id",
+    "baseRevision",
+    "summary",
+    "questions",
+    "operations"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "skill": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+        },
+        "branchId": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+        },
+        "module": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "goal": {
+          "type": "string",
+          "maxLength": 3000
+        },
+        "exercise": {
+          "type": "string",
+          "maxLength": 3000
+        },
+        "proof": {
+          "type": "string",
+          "maxLength": 3000
+        },
+        "toolIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+          },
+          "maxItems": 30
+        },
+        "prerequisites": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+          },
+          "maxItems": 30
+        },
+        "risk": {
+          "type": "string",
+          "enum": [
+            "low",
+            "care",
+            "pro"
+          ]
+        },
+        "stage": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4
+        },
+        "archived": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "branchId",
+        "module",
+        "title",
+        "goal",
+        "exercise",
+        "proof",
+        "toolIds",
+        "prerequisites",
+        "risk",
+        "stage",
+        "archived"
+      ],
+      "additionalProperties": false
+    },
+    "project": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 3000
+        },
+        "branchIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+          },
+          "maxItems": 30
+        },
+        "skillIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+          },
+          "maxItems": 30
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 700
+          },
+          "maxItems": 20
+        },
+        "checks": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 700
+          },
+          "maxItems": 15
+        },
+        "toolIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+          },
+          "maxItems": 30
+        },
+        "stage": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 4
+        },
+        "risk": {
+          "type": "string",
+          "enum": [
+            "low",
+            "care",
+            "pro"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "practice",
+            "theory"
+          ]
+        },
+        "size": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "archived": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "description",
+        "branchIds",
+        "skillIds",
+        "steps",
+        "checks",
+        "toolIds",
+        "stage",
+        "risk",
+        "kind",
+        "size",
+        "archived"
+      ],
+      "additionalProperties": false
+    },
+    "branch": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 100
+        },
+        "subtitle": {
+          "type": "string",
+          "maxLength": 180
+        },
+        "group": {
+          "type": "string",
+          "enum": [
+            "Фундамент",
+            "Материалы",
+            "Системы",
+            "Применение"
+          ]
+        },
+        "color": {
+          "type": "string",
+          "pattern": "^#[0-9a-fA-F]{6}$"
+        },
+        "icon": {
+          "type": "string",
+          "enum": [
+            "compass",
+            "wood",
+            "gear",
+            "layers",
+            "brick",
+            "needle",
+            "bolt",
+            "chip",
+            "drop",
+            "house",
+            "leaf",
+            "wheel",
+            "cube",
+            "spark"
+          ]
+        },
+        "goal": {
+          "type": "string",
+          "maxLength": 3000
+        },
+        "archived": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "subtitle",
+        "group",
+        "color",
+        "icon",
+        "goal",
+        "archived"
+      ],
+      "additionalProperties": false
+    },
+    "event": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "kind": {
+          "type": "string",
+          "enum": [
+            "practice",
+            "theory",
+            "attempt",
+            "historical"
+          ]
+        },
+        "date": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^\\d{4}-\\d{2}-\\d{2}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "dateLabel": {
+          "type": "string",
+          "maxLength": 200
+        },
+        "description": {
+          "type": "string",
+          "maxLength": 6000
+        },
+        "evidence": {
+          "type": "string",
+          "maxLength": 3000
+        },
+        "allocations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "skillId": {
+                "type": "string",
+                "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+              },
+              "points": {
+                "type": "integer",
+                "minimum": 1,
+                "maximum": 30
+              }
+            },
+            "required": [
+              "skillId",
+              "points"
+            ],
+            "additionalProperties": false
+          },
+          "maxItems": 15
+        },
+        "projectId": {
+          "anyOf": [
+            {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "stale": {
+          "type": "boolean"
+        },
+        "toolIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+          },
+          "maxItems": 30
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "kind",
+        "date",
+        "dateLabel",
+        "description",
+        "evidence",
+        "allocations",
+        "projectId",
+        "stale",
+        "toolIds"
+      ],
+      "additionalProperties": false
+    }
+  }
+}
