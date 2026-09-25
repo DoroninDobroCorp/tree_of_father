@@ -90,6 +90,7 @@ class Config:
             return os.environ.get(key) or file_env.get(key) or default
 
         self.api_key = get_val("OPENAI_API_KEY", "").strip()
+        self.base_url = get_val("OPENAI_BASE_URL", "https://api.openai.com/v1").strip().rstrip("/")
         self.model = get_val("OPENAI_MODEL", "gpt-5-mini").strip()
         self.max_tokens = int(get_val("OPENAI_MAX_OUTPUT_TOKENS", "12000"))
         self.max_requests_per_hour = int(get_val("MAX_REQUESTS_PER_HOUR", "20"))
@@ -352,8 +353,9 @@ class WorkshopRequestHandler(BaseHTTPRequestHandler):
             payload = make_payload(token_param)
             payload_bytes = json.dumps(payload).encode("utf-8")
 
+            endpoint = f"{app.config.base_url}/chat/completions"
             req = urllib.request.Request(
-                "https://api.openai.com/v1/chat/completions",
+                endpoint,
                 data=payload_bytes,
                 headers={
                     "Content-Type": "application/json",
