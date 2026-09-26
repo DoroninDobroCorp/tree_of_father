@@ -20,7 +20,15 @@ let saveError='',corruptBackup='',undo=[],migrationNote='';
 let D=clone(SEED);
 const MSTATUS={mastered:'Освоен',progress:'В процессе',todo:'Впереди'};
 // Older saves are upgraded in place; the untouched original stays in OLD_KEY and can be downloaded from «Данные».
-function upgrade(state){const r=Core.migrate(state,SEED,HISTORY);for(const [k,v] of Object.entries(SEED.inventory||{})){if(r.state.inventory[k]===undefined)r.state.inventory[k]=v}Core.validateState(r.state,SCHEMA);return r}
+function upgrade(state){
+ const r=Core.migrate(state,SEED,HISTORY);
+ const toolIds=new Set(r.state.tools.map(x=>x.id));
+ for(const t of SEED.tools){if(!toolIds.has(t.id)){r.state.tools.push(clone(t));toolIds.add(t.id)}}
+ for(const [k,v] of Object.entries(SEED.inventory||{})){if(r.state.inventory[k]===undefined&&toolIds.has(k))r.state.inventory[k]=v}
+ for(const k of Object.keys(r.state.inventory)){if(!toolIds.has(k))delete r.state.inventory[k]}
+ Core.validateState(r.state,SCHEMA);
+ return r;
+}
 function reportText(r){return r?`Каталог обновлён: новых карточек ${r.added}, обновлено ${r.updated}${r.kept?`, твои правки сохранены в ${r.kept}`:''}. Опыт и заметки не тронуты.`:''}
 try{const raw=localStorage.getItem(KEY);if(raw){try{const o=JSON.parse(raw);const r=upgrade(o.state);D=r.state;if(r.migrated){if(o.state.schemaVersion!==Core.VERSION&&!localStorage.getItem(OLD_KEY))localStorage.setItem(OLD_KEY,raw);migrationNote=reportText(r.report)||'Сохранение обновлено до новой версии.';undo=[]}else undo=Array.isArray(o.undo)?o.undo.slice(-3):[]}catch(e){corruptBackup=raw;saveError='Сохранение не прочитано: '+e.message+'. Исходные данные сохранены для выгрузки в разделе «Данные». Сейчас показан стартовый профиль.'}}}catch{saveError='Браузер не разрешил постоянное хранение. Карта работает, но перед закрытием нужно экспортировать JSON.'}
 const U={page:'home',branch:null,search:'',mfilter:'all',group:'all',status:'all',projectBranch:'all',simple:false,toolBranch:'all',toolStatus:'all',journalKind:'all',mode:'experience',aiScope:'wood',aiText:'',proposal:null,proposalSelected:[],aiBusy:false,aiConsent:false,health:null,aiMessage:'',chatPackage:'',packageMode:null,packageRevision:null,drafts:{},openModal:null,serverStatus:{status:'checking',message:''},serverBackups:[],serverGit:null,serverLastSaved:null,selectedBackup:null};
@@ -87,10 +95,11 @@ async function initServerSync(){
    if(data.exists&&data.save&&data.save.state){
     const serverState=data.save.state;
     const localRev=D.revision||0,serverRev=serverState.revision||0;
-    if(serverRev>=localRev){
+    if(serverRev>=localRev||corruptBackup||saveError){
      const r=upgrade(serverState);D=r.state;
      undo=Array.isArray(data.save.undo)?data.save.undo.slice(-3):[];
      try{localStorage.setItem(KEY,JSON.stringify({app:'svoya-masterskaya',version:Core.VERSION,state:D,undo}))}catch{}
+     saveError='';corruptBackup='';
      U.serverLastSaved=data.savedAt;
      U.serverStatus={status:'synced',message:`Синхронизировано с сервером (r${D.revision})`};
      render();updateSaveBadge();
