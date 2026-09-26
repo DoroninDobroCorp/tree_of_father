@@ -15854,6 +15854,28 @@
         "base",
         "building"
       ]
+    },
+    {
+      "id": "base.screws",
+      "title": "Саморезы разной длины",
+      "es": "tornillos autorroscantes de varias longitudes",
+      "description": "Универсальные саморезы и саморезы по дереву разной длины для сборки каркасов, полок, панелей и быстрого монтажа.",
+      "branchIds": [
+        "base",
+        "wood",
+        "building"
+      ]
+    },
+    {
+      "id": "base.brackets.73_90",
+      "title": "Уголки мебельные (размер 73 и 90)",
+      "es": "escuadras para muebles 73 y 90 mm",
+      "description": "Металлические мебельные монтажные уголки размеров 73 мм и 90 мм для полок, корпусов, каркасов и сборки мебели.",
+      "branchIds": [
+        "base",
+        "wood",
+        "building"
+      ]
     }
   ],
   "events": [
@@ -16058,6 +16080,8 @@
     "screwdriver.flat": "have",
     "land.fokin": "have",
     "base.brackets": "have",
+    "base.screws": "have",
+    "base.brackets.73_90": "have",
     "building.caulkgun": "have",
     "seal": "have",
     "building.sealant": "have",
