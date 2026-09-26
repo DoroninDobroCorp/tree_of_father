@@ -28,7 +28,7 @@ class TestConfigAndRateLimiter(unittest.TestCase):
     """Test configuration loading and rate limiter logic."""
 
     def test_default_config(self):
-        with patch.dict(os.environ, {}, clear=True):
+        with patch.dict(os.environ, {}, clear=True), patch("server.load_env_file", return_value={}):
             cfg = Config(cli_port=9999, cli_host="127.0.0.1")
             self.assertEqual(cfg.port, 9999)
             self.assertEqual(cfg.host, "127.0.0.1")
@@ -226,7 +226,7 @@ class TestServerEndpoints(unittest.TestCase):
 
         def custom_urlopen(req, *args, **kwargs):
             url = req.full_url if hasattr(req, "full_url") else str(req)
-            if "api.openai.com" in url:
+            if "/chat/completions" in url:
                 return mock_http_response
             return real_urlopen(req, *args, **kwargs)
 
@@ -268,7 +268,7 @@ class TestServerEndpoints(unittest.TestCase):
 
         def custom_urlopen(req, *args, **kwargs):
             url = req.full_url if hasattr(req, "full_url") else str(req)
-            if "api.openai.com" in url:
+            if "/chat/completions" in url:
                 return mock_http_response
             return real_urlopen(req, *args, **kwargs)
 
@@ -303,7 +303,7 @@ class TestServerEndpoints(unittest.TestCase):
 
         def custom_urlopen(req, *args, **kwargs):
             url = req.full_url if hasattr(req, "full_url") else str(req)
-            if "api.openai.com" in url:
+            if "/chat/completions" in url:
                 raise http_error
             return real_urlopen(req, *args, **kwargs)
 
