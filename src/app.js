@@ -21,10 +21,11 @@ let D=clone(SEED);
 const MSTATUS={mastered:'Освоен',progress:'В процессе',todo:'Впереди'};
 // Older saves are upgraded in place; the untouched original stays in OLD_KEY and can be downloaded from «Данные».
 function upgrade(state){
+ // New seed tools arrive only through the catalog merge; starting inventory marks apply only to tools that merge just added, so deleted tools and removed marks stay gone.
+ const had=new Set((state.tools||[]).map(x=>x.id));
  const r=Core.migrate(state,SEED,HISTORY);
  const toolIds=new Set(r.state.tools.map(x=>x.id));
- for(const t of SEED.tools){if(!toolIds.has(t.id)){r.state.tools.push(clone(t));toolIds.add(t.id)}}
- for(const [k,v] of Object.entries(SEED.inventory||{})){if(r.state.inventory[k]===undefined&&toolIds.has(k))r.state.inventory[k]=v}
+ for(const [k,v] of Object.entries(SEED.inventory||{})){if(!had.has(k)&&r.state.inventory[k]===undefined&&toolIds.has(k))r.state.inventory[k]=v}
  for(const k of Object.keys(r.state.inventory)){if(!toolIds.has(k))delete r.state.inventory[k]}
  Core.validateState(r.state,SCHEMA);
  return r;
