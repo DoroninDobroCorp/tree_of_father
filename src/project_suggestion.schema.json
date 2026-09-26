@@ -1,0 +1,150 @@
+{
+  "type": "object",
+  "properties": {
+    "summary": {
+      "type": "string",
+      "maxLength": 600
+    },
+    "branchIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+      },
+      "maxItems": 3
+    },
+    "skillIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+      },
+      "maxItems": 15
+    },
+    "newSkills": {
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+          },
+          "branchId": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+          },
+          "module": {
+            "type": "string",
+            "maxLength": 100
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 160
+          },
+          "goal": {
+            "type": "string",
+            "maxLength": 3000
+          },
+          "exercise": {
+            "type": "string",
+            "maxLength": 3000
+          },
+          "proof": {
+            "type": "string",
+            "maxLength": 3000
+          },
+          "criteria": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "maxLength": 300
+            },
+            "maxItems": 8
+          },
+          "risk": {
+            "type": "string",
+            "enum": [
+              "low",
+              "care",
+              "pro"
+            ]
+          },
+          "stage": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 4
+          }
+        },
+        "required": [
+          "id",
+          "branchId",
+          "module",
+          "title",
+          "goal",
+          "exercise",
+          "proof",
+          "criteria",
+          "risk",
+          "stage"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "steps": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 700
+      },
+      "maxItems": 10
+    },
+    "checks": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 700
+      },
+      "maxItems": 6
+    },
+    "toolIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+      },
+      "maxItems": 20
+    },
+    "stage": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4
+    },
+    "risk": {
+      "type": "string",
+      "enum": [
+        "low",
+        "care",
+        "pro"
+      ]
+    },
+    "size": {
+      "type": "string",
+      "maxLength": 80
+    }
+  },
+  "required": [
+    "summary",
+    "branchIds",
+    "skillIds",
+    "newSkills",
+    "steps",
+    "checks",
+    "toolIds",
+    "stage",
+    "risk",
+    "size"
+  ],
+  "additionalProperties": false
+}

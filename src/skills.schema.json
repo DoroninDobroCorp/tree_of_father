@@ -1,0 +1,43 @@
+{
+  "type": "object",
+  "properties": {
+    "summary": {"type": "string", "maxLength": 600},
+    "allocations": {
+      "type": "array",
+      "maxItems": 15,
+      "items": {
+        "type": "object",
+        "properties": {
+          "skillId": {"type": "string", "pattern": "^[a-z][a-z0-9_.-]{1,79}$"},
+          "points": {"type": "integer", "minimum": 1, "maximum": 30}
+        },
+        "required": ["skillId", "points"],
+        "additionalProperties": false
+      }
+    },
+    "newSkills": {
+      "type": "array",
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string", "pattern": "^[a-z][a-z0-9_.-]{1,79}$"},
+          "branchId": {"type": "string", "pattern": "^[a-z][a-z0-9_.-]{1,79}$"},
+          "module": {"type": "string", "maxLength": 100},
+          "title": {"type": "string", "maxLength": 160},
+          "goal": {"type": "string", "maxLength": 3000},
+          "exercise": {"type": "string", "maxLength": 3000},
+          "proof": {"type": "string", "maxLength": 3000},
+          "criteria": {"type": "array", "items": {"type": "string", "maxLength": 300}, "maxItems": 8},
+          "risk": {"type": "string", "enum": ["low", "care", "pro"]},
+          "stage": {"type": "integer", "minimum": 1, "maximum": 4},
+          "points": {"type": "integer", "minimum": 1, "maximum": 30}
+        },
+        "required": ["id", "branchId", "module", "title", "goal", "exercise", "proof", "criteria", "risk", "stage", "points"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["summary", "allocations", "newSkills"],
+  "additionalProperties": false
+}

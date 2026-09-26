@@ -40,8 +40,9 @@ def static_dom_smoke_check(html_path: pathlib.Path) -> bool:
     seed_end = content.find("</script>", seed_start)
     seed_raw = content[seed_start:seed_end]
     seed_data = json.loads(seed_raw)
-    assert seed_data.get("schemaVersion") == 3, "Invalid schemaVersion in seed"
-    assert len(seed_data.get("skills", [])) > 50, "Insufficient skills in seed"
+    assert seed_data.get("schemaVersion") == 4, "Invalid schemaVersion in seed"
+    assert len(seed_data.get("skills", [])) > 300, "Insufficient skills in seed"
+    assert all(len(s["criteria"]) >= 2 for s in seed_data["skills"]), "Skill without mastery criteria"
     print(f"  ✓ Seed data verified ({len(seed_data['skills'])} skills, {len(seed_data['projects'])} projects)")
 
     # 3. Proposal schema script tag
@@ -53,6 +54,11 @@ def static_dom_smoke_check(html_path: pathlib.Path) -> bool:
     schema_data = json.loads(schema_raw)
     assert "$defs" in schema_data, "Schema missing $defs"
     print("  ✓ Proposal schema verified")
+
+    for marker in ('<script id="catalog-history" type="application/json">', '<script id="ai-rules" type="text/plain">'):
+        assert marker in content, f"Missing {marker}"
+    assert "<!--" not in content.split("<script>(()=>{", 1)[0].split("</noscript>", 1)[1], "Unreplaced build marker"
+    print("  ✓ Catalog history and AI rules embedded")
 
     # 4. App JavaScript integrity
     script_marker = "<script>(()=>{"
@@ -99,6 +105,16 @@ def run_playwright_test(base_url: str):
         assert is_valid is True, "window.Workshop.validate() failed"
         print("  ✓ In-browser Core.validateState(D, SCHEMA) passed")
 
+        # Mastery: tick the first skill of a branch and see the counter move
+        page.click('[data-action="nav"][data-id="map"]')
+        page.click('.branch-card[data-id="wood"]')
+        page.wait_for_selector(".mastery-summary")
+        page.click(".skill-tick >> nth=0")
+        mastered = page.evaluate("Object.values(window.Workshop.getState().mastery).filter(m => m.mastered).length")
+        assert mastered == 1, f"Expected one mastered skill, got {mastered}"
+        assert page.text_content(".mastery-count b") == "1", "Branch mastery counter did not update"
+        print("  ✓ Mastery tick updates state and branch progress")
+
         # Click Mentor navigation
         page.click('[data-action="nav"][data-id="mentor"]')
         page.wait_for_selector('#ai-scope')
@@ -137,6 +153,7 @@ def main():
 
     # Start ephemeral background server
     config = Config(cli_port=0, cli_host="127.0.0.1")
+    config.access_key = ""
     workshop_app = WorkshopServer(config)
 
     class SmokeHandler(WorkshopRequestHandler):

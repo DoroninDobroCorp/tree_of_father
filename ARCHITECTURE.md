@@ -10,9 +10,10 @@
 
 1. **Автономность (Zero Dependencies):**
    - Клиентская часть собрана в автономный `index.html` без внешних CDN, веб-шрифтов или сторонних JavaScript-библиотек.
-   - Локальный backend (`server.py`) написан исключительно на стандартной библиотеке Python 3.9+ (`http.server`, `urllib.request`, `json`, `secrets`). Установка сторонних пакетов через `pip` не требуется.
+   - Локальный backend (`server.py`) написан исключительно на стандартной библиотеке Python 3.10+ (`http.server`, `urllib.request`, `json`, `secrets`). Установка сторонних пакетов через `pip` не требуется.
 2. **Изоляция данных и безопасность:**
-   - Сервер слушает строго `127.0.0.1` и не принимает внешние подключения.
+   - Сервер по умолчанию слушает `127.0.0.1` и отдаёт только `index.html` и `robots.txt` (белый список); `.env`, исходники и `.git` не выдаются.
+   - ИИ-запросы без `WORKSHOP_ACCESS_KEY` принимаются только при `Host` = `127.0.0.1`/`localhost`. Если ключ задан, он обязателен всегда (заголовок `X-Workshop-Key`). `WORKSHOP_PUBLIC_API=1` снимает проверку доступа полностью; остаётся только часовой лимит. Разрешающего CORS нет.
    - API-ключ OpenAI хранится только в файле конфигурации `.env` на сервере и никогда не передаётся в браузер или сохранение.
    - Защита от межсайтовых атак: взаимодействие с `/api/propose` защищено сессионным токеном (`X-Workshop-Token`), сгенерированным сервером в памяти.
 3. **Человек принимает решения (Human-in-the-loop):**
@@ -25,14 +26,15 @@
 
 ---
 
-## 2. Структура состояния (Схема v3)
+## 2. Структура состояния (Схема v4)
 
-Состояние игры хранится в `localStorage` браузера в формате JSON (версия схемы `schemaVersion: 3`).
+Состояние игры хранится в `localStorage` браузера (ключ `svoya-masterskaya-rpg-v3`, имя сохранено ради совместимости) в формате JSON, `schemaVersion: 4`.
 
 ```typescript
 interface State {
-  schemaVersion: 3;
+  schemaVersion: 4;
   revision: number;              // Монотонный счётчик ревизий (0, 1, 2...)
+  catalogVersion: number;        // Версия встроенного каталога, с которой синхронизирован профиль
   branches: Branch[];            // 14 направлений (Дерево, Металл, Электрика и др.)
   skills: Skill[];               // Канонические карточки навыков
   projects: Project[];           // Карточки проектов/квестов
@@ -43,6 +45,7 @@ interface State {
   focus: string[];               // Активные направления пользователя
   notes: Record<string, string>; // Личные заметки к навыкам
   goals: Record<string, SkillGoal>; // explore, repeat, deepen, later
+  mastery: Record<string, Mastery>; // Отметки освоения, независимые от XP
   settings: { theme: 'light' | 'dark' };
   audit: AuditEntry[];           // История последних 100 изменений
   appliedProposalIds: string[];  // ID применённых предложений (защита от повторного применения)
@@ -55,13 +58,24 @@ interface State {
 - `branchId`: привязка к родительской ветке.
 - `module`: название подветки (например, «Разметка и геометрия»).
 - `title`, `goal`, `exercise`, `proof`: конкретные формулировки цели, учебного действия и критерия проверки.
+- `criteria`: 0–8 проверяемых пунктов освоения (в выпущенном каталоге и от ИИ — не меньше двух).
 - `toolIds`: ссылки на инструменты из каталога.
 - `prerequisites`: список зависимостей (строго ациклический граф).
 - `risk`: уровень риска (`low`, `care`, `pro`).
 - `stage`: ступень маршрута (1..4).
 - `archived`: логическое удаление без потери истории.
 
-### 2.2. Запись в журнале (`Event`)
+### 2.2. Освоение (`Mastery`)
+
+```typescript
+interface Mastery { mastered: boolean; checks: number[]; date: string | null }
+```
+
+- `checks` — индексы отмеченных `criteria`; при изменении текста критериев отметки сбрасываются, `mastered` остаётся.
+- Запись без `mastered` и без `checks` удаляется. ИИ не может менять `mastery`.
+- `Core.skillProgress` даёт статус: `mastered` / `progress` (есть XP или отмеченные критерии) / `todo`. `Core.branchStats` считает `mastered`, `progress`, `todo`; `Core.isReady` — все предпосылки освоены (для блока «Следующие шаги»).
+
+### 2.3. Запись в журнале (`Event`)
 Каждая запись опыта содержит:
 - `kind`: вид записи (`practice`, `theory`, `attempt`, `historical`).
 - `date`: дата в формате `YYYY-MM-DD` или `null` (если точная дата неизвестна).
@@ -69,6 +83,14 @@ interface State {
 - `evidence`: проверяемое подтверждение или основание.
 - `allocations`: массив распределения XP по навыкам (`skillId`, `points` от 1 до 30).
 - `projectId`: связь с проектом или `null`.
+
+### 2.4. Миграция и обновление каталога
+
+`Core.migrate(state, seed, history)` вызывается при загрузке и при импорте:
+
+- v3 → v4: `schemaVersion: 4`, `catalogVersion: 0`, `mastery: {}`, `criteria: []`. Исходная строка сохранения v3 кладётся в `localStorage` под `svoya-masterskaya-rpg-v3-before-v4`.
+- Если `state.catalogVersion < seed.catalogVersion`, `mergeCatalog` сливает каталог: новые ID добавляются; карточка, чей хэш (`Core.itemHash`) есть в `src/catalog_history.json` (то есть не менялась пользователем), заменяется выпущенной версией с сохранением `archived`; изменённые пользователем карточки остаются, но получают `criteria`, если своих нет; собственные карточки пользователя сохраняются. События, заметки, цели, инвентарь и освоение не трогаются.
+- `catalog_history.json` — только дописываемый список хэшей всех выпущенных версий каждой карточки; его ведёт `build.py` (Python-реализация хэша совпадает с JS, это проверяет тест).
 
 ---
 
@@ -121,6 +143,13 @@ interface State {
 - `plan`: последовательность учебных проектов. Начисление опыта (`add_event`) запрещено.
 - `experience`: анализ завершённой практики и предложение записей опыта.
 
+Помощники в формах — одноразовые ответы без вопросов, не чат и не `Proposal`. У каждого свой системный промпт в `server.py` (`SUGGEST_MODES`) и своя строгая схема. Клиент проверяет ответ той же схемой, сборка встраивает схемы в `index.html` (`suggest-schemas`):
+- `skills` (`src/skills.schema.json`), кнопка «Подобрать с ИИ» в записи опыта: `allocations` по существующим навыкам и до трёх `newSkills` с XP.
+- `skill` (`src/skill_card.schema.json`), кнопка «Заполнить с ИИ» в карточке навыка: подветка, тексты, критерии, предпосылки, инструменты, риск и ступень. В существующей карточке заполняются только пустые поля, риск только повышается.
+- `project` (`src/project_suggestion.schema.json`), кнопка «Заполнить с ИИ» в своём проекте: навыки (и до трёх новых), направления, этапы, критерии, инструменты, ступень, риск, масштаб. Заполненные пользователем этапы и критерии не перезаписываются; у существующего проекта риск только повышается.
+
+В обоих случаях отправляются текст формы и компактный индекс каталога. Неизвестные ID и новые навыки вне активных веток отбрасываются, остальное подставляется в форму. На карту всё попадает одним коммитом только после сохранения формы пользователем.
+
 ---
 
 ## 5. Архитектура сервера (`server.py`)
@@ -130,16 +159,17 @@ interface State {
 ```
 +-------------------------------------------------------------+
 |                      Браузер (Клиент)                       |
-|                   http://127.0.0.1:8765                     |
+|          http://127.0.0.1:8765 или через nginx /api/        |
 +------------------------------+------------------------------+
                                |
-            [GET /]            |            [POST /api/propose]
-     (Статические файлы)       |        (X-Workshop-Token + Payload)
+   [GET / · index.html]        |            [POST /api/propose]
+     (только белый список)     | (X-Workshop-Token [+ X-Workshop-Key])
                                v
 +-------------------------------------------------------------+
 |                     server.py (Локальный)                    |
 |                                                             |
 |  - RateLimiter: скользящее окно 1 час (макс. 20 запр./час)  |
+|  - Доступ: WORKSHOP_ACCESS_KEY или локальный Host           |
 |  - Проверка X-Workshop-Token против session_token           |
 |  - Загрузка системных правил (ai_instructions.txt)          |
 |  - Валидация JSON Schema (proposal.schema.json)             |
@@ -150,33 +180,32 @@ interface State {
         (Structured Outputs)   | JSON Schema
                                v
 +-------------------------------------------------------------+
-|                 OpenAI API (api.openai.com)                 |
-|             gpt-5-mini / gpt-4o-mini / gpt-4o               |
+|        {OPENAI_BASE_URL}/chat/completions                   |
+|        OpenAI или совместимый прокси (VibeProxy)            |
 +-------------------------------------------------------------+
 ```
 
 ### Маршруты API:
 1. `GET /api/health`
-   - Возвращает `{ app: "svoya-masterskaya", configured: bool, model: string, sessionToken: string }`.
+   - Возвращает `{ app, configured, accessRequired, accessGranted }`; при наличии доступа — также `model` и `sessionToken`.
 2. `POST /api/propose`
-   - Заголовок: `X-Workshop-Token: <sessionToken>`
+   - Заголовки: `X-Workshop-Token: <sessionToken>`, при заданном ключе — `X-Workshop-Key`. Без доступа — 403.
    - Тело: `{ mode, scope, message, context }`
    - Проксирует вызов в OpenAI с `response_format: { type: "json_schema", ... }`.
    - Возвращает `{ proposal: ... }` при успехе или `{ error: string }` при ошибке.
 3. `GET /<path>`
-   - Отдаёт `index.html`, `maker_rpg.html`, `initial-profile.json`, `robots.txt` и другие безопасные файлы с проверкой `relative_to` для предотвращения Path Traversal.
+   - Отдаёт только `/`, `/index.html`, `/robots.txt`; всё остальное — 404.
 
 ---
 
 ## 6. Конвейер сборки (`src/build.py`)
 
-Для удобной разработки код разделен на модули:
-- `src/shell.html` — базовый HTML-шаблон.
-- `src/style.css` — CSS-стили интерфейса и тёмной темы.
-- `src/seed.json` — исходный каталог (14 веток, 164 навыка, 60 проектов).
+Исходники:
+- `src/shell.html` — HTML-шаблон с маркерами `<!-- STYLE -->`, `<!-- SEED -->`, `<!-- SCHEMA -->`, `<!-- HISTORY -->`, `<!-- AI_RULES -->`, `<!-- CORE -->`, `<!-- APP -->`.
+- `src/style.css`, `src/core.js`, `src/app.js`.
+- `src/seed.json` — исходный каталог и стартовый опыт (`catalogVersion` увеличивается при изменении каталога).
+- `src/catalog_history.json` — хэши выпущенных версий карточек.
 - `src/proposal.schema.json` — контракт Structured Outputs.
-- `src/core.js` — правила и расчет опыта.
-- `src/app.js` — логика UI и обработчики событий.
-- `src/ai_instructions.txt` — системный промпт ИИ-наставника.
+- `src/ai_instructions.txt` — правила ИИ; один источник и для сервера, и для пакета ручного обмена в браузере.
 
-Запуск `python3 src/build.py` собирает единый переносимый файл `index.html` и обновляет `maker_rpg.html` и `initial-profile.json`.
+`python3 src/build.py` проверяет схему (строгий режим OpenAI: `additionalProperties: false`, все свойства в `required`) и каталог (уникальные ID, ссылки на ветки, инструменты, навыки, 2–8 критериев), дописывает историю хэшей и собирает `index.html`. Других генерируемых файлов нет.

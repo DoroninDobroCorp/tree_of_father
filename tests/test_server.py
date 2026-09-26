@@ -69,7 +69,9 @@ class TestServerEndpoints(unittest.TestCase):
         # Bind to port 0 (ephemeral port assigned by OS)
         cls.config = Config(cli_port=0, cli_host="127.0.0.1")
         cls.config.api_key = "sk-test-mock-key-12345"
-        cls.config.max_requests_per_hour = 5
+        cls.config.access_key = ""
+        cls.config.public_api = False
+        cls.config.max_requests_per_hour = 20
         cls.workshop_app = WorkshopServer(cls.config)
 
         class TestBoundHandler(WorkshopRequestHandler):
@@ -134,11 +136,10 @@ class TestServerEndpoints(unittest.TestCase):
         self.assertIn("text/html", hdrs.get("Content-Type", ""))
         self.assertIn("Своя мастерская", body)
 
-    def test_serve_initial_profile_json(self):
-        status, body, hdrs = self._get("/initial-profile.json")
-        self.assertEqual(status, HTTPStatus.OK)
-        self.assertIn("application/json", hdrs.get("Content-Type", ""))
-        self.assertEqual(body.get("schemaVersion"), 3)
+    def test_private_files_are_not_served(self):
+        for path in ("/.env", "/.env.example", "/server.py", "/src/app.js", "/src/seed.json", "/.git/config", "/README_RU.md"):
+            status, _, _ = self._get(path)
+            self.assertEqual(status, HTTPStatus.NOT_FOUND, path)
 
     def test_serve_robots_txt(self):
         status, body, hdrs = self._get("/robots.txt")
@@ -153,11 +154,49 @@ class TestServerEndpoints(unittest.TestCase):
         # Should be forbidden or not found
         self.assertIn(status, (HTTPStatus.FORBIDDEN, HTTPStatus.NOT_FOUND))
 
-    def test_cors_options(self):
-        req = urllib.request.Request(f"{self.base_url}/api/health", method="OPTIONS")
-        with urllib.request.urlopen(req) as resp:
-            self.assertEqual(resp.status, HTTPStatus.NO_CONTENT)
-            self.assertEqual(resp.headers.get("Access-Control-Allow-Origin"), "*")
+    def test_no_permissive_cors(self):
+        status, _, hdrs = self._get("/api/health")
+        self.assertEqual(status, HTTPStatus.OK)
+        self.assertNotIn("Access-Control-Allow-Origin", hdrs)
+
+    def test_public_host_without_access_key_gets_no_token(self):
+        status, body, _ = self._get("/api/health", headers={"Host": "tree.example.org"})
+        self.assertEqual(status, HTTPStatus.OK)
+        self.assertTrue(body["accessRequired"])
+        self.assertFalse(body["accessGranted"])
+        self.assertEqual(body["sessionToken"], "")
+        status, body, _ = self._post(
+            "/api/propose",
+            {"message": "Test"},
+            headers={"Host": "tree.example.org", "X-Workshop-Token": self.workshop_app.session_token},
+        )
+        self.assertEqual(status, HTTPStatus.FORBIDDEN)
+
+    def test_access_key_unlocks_public_host(self):
+        self.config.access_key = "door-key-123"
+        try:
+            status, body, _ = self._get("/api/health", headers={"Host": "tree.example.org"})
+            self.assertFalse(body["accessGranted"])
+            status, body, _ = self._get("/api/health", headers={"Host": "tree.example.org", "X-Workshop-Key": "wrong"})
+            self.assertFalse(body["accessGranted"])
+            status, body, _ = self._get("/api/health", headers={"Host": "tree.example.org", "X-Workshop-Key": "door-key-123"})
+            self.assertTrue(body["accessGranted"])
+            self.assertEqual(body["sessionToken"], self.workshop_app.session_token)
+            # With a key configured even localhost must present it
+            status, body, _ = self._get("/api/health")
+            self.assertFalse(body["accessGranted"])
+        finally:
+            self.config.access_key = ""
+
+    def test_public_api_opens_public_host(self):
+        self.config.public_api = True
+        try:
+            status, body, _ = self._get("/api/health", headers={"Host": "tree.example.org"})
+            self.assertFalse(body["accessRequired"])
+            self.assertTrue(body["accessGranted"])
+            self.assertEqual(body["sessionToken"], self.workshop_app.session_token)
+        finally:
+            self.config.public_api = False
 
     def test_health_endpoint(self):
         status, body, _ = self._get("/api/health")
@@ -245,6 +284,79 @@ class TestServerEndpoints(unittest.TestCase):
             self.assertEqual(status, HTTPStatus.OK)
             self.assertIn("proposal", body)
             self.assertEqual(body["proposal"]["id"], "p-mock-1")
+
+    def test_propose_skills_mode_forbids_questions(self):
+        token = self.workshop_app.session_token
+        sent = []
+        mock_http_response = MagicMock()
+        mock_http_response.read.return_value = json.dumps(
+            {"choices": [{"message": {"content": json.dumps({"summary": "s", "allocations": [], "newSkills": []}), "role": "assistant"}}]}
+        ).encode("utf-8")
+        mock_http_response.__enter__.return_value = mock_http_response
+        real_urlopen = urllib.request.urlopen
+
+        def custom_urlopen(req, *args, **kwargs):
+            url = req.full_url if hasattr(req, "full_url") else str(req)
+            if "/chat/completions" in url:
+                sent.append(json.loads(req.data))
+                return mock_http_response
+            return real_urlopen(req, *args, **kwargs)
+
+        with patch("urllib.request.urlopen", side_effect=custom_urlopen):
+            for mode in ("skills", "expand"):
+                status, _, _ = self._post(
+                    "/api/propose",
+                    {"mode": mode, "scope": "all", "message": "Собрал полку", "context": {"revision": 0}},
+                    headers={"X-Workshop-Token": token},
+                )
+                self.assertEqual(status, HTTPStatus.OK)
+
+        skills_system = [m["content"] for m in sent[0]["messages"] if m["role"] == "system"]
+        expand_system = [m["content"] for m in sent[1]["messages"] if m["role"] == "system"]
+        self.assertEqual(skills_system, [server.SKILLS_MODE_RULES])
+        self.assertIn("Никогда не задавай вопросов", server.SKILLS_MODE_RULES)
+        self.assertEqual(sent[0]["response_format"]["json_schema"]["schema"], self.workshop_app.suggest_schemas["skills"])
+        self.assertNotIn("baseRevision", sent[0]["response_format"]["json_schema"]["schema"]["properties"])
+        self.assertEqual(expand_system, [self.workshop_app.ai_rules])
+
+    def test_propose_project_mode_uses_own_schema(self):
+        token = self.workshop_app.session_token
+        sent = []
+        answer = {"summary": "s", "branchIds": ["wood"], "skillIds": [], "newSkills": [], "steps": [], "checks": [],
+                  "toolIds": [], "stage": 1, "risk": "care", "size": "Выходные"}
+        mock_http_response = MagicMock()
+        mock_http_response.read.return_value = json.dumps(
+            {"choices": [{"message": {"content": json.dumps(answer), "role": "assistant"}}]}
+        ).encode("utf-8")
+        mock_http_response.__enter__.return_value = mock_http_response
+
+        real_urlopen = urllib.request.urlopen
+
+        def custom_urlopen(req, *args, **kwargs):
+            url = req.full_url if hasattr(req, "full_url") else str(req)
+            if "/chat/completions" in url:
+                sent.append(json.loads(req.data))
+                return mock_http_response
+            return real_urlopen(req, *args, **kwargs)
+
+        with patch("urllib.request.urlopen", side_effect=custom_urlopen):
+            status, body, _ = self._post(
+                "/api/propose",
+                {"mode": "project", "scope": "all", "message": "Полка для книг", "context": {"revision": 3}},
+                headers={"X-Workshop-Token": token},
+            )
+        self.assertEqual(status, HTTPStatus.OK)
+        self.assertEqual(body["proposal"], answer)
+        self.assertEqual(sent[0]["messages"][0]["content"], server.PROJECT_MODE_RULES)
+        self.assertEqual(sent[0]["response_format"]["json_schema"]["name"], "project_suggestion")
+        self.assertEqual(sent[0]["response_format"]["json_schema"]["schema"], self.workshop_app.suggest_schemas["project"])
+
+    def test_suggest_schemas_are_strict_and_modes_complete(self):
+        from src.build import check_strict_schema
+
+        self.assertEqual(set(self.workshop_app.suggest_schemas), set(server.SUGGEST_MODES))
+        for schema in self.workshop_app.suggest_schemas.values():
+            check_strict_schema(schema)
 
     def test_propose_openai_refusal(self):
         token = self.workshop_app.session_token

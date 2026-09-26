@@ -389,6 +389,14 @@
           "type": "string",
           "maxLength": 3000
         },
+        "criteria": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "maxLength": 300
+          },
+          "maxItems": 8
+        },
         "toolIds": {
           "type": "array",
           "items": {
@@ -430,6 +438,7 @@
         "goal",
         "exercise",
         "proof",
+        "criteria",
         "toolIds",
         "prerequisites",
         "risk",

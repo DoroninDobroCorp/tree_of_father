@@ -1,0 +1,85 @@
+{
+  "type": "object",
+  "properties": {
+    "summary": {
+      "type": "string",
+      "maxLength": 600
+    },
+    "branchId": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+    },
+    "module": {
+      "type": "string",
+      "maxLength": 100
+    },
+    "title": {
+      "type": "string",
+      "maxLength": 160
+    },
+    "goal": {
+      "type": "string",
+      "maxLength": 3000
+    },
+    "exercise": {
+      "type": "string",
+      "maxLength": 3000
+    },
+    "proof": {
+      "type": "string",
+      "maxLength": 3000
+    },
+    "criteria": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 300
+      },
+      "maxItems": 8
+    },
+    "prerequisites": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+      },
+      "maxItems": 5
+    },
+    "toolIds": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^[a-z][a-z0-9_.-]{1,79}$"
+      },
+      "maxItems": 10
+    },
+    "risk": {
+      "type": "string",
+      "enum": [
+        "low",
+        "care",
+        "pro"
+      ]
+    },
+    "stage": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 4
+    }
+  },
+  "required": [
+    "summary",
+    "branchId",
+    "module",
+    "title",
+    "goal",
+    "exercise",
+    "proof",
+    "criteria",
+    "prerequisites",
+    "toolIds",
+    "risk",
+    "stage"
+  ],
+  "additionalProperties": false
+}

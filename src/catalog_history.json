@@ -1,0 +1,2146 @@
+{
+"branches:base": [
+"77zo82"
+],
+"branches:building": [
+"qk3wd9"
+],
+"branches:composite": [
+"1pxen54"
+],
+"branches:digital": [
+"1lzu9xi"
+],
+"branches:electrical": [
+"76b3db"
+],
+"branches:electronics": [
+"42djgt"
+],
+"branches:finish": [
+"4iecmm"
+],
+"branches:land": [
+"112fd41"
+],
+"branches:mechanics": [
+"11v32ei"
+],
+"branches:metal": [
+"uu63pc"
+],
+"branches:mineral": [
+"93t95d"
+],
+"branches:textile": [
+"89zprb"
+],
+"branches:transport": [
+"vvi89g"
+],
+"branches:wood": [
+"1y8yzks"
+],
+"projects:q-arduino": [
+"7a75m2"
+],
+"projects:q-base-drillsampler": [
+"r0936l"
+],
+"projects:q-base-safetykit": [
+"1w2e83s"
+],
+"projects:q-base-toolwall": [
+"m9eisu"
+],
+"projects:q-bed": [
+"87svkk"
+],
+"projects:q-bench": [
+"ipvv0w"
+],
+"projects:q-bike": [
+"1u95hgb"
+],
+"projects:q-box": [
+"5z142g"
+],
+"projects:q-building-door": [
+"1wbl4ru"
+],
+"projects:q-building-mount": [
+"1hm0hft"
+],
+"projects:q-building-patch": [
+"15xkq1r"
+],
+"projects:q-building-silicone": [
+"b93mbz"
+],
+"projects:q-cablewrap": [
+"1mm7opf"
+],
+"projects:q-cadtable": [
+"1utatmc"
+],
+"projects:q-carbook": [
+"pnzvbm"
+],
+"projects:q-cistern": [
+"7o3hl1"
+],
+"projects:q-clean-card": [
+"vxlnlj"
+],
+"projects:q-clean-course": [
+"1vrp9ki"
+],
+"projects:q-coatings": [
+"qjt20l"
+],
+"projects:q-composite-repair": [
+"1njm16j"
+],
+"projects:q-composite-samples": [
+"ipp3mi"
+],
+"projects:q-composite-shell": [
+"1edo13o"
+],
+"projects:q-composite-thermoform": [
+"gcffh2"
+],
+"projects:q-composite-twopart": [
+"982a1q"
+],
+"projects:q-cuts": [
+"1nt2jk3"
+],
+"projects:q-digital-cutlist": [
+"rxmtu1"
+],
+"projects:q-digital-holder": [
+"1oczu2l"
+],
+"projects:q-digital-laserorder": [
+"260nan"
+],
+"projects:q-digital-printlab": [
+"6jxt65"
+],
+"projects:q-drip": [
+"1h05915"
+],
+"projects:q-electrical-batteries": [
+"1gnamtb"
+],
+"projects:q-electrical-ledshelf": [
+"livw3a"
+],
+"projects:q-electrical-loadaudit": [
+"1gakg4g"
+],
+"projects:q-electrical-ohmlab": [
+"10u78tn"
+],
+"projects:q-electricbrief": [
+"fxj1da"
+],
+"projects:q-electronics-climate": [
+"8xvlsr"
+],
+"projects:q-electronics-lightnode": [
+"1agpmj"
+],
+"projects:q-electronics-permboard": [
+"165etkb"
+],
+"projects:q-electronics-turntable": [
+"145zra7"
+],
+"projects:q-energybudget": [
+"1qo6u6b"
+],
+"projects:q-esp": [
+"jvz2m2"
+],
+"projects:q-extract": [
+"19vqpny"
+],
+"projects:q-fasteners": [
+"10tghqb"
+],
+"projects:q-finish-paintpanel": [
+"fo988g"
+],
+"projects:q-finish-refresh": [
+"1tcim9y"
+],
+"projects:q-finish-rustytool": [
+"65l6h"
+],
+"projects:q-finish-upholstery": [
+"1cl9h3r"
+],
+"projects:q-fusion": [
+"67xn6n"
+],
+"projects:q-glassclass": [
+"16hubb9"
+],
+"projects:q-grow": [
+"1hlh7wz"
+],
+"projects:q-guide": [
+"vraj3q"
+],
+"projects:q-housepassport": [
+"1uz5vr0"
+],
+"projects:q-joinery": [
+"bz3ltj"
+],
+"projects:q-laminate": [
+"8b64ms"
+],
+"projects:q-land-compost": [
+"74f8gf"
+],
+"projects:q-land-pruning": [
+"1tryo7r"
+],
+"projects:q-land-rainbarrel": [
+"11dy3bd"
+],
+"projects:q-land-stepping": [
+"mgpaf4"
+],
+"projects:q-mechanics-cartridge": [
+"wpgj06"
+],
+"projects:q-mechanics-descale": [
+"iltjib"
+],
+"projects:q-mechanics-hoses": [
+"s6xi7m"
+],
+"projects:q-mechanics-leakhunt": [
+"1her2zo"
+],
+"projects:q-mechanics-siphon": [
+"1bnvo75"
+],
+"projects:q-mechanism": [
+"1ugox69"
+],
+"projects:q-metal-boltframe": [
+"1mt98j1"
+],
+"projects:q-metal-hooks": [
+"1uhxrme"
+],
+"projects:q-metal-samples": [
+"gtud0y"
+],
+"projects:q-metal-tinbox": [
+"15ssm6y"
+],
+"projects:q-metalbracket": [
+"shlbac"
+],
+"projects:q-meter": [
+"18ly5x"
+],
+"projects:q-mineral-anchorboard": [
+"w2a1kt"
+],
+"projects:q-mineral-handbuilt": [
+"15vhr3a"
+],
+"projects:q-mineral-planter": [
+"12djxzj"
+],
+"projects:q-mineral-regrout": [
+"11knk96"
+],
+"projects:q-miter": [
+"1gnguuz"
+],
+"projects:q-paver": [
+"jyyv2e"
+],
+"projects:q-plasterboard": [
+"1dgb5pu"
+],
+"projects:q-plastic": [
+"1nk3mvd"
+],
+"projects:q-pouch": [
+"5ngkme"
+],
+"projects:q-powerlabels": [
+"zerndw"
+],
+"projects:q-rainwalk": [
+"1rjusg1"
+],
+"projects:q-rcbench": [
+"1vd4mj6"
+],
+"projects:q-resinplan": [
+"1l9jmv8"
+],
+"projects:q-reverse": [
+"1rv76wb"
+],
+"projects:q-router": [
+"53q80k"
+],
+"projects:q-sandwich": [
+"1ud5qvy"
+],
+"projects:q-seatpad": [
+"bo54kr"
+],
+"projects:q-sensor": [
+"3saam8"
+],
+"projects:q-sheet": [
+"14ym424"
+],
+"projects:q-shelf": [
+"1hoetnx"
+],
+"projects:q-shower": [
+"erwdaf"
+],
+"projects:q-silicone": [
+"1n4l5ot"
+],
+"projects:q-stainlog": [
+"j0btzz"
+],
+"projects:q-stool": [
+"1oatdo0"
+],
+"projects:q-table": [
+"19smii4"
+],
+"projects:q-tankalarm": [
+"10yrzrg"
+],
+"projects:q-textile-chairseat": [
+"zqppnk"
+],
+"projects:q-textile-mending": [
+"1jslweb"
+],
+"projects:q-textile-pillow": [
+"1r255wy"
+],
+"projects:q-textile-tote": [
+"1ux9v06"
+],
+"projects:q-thread": [
+"fpfazq"
+],
+"projects:q-tileboard": [
+"htdkqi"
+],
+"projects:q-transport-bike-tuneup": [
+"16yzk4b"
+],
+"projects:q-transport-car-monthly": [
+"1khdf8y"
+],
+"projects:q-transport-season": [
+"oujbsa"
+],
+"projects:q-transport-spare": [
+"9yomkq"
+],
+"projects:q-tray": [
+"1nxpwln"
+],
+"projects:q-wallmodel": [
+"1xb1n4e"
+],
+"projects:q-watermap": [
+"3vb5tx"
+],
+"projects:q-waterreport": [
+"yhxxee"
+],
+"projects:q-weld": [
+"1nvlv2f"
+],
+"projects:q-wood-bookcase": [
+"r07gjh"
+],
+"projects:q-wood-chairfix": [
+"1hsztf4"
+],
+"projects:q-wood-coffeetable": [
+"18x6shw"
+],
+"projects:q-wood-dovetailbox": [
+"1ktflbz"
+],
+"projects:q-wood-jointsampler": [
+"e9fte3"
+],
+"projects:q-wood-nightstand": [
+"8jrtir"
+],
+"projects:q-wood-wallcabinet": [
+"ak0hcw"
+],
+"projects:q-woodpassport": [
+"1ljlpdp"
+],
+"projects:q-workplace": [
+"1bcn3o6"
+],
+"skills:base.anchors": [
+"10vvy5o",
+"1yk1aj8"
+],
+"skills:base.bolts": [
+"1fk9yli",
+"1c322cn"
+],
+"skills:base.diagnose": [
+"rvdzlf",
+"q901o7"
+],
+"skills:base.dismantle": [
+"1qb3ku4",
+"c94lqv"
+],
+"skills:base.docs": [
+"1ysg6so",
+"stsab4"
+],
+"skills:base.drill": [
+"zyr8j8",
+"1xkm0jy"
+],
+"skills:base.drillbits": [
+"uzo41l"
+],
+"skills:base.dust": [
+"13jk7w9"
+],
+"skills:base.fastener": [
+"ayduck",
+"1vvozci",
+"489r2b"
+],
+"skills:base.firstaid": [
+"3aorod"
+],
+"skills:base.hidden": [
+"1d0feg4"
+],
+"skills:base.hold": [
+"1sy1n2s",
+"1euxco8"
+],
+"skills:base.jigs": [
+"1jhpvhj",
+"nrq9zy"
+],
+"skills:base.knife": [
+"1vfx5xf"
+],
+"skills:base.level": [
+"wuk0n2"
+],
+"skills:base.measure": [
+"deil9y",
+"5bh2bj"
+],
+"skills:base.metrology": [
+"y61rq8",
+"1zo7g3"
+],
+"skills:base.multitool": [
+"d3zw58",
+"dm6bkj"
+],
+"skills:base.powertool": [
+"143kxo3"
+],
+"skills:base.ppe": [
+"ofj6ee",
+"6rp5re"
+],
+"skills:base.reassembly": [
+"1wmt3om"
+],
+"skills:base.rigging": [
+"cqq532",
+"t9595a"
+],
+"skills:base.safety": [
+"u4ss47",
+"gbmzd8",
+"1xitcf0"
+],
+"skills:base.seal": [
+"uh6cdk",
+"1pa0liy",
+"c7vc4w",
+"c4h7vk",
+"u1j1wq",
+"f1upe9"
+],
+"skills:base.sharpen": [
+"1he3mwx",
+"1ql1sjl"
+],
+"skills:base.stuck": [
+"zbooaw",
+"1xxkst4"
+],
+"skills:base.wallhole": [
+"bvsvj"
+],
+"skills:base.workshop": [
+"12zci9g",
+"1rkttbz"
+],
+"skills:building.acoustic": [
+"h45whv",
+"myzwa5"
+],
+"skills:building.anchors": [
+"rhfsqy"
+],
+"skills:building.cracks": [
+"264o3v"
+],
+"skills:building.damp": [
+"16m71dy"
+],
+"skills:building.door_adjust": [
+"1j0gwb2"
+],
+"skills:building.draughts": [
+"1bi61tu"
+],
+"skills:building.drywall": [
+"g8pfgr",
+"v4gfg2"
+],
+"skills:building.drywall_patch": [
+"xr5m0h"
+],
+"skills:building.envelope": [
+"1a6yfip",
+"1pcu5qw"
+],
+"skills:building.foundation": [
+"4fp78v",
+"eka6aw"
+],
+"skills:building.frame": [
+"13r1ozg",
+"1uhg68m"
+],
+"skills:building.heavy_mount": [
+"ua9mol"
+],
+"skills:building.hidden": [
+"yzzget"
+],
+"skills:building.hollow_anchors": [
+"1loompw"
+],
+"skills:building.insulation": [
+"165o1sz"
+],
+"skills:building.integration": [
+"1uzjroh",
+"30vw05"
+],
+"skills:building.loads": [
+"rdestu",
+"4ku0hd"
+],
+"skills:building.lock": [
+"1l4uxxn"
+],
+"skills:building.maintenance": [
+"suqov"
+],
+"skills:building.openings": [
+"pwftqf",
+"1v2w3nm"
+],
+"skills:building.renovation_plan": [
+"kwv62v"
+],
+"skills:building.roof": [
+"1y15s8s",
+"1tlhs65"
+],
+"skills:building.silicone": [
+"1lamjg7",
+"cjeoi5"
+],
+"skills:building.survey": [
+"iempj5",
+"12vj1a5"
+],
+"skills:building.thermal_audit": [
+"uvg7ka"
+],
+"skills:building.wet_zone": [
+"8y4htn"
+],
+"skills:composite.advanced": [
+"fjbiv6",
+"16pl3qd"
+],
+"skills:composite.casting": [
+"g19hbx",
+"ovyy5d"
+],
+"skills:composite.cut": [
+"1u4go9d",
+"zwtnpz"
+],
+"skills:composite.cutcloth": [
+"l1ib9d"
+],
+"skills:composite.defects": [
+"18mqibi"
+],
+"skills:composite.draft": [
+"r2krya"
+],
+"skills:composite.fabrics": [
+"18tslvv"
+],
+"skills:composite.fillers": [
+"d9uwmk"
+],
+"skills:composite.fillet": [
+"7zlri0"
+],
+"skills:composite.finish": [
+"2jkp6s",
+"2l34iu",
+"dremh9"
+],
+"skills:composite.gelcoat": [
+"1kcpc53"
+],
+"skills:composite.layup": [
+"5q1k5s",
+"1yuj5ad"
+],
+"skills:composite.mix": [
+"13yte3f",
+"cpwb8o"
+],
+"skills:composite.mold": [
+"oc33o4",
+"66nhqi"
+],
+"skills:composite.plastic": [
+"1kzdzbx",
+"h053qn"
+],
+"skills:composite.plug": [
+"1nwrm3f",
+"1j1tem0"
+],
+"skills:composite.plugmat": [
+"1wmqhf9"
+],
+"skills:composite.repair": [
+"ou0bv6"
+],
+"skills:composite.resins": [
+"eq112w"
+],
+"skills:composite.sandwich": [
+"xwcm4q",
+"110z384"
+],
+"skills:composite.sds": [
+"aetdie",
+"yb9jme"
+],
+"skills:composite.shell": [
+"c1k5pi"
+],
+"skills:composite.silicone": [
+"wyz13z",
+"1sc322a"
+],
+"skills:composite.silicone2": [
+"1kd92st"
+],
+"skills:composite.split": [
+"pbvt3v"
+],
+"skills:composite.stiff": [
+"z7i600"
+],
+"skills:composite.thermoform": [
+"1j8js9e"
+],
+"skills:composite.vacuum": [
+"1u93bvk",
+"19ahed8"
+],
+"skills:composite.waste": [
+"64m1y0"
+],
+"skills:composite.weld": [
+"1c4l77i",
+"12tghzl"
+],
+"skills:composite.workspace": [
+"bas7bv"
+],
+"skills:digital.assembly": [
+"1sly9d7",
+"11qrtg6"
+],
+"skills:digital.cad_import": [
+"1gep3xm"
+],
+"skills:digital.cam": [
+"1m2ggwc",
+"ih0fdn"
+],
+"skills:digital.cutlist": [
+"79xs7j"
+],
+"skills:digital.drawing": [
+"1j0iwtx"
+],
+"skills:digital.engineering": [
+"44loj5",
+"lbuqk2"
+],
+"skills:digital.fdm": [
+"ar0y6b",
+"m9g2io"
+],
+"skills:digital.features": [
+"1puxn0s"
+],
+"skills:digital.files": [
+"1e5qwaw"
+],
+"skills:digital.fit_test": [
+"1mwvu"
+],
+"skills:digital.laser": [
+"tvwen1",
+"wuisv"
+],
+"skills:digital.load_basic": [
+"hgosxy"
+],
+"skills:digital.ordering": [
+"1kkvpll"
+],
+"skills:digital.param": [
+"xwcx4y",
+"9it62l"
+],
+"skills:digital.photo_ref": [
+"1rrynon"
+],
+"skills:digital.print_materials": [
+"1cvfbay"
+],
+"skills:digital.print_trouble": [
+"ndrw1s"
+],
+"skills:digital.printer_care": [
+"19hdrgn"
+],
+"skills:digital.production": [
+"1owi9jd",
+"11vd7dv"
+],
+"skills:digital.project_doc": [
+"8f3dli"
+],
+"skills:digital.quantities": [
+"h889od"
+],
+"skills:digital.resin": [
+"rmiz1z",
+"1ltysni"
+],
+"skills:digital.scan": [
+"1a3husa",
+"1jn4iqo"
+],
+"skills:digital.sketch": [
+"wpwxl",
+"bpfl1p"
+],
+"skills:digital.sketch_constraints": [
+"1tsl092"
+],
+"skills:digital.slicer": [
+"1pp03m7"
+],
+"skills:digital.timeline": [
+"13j615h"
+],
+"skills:digital.vector": [
+"18592j8"
+],
+"skills:electrical.acdc": [
+"1c33857"
+],
+"skills:electrical.appliance": [
+"pvrym7"
+],
+"skills:electrical.backup": [
+"uuya3t",
+"1yy1g0s"
+],
+"skills:electrical.basics": [
+"1hyudo5",
+"bk6vgh"
+],
+"skills:electrical.battery": [
+"1bwl93a",
+"75tuag"
+],
+"skills:electrical.circuits_home": [
+"514lgi"
+],
+"skills:electrical.connect": [
+"gwah2y",
+"1oryjpy",
+"134j0ym"
+],
+"skills:electrical.consumption": [
+"1a0zh3h"
+],
+"skills:electrical.continuity": [
+"1w6tu3b"
+],
+"skills:electrical.dc_system": [
+"vrcbb7"
+],
+"skills:electrical.energy": [
+"1ulx339"
+],
+"skills:electrical.led": [
+"1ukg8pn"
+],
+"skills:electrical.mains": [
+"n4v46w",
+"4xs9xo"
+],
+"skills:electrical.meter": [
+"1ao025z",
+"6b5xh3"
+],
+"skills:electrical.ohm": [
+"uwlopt"
+],
+"skills:electrical.panel": [
+"m96fmf",
+"16lyvp7"
+],
+"skills:electrical.protect": [
+"eofprz",
+"1s1mokv"
+],
+"skills:electrical.psu": [
+"8ivkd1"
+],
+"skills:electrical.schematic": [
+"7nqdkv"
+],
+"skills:electrical.shock": [
+"1arabbz"
+],
+"skills:electrical.small_battery": [
+"hddo4u"
+],
+"skills:electrical.solar": [
+"prj1zs",
+"1pgpzcr"
+],
+"skills:electrical.wire": [
+"t2cbg9"
+],
+"skills:electronics.actuators": [
+"yhalo1",
+"miazm8"
+],
+"skills:electronics.arduino": [
+"1h4afo9",
+"1n1jjlr"
+],
+"skills:electronics.circuit": [
+"v4pwm2",
+"1109gvu"
+],
+"skills:electronics.components": [
+"4p2gwm"
+],
+"skills:electronics.control": [
+"1fkfu2b",
+"1o9ugbm"
+],
+"skills:electronics.desolder": [
+"f3c4kj"
+],
+"skills:electronics.display": [
+"18dhozh"
+],
+"skills:electronics.divider": [
+"1nyadh8"
+],
+"skills:electronics.enclosure": [
+"yza1kg"
+],
+"skills:electronics.encoder": [
+"bqtq5u"
+],
+"skills:electronics.esp": [
+"18a45kt",
+"cxaj35"
+],
+"skills:electronics.failsafe": [
+"jx169i",
+"zr693v"
+],
+"skills:electronics.homeauto": [
+"pi34fa"
+],
+"skills:electronics.i2c": [
+"15crlt8"
+],
+"skills:electronics.inputs": [
+"1xwxj91"
+],
+"skills:electronics.labpsu": [
+"q3lel6"
+],
+"skills:electronics.mqtt": [
+"5675xj"
+],
+"skills:electronics.network": [
+"rd89q4",
+"f4jbx5"
+],
+"skills:electronics.nonblocking": [
+"1hij56l"
+],
+"skills:electronics.pcb": [
+"1mpxmza"
+],
+"skills:electronics.perfboard": [
+"1ujklwn"
+],
+"skills:electronics.plc": [
+"15zrvtn",
+"13wginb"
+],
+"skills:electronics.power_mcu": [
+"1hj9zr8"
+],
+"skills:electronics.relay": [
+"12wqfsk"
+],
+"skills:electronics.repair": [
+"wnn9l8",
+"isuzus"
+],
+"skills:electronics.robot": [
+"a4mdd3",
+"1ixya3j"
+],
+"skills:electronics.scope": [
+"19x63sd"
+],
+"skills:electronics.sensors": [
+"ute1pl",
+"vnc8r3"
+],
+"skills:electronics.serial": [
+"affvjx"
+],
+"skills:electronics.solder": [
+"1housd2",
+"10f4cw"
+],
+"skills:electronics.steppers": [
+"f2jwdi"
+],
+"skills:finish.aerosol": [
+"1lhsi3e"
+],
+"skills:finish.assess": [
+"1t7a96x"
+],
+"skills:finish.brush": [
+"hex9qz"
+],
+"skills:finish.chemistry": [
+"18uw47z",
+"14f9c7d"
+],
+"skills:finish.clean_theory": [
+"19axvo2",
+"u1ivvm"
+],
+"skills:finish.clearcoat": [
+"14r7zv1",
+"1isrcj0"
+],
+"skills:finish.coat": [
+"x3be6u",
+"i829ar"
+],
+"skills:finish.corrosion": [
+"sbs626",
+"fmrqos"
+],
+"skills:finish.detail": [
+"czl0ve",
+"pgwc24"
+],
+"skills:finish.extraction": [
+"8e9la6",
+"1nl3ug9"
+],
+"skills:finish.fabric_id": [
+"1814qw0"
+],
+"skills:finish.fill": [
+"of1yk9"
+],
+"skills:finish.full_restore": [
+"1i6zs2d"
+],
+"skills:finish.furniture": [
+"ojefq9"
+],
+"skills:finish.hard_floor": [
+"ttemfq"
+],
+"skills:finish.metal_care": [
+"1a4n9vw"
+],
+"skills:finish.oil": [
+"1tm5mrz"
+],
+"skills:finish.primer": [
+"46opg8"
+],
+"skills:finish.restore": [
+"1pgqkk2",
+"1yk1hld"
+],
+"skills:finish.rust": [
+"1iaosua"
+],
+"skills:finish.sand": [
+"1xjhdan",
+"17df95q",
+"1uyiyx1"
+],
+"skills:finish.scratch": [
+"tghvlo"
+],
+"skills:finish.spray": [
+"12s9152",
+"bc0k67"
+],
+"skills:finish.stain": [
+"ho2fut",
+"a3jaue"
+],
+"skills:finish.steam": [
+"1oown4o",
+"avm1ib"
+],
+"skills:finish.strip": [
+"1o94hf0"
+],
+"skills:finish.upholstery": [
+"nhhx9s"
+],
+"skills:finish.wood_tint": [
+"dbxjbn"
+],
+"skills:land.compost": [
+"hphu7c"
+],
+"skills:land.drain": [
+"1pssg2e",
+"1e04naw"
+],
+"skills:land.earth": [
+"170cfo3",
+"gg1c06"
+],
+"skills:land.edging": [
+"zxy38t",
+"1erp3wa"
+],
+"skills:land.greenhouse": [
+"k5n41",
+"1y7ilhz"
+],
+"skills:land.growing": [
+"1rut8cm",
+"1w345z0",
+"757hos"
+],
+"skills:land.hose": [
+"1dxsucu"
+],
+"skills:land.irrigation": [
+"14kcfrv",
+"1y088sl"
+],
+"skills:land.level": [
+"1w63834",
+"v2jg81"
+],
+"skills:land.mulch": [
+"10a3wf7"
+],
+"skills:land.paths": [
+"1y1w4he",
+"1wdgbcs"
+],
+"skills:land.planting": [
+"fho0xk"
+],
+"skills:land.pruning": [
+"1tlqh3y"
+],
+"skills:land.rainwater": [
+"lchm4v"
+],
+"skills:land.raised_bed": [
+"g1to4p"
+],
+"skills:land.site_map": [
+"1i0f2oa"
+],
+"skills:land.soil": [
+"zwxrt6"
+],
+"skills:land.sowing": [
+"1vbli7p"
+],
+"skills:land.stepping": [
+"90dvzx"
+],
+"skills:land.trees": [
+"8zm1v2",
+"1ui5ewz"
+],
+"skills:land.utilities_map": [
+"pqey5e"
+],
+"skills:land.waste": [
+"1xkc0g8",
+"ve1ng9"
+],
+"skills:mechanics.ac_service": [
+"1l2yusm"
+],
+"skills:mechanics.aerator": [
+"asmkbh"
+],
+"skills:mechanics.bearing_swap": [
+"1b0sj8u"
+],
+"skills:mechanics.belts": [
+"1umhdmz"
+],
+"skills:mechanics.cartridge": [
+"1g23euy"
+],
+"skills:mechanics.cistern": [
+"smfghd",
+"1il6v5a"
+],
+"skills:mechanics.clogs": [
+"eupfa"
+],
+"skills:mechanics.drain": [
+"1p6ip8l",
+"1slzu5z"
+],
+"skills:mechanics.drive": [
+"8zrn8s",
+"1g569d2"
+],
+"skills:mechanics.faucet_replace": [
+"4azin6",
+"1h9ebxo",
+"zw9isj"
+],
+"skills:mechanics.faucet_types": [
+"12gu0l9"
+],
+"skills:mechanics.filter": [
+"1qyj6lf",
+"qykggz"
+],
+"skills:mechanics.fittings": [
+"ln2q",
+"nail5g"
+],
+"skills:mechanics.flush_valve": [
+"a7gryq"
+],
+"skills:mechanics.gas": [
+"1neaa8q",
+"af9qod"
+],
+"skills:mechanics.gaskets": [
+"1sfi6a9"
+],
+"skills:mechanics.hoses": [
+"1f5qbk1"
+],
+"skills:mechanics.hvac": [
+"2z6szd",
+"13riiht"
+],
+"skills:mechanics.hydraulic": [
+"1cka3xq",
+"14bzsnq"
+],
+"skills:mechanics.leaks": [
+"oisu6e"
+],
+"skills:mechanics.lubrication": [
+"5psyql"
+],
+"skills:mechanics.pipes": [
+"epkb68"
+],
+"skills:mechanics.pneumatic": [
+"1jd9hdw",
+"1k8nspc"
+],
+"skills:mechanics.ptfe": [
+"1og1iev",
+"3lnekv",
+"1fqzzqj",
+"g4tcuw"
+],
+"skills:mechanics.pumps": [
+"6cs1ai",
+"sobtxe"
+],
+"skills:mechanics.tank": [
+"1y6caj3"
+],
+"skills:mechanics.toilet_leak": [
+"16rs9nd"
+],
+"skills:mechanics.trap_smell": [
+"adrm06"
+],
+"skills:mechanics.valves": [
+"999x8y",
+"ks1az7"
+],
+"skills:mechanics.vent": [
+"nduaxo",
+"1u5jykq"
+],
+"skills:mechanics.washer": [
+"1f7ephb"
+],
+"skills:mechanics.water_heater": [
+"vdqnz4"
+],
+"skills:metal.bend": [
+"10hnkku"
+],
+"skills:metal.boltframe": [
+"glapjl"
+],
+"skills:metal.corrosion": [
+"1dwck08"
+],
+"skills:metal.cut": [
+"xzv84q",
+"s5477t",
+"1jmvq2l"
+],
+"skills:metal.drill": [
+"1hx5pfn",
+"1d8xivk"
+],
+"skills:metal.drillpress": [
+"13x90ix"
+],
+"skills:metal.fasteners": [
+"13tt9br"
+],
+"skills:metal.file": [
+"1d3nw3c"
+],
+"skills:metal.grinder": [
+"zkogav"
+],
+"skills:metal.heat": [
+"81v22o"
+],
+"skills:metal.hot": [
+"1tkvulh",
+"rgbfgt"
+],
+"skills:metal.lathe": [
+"bpiiyb",
+"1nvzjyr"
+],
+"skills:metal.layout": [
+"1g8s2l"
+],
+"skills:metal.mig": [
+"bexq39",
+"14gygst"
+],
+"skills:metal.mill": [
+"hglm4d",
+"1al7s0j"
+],
+"skills:metal.mma": [
+"1sjepjx",
+"1onpfs6"
+],
+"skills:metal.plasma": [
+"x444sr"
+],
+"skills:metal.rivet": [
+"1yiapnq"
+],
+"skills:metal.sheet": [
+"1aw1wzg",
+"v7m3rh",
+"173x34i"
+],
+"skills:metal.softsolder": [
+"c2cxve"
+],
+"skills:metal.stock": [
+"m3puja"
+],
+"skills:metal.thread": [
+"bmpeja",
+"1h2nmpl"
+],
+"skills:metal.tig": [
+"xqortl",
+"1vyt7ce"
+],
+"skills:metal.types": [
+"s5n71f"
+],
+"skills:metal.weld_basics": [
+"cc9m6x"
+],
+"skills:metal.wire": [
+"18bhw1i"
+],
+"skills:mineral.anchor": [
+"4vp1iw"
+],
+"skills:mineral.binders": [
+"6uv8h4"
+],
+"skills:mineral.ceramic": [
+"o6rekx",
+"1ob4fyn"
+],
+"skills:mineral.clay": [
+"1pak9uv"
+],
+"skills:mineral.form": [
+"1861nqr",
+"8v7e6w"
+],
+"skills:mineral.glass": [
+"10z488i",
+"u9861n"
+],
+"skills:mineral.glaze": [
+"zlxugk"
+],
+"skills:mineral.glazing": [
+"z64a0m"
+],
+"skills:mineral.gypsum": [
+"1gj4f5c"
+],
+"skills:mineral.handling": [
+"1533sge"
+],
+"skills:mineral.lime": [
+"7bjf22"
+],
+"skills:mineral.masonry": [
+"te8v1d",
+"19no333",
+"ohlxl0"
+],
+"skills:mineral.mix": [
+"xwxn6j",
+"wrrglw"
+],
+"skills:mineral.mortarjoint": [
+"1ycryhz"
+],
+"skills:mineral.plaster": [
+"166gkmb",
+"1f999i7"
+],
+"skills:mineral.refractory": [
+"1633krk",
+"t3a8fc"
+],
+"skills:mineral.regrout": [
+"oybidr",
+"1jg7l0j"
+],
+"skills:mineral.repair": [
+"6m532"
+],
+"skills:mineral.safety": [
+"1dgp27t"
+],
+"skills:mineral.smallcast": [
+"4ofvzk"
+],
+"skills:mineral.stone": [
+"1s3xyr3",
+"pyk8az"
+],
+"skills:mineral.stoneid": [
+"lu5tpu"
+],
+"skills:mineral.tile": [
+"atx8q9",
+"urh7za"
+],
+"skills:mineral.tilecut": [
+"y855i5"
+],
+"skills:textile.binding": [
+"mlercl"
+],
+"skills:textile.buttons": [
+"loisll"
+],
+"skills:textile.eyelets": [
+"7h2nrp"
+],
+"skills:textile.fabrics": [
+"1k43eer"
+],
+"skills:textile.foam": [
+"dift61"
+],
+"skills:textile.gear_repair": [
+"dzua7p"
+],
+"skills:textile.hand": [
+"1wsau6u",
+"fb9nru"
+],
+"skills:textile.leather": [
+"12lsxm7",
+"8ehpxk"
+],
+"skills:textile.leather_edge": [
+"w9aoiu"
+],
+"skills:textile.leather_select": [
+"s2vlnc"
+],
+"skills:textile.lining": [
+"1i9ust4"
+],
+"skills:textile.machine": [
+"4z93tj",
+"q42a7x"
+],
+"skills:textile.machine_care": [
+"ey2y2w"
+],
+"skills:textile.outdoor": [
+"1dihoxo"
+],
+"skills:textile.patch": [
+"1jl8jbh"
+],
+"skills:textile.pattern": [
+"gt0yn1",
+"o114m0"
+],
+"skills:textile.seams": [
+"ry10oz"
+],
+"skills:textile.strip": [
+"4fn4p8"
+],
+"skills:textile.technical": [
+"1pwbuud",
+"1cuso29"
+],
+"skills:textile.trim": [
+"2icg0s",
+"qg9st7"
+],
+"skills:textile.upholstery": [
+"1vmfay3",
+"1h3dpbx"
+],
+"skills:textile.volume": [
+"zmfq2u"
+],
+"skills:transport.auto": [
+"1uo02id",
+"1pjbkbh"
+],
+"skills:transport.bike": [
+"1a7oy03",
+"6n9r4p"
+],
+"skills:transport.bike_brakes": [
+"1ki6ywp",
+"15v8xez"
+],
+"skills:transport.bike_chain": [
+"ybwkgo"
+],
+"skills:transport.bike_check": [
+"tjw233"
+],
+"skills:transport.bike_gears": [
+"13cnz55"
+],
+"skills:transport.bike_tube": [
+"ymloxa"
+],
+"skills:transport.body": [
+"1kx8acn",
+"10j0x1v"
+],
+"skills:transport.car_battery": [
+"chbie3"
+],
+"skills:transport.car_bulbs": [
+"1jcs76n"
+],
+"skills:transport.car_filters": [
+"axc6wp"
+],
+"skills:transport.car_fluids": [
+"ywxjf4"
+],
+"skills:transport.car_symptoms": [
+"tgjgi2"
+],
+"skills:transport.car_tyres": [
+"z56tvs"
+],
+"skills:transport.car_wheel": [
+"6l75h9"
+],
+"skills:transport.car_wipers": [
+"pq029p"
+],
+"skills:transport.cargo": [
+"1u3yklx"
+],
+"skills:transport.heavy": [
+"m5qt8r",
+"1ckvss2"
+],
+"skills:transport.marine": [
+"h2r9pt",
+"3nj22y"
+],
+"skills:transport.moto": [
+"1whdheb",
+"1tsojzf"
+],
+"skills:transport.obd": [
+"kd8a9m",
+"ccerk8"
+],
+"skills:transport.rc": [
+"1ah6fzi",
+"bp3kg0"
+],
+"skills:transport.safety": [
+"1ywrey1",
+"1vrb5bm"
+],
+"skills:transport.smallengine": [
+"13800tz",
+"1ywid7a"
+],
+"skills:transport.smallengine_service": [
+"jn5wvc"
+],
+"skills:transport.storage": [
+"h9e15o"
+],
+"skills:wood.antitip": [
+"1dei3x0"
+],
+"skills:wood.bed": [
+"i9v5l2",
+"10ck32h"
+],
+"skills:wood.carcass": [
+"ghwrmf"
+],
+"skills:wood.chisel": [
+"1s91m5o",
+"1h0e324"
+],
+"skills:wood.circular": [
+"1avmuzb",
+"f4lpns"
+],
+"skills:wood.cutlist": [
+"1i5suu9"
+],
+"skills:wood.design": [
+"k162c3"
+],
+"skills:wood.dovetail": [
+"vy87u7"
+],
+"skills:wood.dowels": [
+"1uifi4o",
+"exzkta"
+],
+"skills:wood.drawers": [
+"15wixcx"
+],
+"skills:wood.drying": [
+"164is06",
+"ug8ao2"
+],
+"skills:wood.edge_joint": [
+"dr9wqu"
+],
+"skills:wood.edgebanding": [
+"itetn1"
+],
+"skills:wood.frame": [
+"lg2xpm",
+"1dw8yao"
+],
+"skills:wood.glue": [
+"19qd57r",
+"71p167"
+],
+"skills:wood.grooves": [
+"1pj9gul",
+"17o1ibk"
+],
+"skills:wood.halflap": [
+"1hto1cu"
+],
+"skills:wood.hand_saw": [
+"1jc3av4",
+"14mlm1d"
+],
+"skills:wood.hinges": [
+"94kq4"
+],
+"skills:wood.jigsaw": [
+"k1qly1",
+"1h5344a"
+],
+"skills:wood.knockdown": [
+"yyo16l"
+],
+"skills:wood.machines": [
+"nkgka1",
+"eaub34"
+],
+"skills:wood.marking": [
+"a277np"
+],
+"skills:wood.miter": [
+"shvzpq",
+"ev4uxs"
+],
+"skills:wood.moisture": [
+"18v0tal",
+"tnua48"
+],
+"skills:wood.mortise": [
+"z34m1p"
+],
+"skills:wood.plane": [
+"1blf39b",
+"80wjqz"
+],
+"skills:wood.pocket": [
+"1pz5bjb"
+],
+"skills:wood.repair_loose": [
+"16c96ov"
+],
+"skills:wood.repair_stripped": [
+"yxgop2"
+],
+"skills:wood.router": [
+"1hrphyv",
+"1dk6ncd"
+],
+"skills:wood.screws": [
+"mi2v7m",
+"189lrq3"
+],
+"skills:wood.seating": [
+"96blfc",
+"183h0tr"
+],
+"skills:wood.shaping": [
+"1gn0t08"
+],
+"skills:wood.sheet": [
+"52q1bv"
+],
+"skills:wood.sheet_cut": [
+"klthgw"
+],
+"skills:wood.shelf": [
+"tjasfq",
+"lzxffl"
+],
+"skills:wood.shelf_pins": [
+"j6l6gi"
+],
+"skills:wood.species": [
+"185tast"
+],
+"skills:wood.square": [
+"n3men9",
+"1gy8dkf"
+],
+"skills:wood.stock": [
+"w4rq7v",
+"1ol7guo"
+],
+"skills:wood.template": [
+"6q5mf8",
+"1ex13p0"
+],
+"skills:wood.top": [
+"1ekcgd7",
+"140ysej"
+],
+"skills:wood.turning": [
+"6c1onk",
+"1lse1ky"
+],
+"tools:arduino": [
+"7qpvof"
+],
+"tools:base.bits": [
+"1r38y2s"
+],
+"tools:base.brackets": [
+"1axdlbs"
+],
+"tools:base.detector": [
+"nvzpei"
+],
+"tools:base.firstaid": [
+"1qqrve5"
+],
+"tools:base.glasses": [
+"1q7catd"
+],
+"tools:base.gloves": [
+"dwx19v"
+],
+"tools:base.hammerdrill": [
+"1x7skt9"
+],
+"tools:base.plugs": [
+"13m66qm"
+],
+"tools:base.rope": [
+"1q755rq"
+],
+"tools:bike": [
+"1vvnnbd"
+],
+"tools:breadboard": [
+"1ae90fn"
+],
+"tools:brush": [
+"n0sl47"
+],
+"tools:building.caulkgun": [
+"w9q7si"
+],
+"tools:building.hygrometer": [
+"170a1ti"
+],
+"tools:building.sealant": [
+"ne0bwx"
+],
+"tools:caliper": [
+"1ebjhe9"
+],
+"tools:chisel": [
+"kpul7y"
+],
+"tools:circular": [
+"1hgs426"
+],
+"tools:clamp": [
+"ym1k4t"
+],
+"tools:composite.heatgun": [
+"1pczxzh"
+],
+"tools:composite.mixcups": [
+"r1gqq6"
+],
+"tools:compressor": [
+"637ly3"
+],
+"tools:computer": [
+"1ax1bmn"
+],
+"tools:crimper": [
+"gjujy3"
+],
+"tools:driver": [
+"4xf2o5"
+],
+"tools:electrical.stripper": [
+"1qyp4yf"
+],
+"tools:electrical.tape": [
+"3remol"
+],
+"tools:electrical.wattmeter": [
+"10ooctw"
+],
+"tools:electronics.desolder": [
+"dwvizc"
+],
+"tools:electronics.labpsu": [
+"1wp4ynq"
+],
+"tools:electronics.scope": [
+"12add13"
+],
+"tools:esp": [
+"14j6jul"
+],
+"tools:extractor": [
+"dnu1rf"
+],
+"tools:file": [
+"8bbn1e"
+],
+"tools:finish.rags": [
+"10mei7i"
+],
+"tools:finish.sandpaper": [
+"1uzooji"
+],
+"tools:finish.scraper": [
+"158xjpq"
+],
+"tools:finish.wirebrush": [
+"1qf8v5o"
+],
+"tools:glasscutter": [
+"q3sc3s"
+],
+"tools:glue": [
+"y5o99w"
+],
+"tools:guide": [
+"12e20hb"
+],
+"tools:hacksaw": [
+"doftwu"
+],
+"tools:handsaw": [
+"rrazif"
+],
+"tools:jackstand": [
+"er95m3"
+],
+"tools:jigsaw": [
+"1hxrq28"
+],
+"tools:knife": [
+"1dzwwwp"
+],
+"tools:land.fokin": [
+"mczo47"
+],
+"tools:land.hose": [
+"xnnxxb"
+],
+"tools:land.mallet": [
+"1dqqbr"
+],
+"tools:land.pruner": [
+"1able48"
+],
+"tools:lathe": [
+"q3afhi"
+],
+"tools:leatherkit": [
+"w63hjb"
+],
+"tools:level": [
+"eh9yyk"
+],
+"tools:measure": [
+"12oxvqk"
+],
+"tools:mechanics.fum": [
+"1sdspb3"
+],
+"tools:mechanics.leakkit": [
+"3jqve2"
+],
+"tools:mechanics.lube": [
+"13elvp3"
+],
+"tools:mechanics.pliers": [
+"kr7c60"
+],
+"tools:mechanics.plunger": [
+"1y6re6a"
+],
+"tools:mechanics.snake": [
+"gx48qh"
+],
+"tools:mechanics.threadseal": [
+"1cvhzb4"
+],
+"tools:metal.anglegrinder": [
+"1wtllut"
+],
+"tools:metal.drillpress": [
+"1ekfssh"
+],
+"tools:metal.fret": [
+"1nazkuc"
+],
+"tools:metal.layout": [
+"1o18l90"
+],
+"tools:metal.lockingpliers": [
+"aycvmm"
+],
+"tools:metal.pliers": [
+"1y6hsn2"
+],
+"tools:metal.solderkit": [
+"1k4c33t"
+],
+"tools:mill": [
+"vrdtp5"
+],
+"tools:mineral.claytools": [
+"1mxauxs"
+],
+"tools:mineral.grouttools": [
+"1enny30"
+],
+"tools:mineral.square": [
+"19kwj94"
+],
+"tools:miter": [
+"1s6f8pi"
+],
+"tools:mixer": [
+"15zvyel"
+],
+"tools:moisture": [
+"1tjs4vz"
+],
+"tools:mold": [
+"1ygx87e"
+],
+"tools:motor": [
+"pz1kpb"
+],
+"tools:multimeter": [
+"15mm4mc"
+],
+"tools:multitool": [
+"1755bgh"
+],
+"tools:notebook": [
+"17ovpr7"
+],
+"tools:obd": [
+"c6eqju"
+],
+"tools:plane": [
+"quuwy0"
+],
+"tools:plasticwelder": [
+"1ahi3c6"
+],
+"tools:ppe": [
+"2go5rl"
+],
+"tools:pressure": [
+"n6ko6f"
+],
+"tools:pressurewasher": [
+"1y8v0k3"
+],
+"tools:printer3d": [
+"1xdcy95"
+],
+"tools:pry": [
+"pjl9rl"
+],
+"tools:rigging": [
+"jt2w1w"
+],
+"tools:riveter": [
+"frntjr"
+],
+"tools:roller": [
+"1pz450q"
+],
+"tools:router": [
+"17zoka7"
+],
+"tools:sander": [
+"1k8jse2"
+],
+"tools:scale": [
+"1ldrqx9"
+],
+"tools:screwdriver": [
+"xfcakg"
+],
+"tools:screwdriver.flat": [
+"1072ll5"
+],
+"tools:screwdriver.ph": [
+"2krprs"
+],
+"tools:seal": [
+"1t0hdba"
+],
+"tools:sensor": [
+"m545s5"
+],
+"tools:sewing": [
+"m3vdhk"
+],
+"tools:sharpen": [
+"rltoc9"
+],
+"tools:shears": [
+"1ss985n"
+],
+"tools:shovel": [
+"13998rx"
+],
+"tools:solder": [
+"1lz6z7g"
+],
+"tools:sprayer": [
+"1aq0vzd"
+],
+"tools:square": [
+"aemn3c"
+],
+"tools:stapler": [
+"1462p9c"
+],
+"tools:tap": [
+"1swe4yf"
+],
+"tools:textile.iron": [
+"nh31e9"
+],
+"tools:textile.setter": [
+"1pcfbp0"
+],
+"tools:tilecutter": [
+"zmukmx"
+],
+"tools:torque": [
+"14jydln"
+],
+"tools:transport.charger": [
+"1i9q6p5"
+],
+"tools:transport.pump": [
+"ka42t0"
+],
+"tools:transport.straps": [
+"efxn3r"
+],
+"tools:trowel": [
+"1s54roq"
+],
+"tools:vacuumkit": [
+"73iqlo"
+],
+"tools:vise": [
+"bpwa79"
+],
+"tools:welder": [
+"9221ro"
+],
+"tools:wood.backsaw": [
+"1ryvcl6"
+],
+"tools:wood.forstner": [
+"3dj7js"
+],
+"tools:wood.gauge": [
+"frl7lo"
+],
+"tools:wood.mallet": [
+"ugejx8"
+],
+"tools:wood.pocketjig": [
+"1dlc986"
+],
+"tools:wood.rasp": [
+"jxshpj"
+],
+"tools:wrench": [
+"1y160v7"
+]
+}
