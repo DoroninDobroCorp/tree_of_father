@@ -8,6 +8,7 @@ import json
 import os
 import pathlib
 import sys
+import tempfile
 import threading
 import time
 import unittest
@@ -67,7 +68,8 @@ class TestServerEndpoints(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # Bind to port 0 (ephemeral port assigned by OS)
-        cls.config = Config(cli_port=0, cli_host="127.0.0.1")
+        cls.temp_dir = tempfile.TemporaryDirectory()
+        cls.config = Config(cli_port=0, cli_host="127.0.0.1", data_dir=pathlib.Path(cls.temp_dir.name))
         cls.config.api_key = "sk-test-mock-key-12345"
         cls.config.access_key = ""
         cls.config.public_api = False
@@ -89,6 +91,24 @@ class TestServerEndpoints(unittest.TestCase):
     def tearDownClass(cls):
         cls.httpd.shutdown()
         cls.httpd.server_close()
+        cls.temp_dir.cleanup()
+
+    def setUp(self):
+        # Reset storage between tests
+        if self.config.data_dir.is_dir():
+            for p in self.config.data_dir.glob("*"):
+                if p.is_file():
+                    try:
+                        p.unlink()
+                    except OSError:
+                        pass
+        if self.config.backups_dir.is_dir():
+            for p in self.config.backups_dir.glob("*"):
+                if p.is_file():
+                    try:
+                        p.unlink()
+                    except OSError:
+                        pass
 
     def _get(self, path: str, headers: dict | None = None) -> tuple[int, dict | str, dict]:
         req = urllib.request.Request(f"{self.base_url}{path}", headers=headers or {})
@@ -433,6 +453,149 @@ class TestServerEndpoints(unittest.TestCase):
 
             self.assertEqual(status, HTTPStatus.UNAUTHORIZED)
             self.assertIn("ключ", str(body.get("error", "")).lower())
+
+    def test_save_flow_and_backups(self):
+        # 1. GET /api/save initially returns exists: False
+        status, body, _ = self._get("/api/save")
+        self.assertEqual(status, HTTPStatus.OK)
+        self.assertFalse(body.get("exists"))
+
+        # 2. POST /api/save with valid state
+        sample_state = {
+            "schemaVersion": 4,
+            "revision": 1,
+            "branches": [{"id": "wood", "title": "Дерево"}],
+            "skills": [{"id": "saw", "branchId": "wood", "title": "Пиление"}],
+            "events": [],
+            "projects": [],
+            "tools": [],
+            "inventory": {},
+            "mastery": {},
+            "notes": {},
+            "goals": {},
+            "audit": [],
+            "settings": {"theme": "light"}
+        }
+        status, post_body, _ = self._post("/api/save", {"state": sample_state, "note": "rev 1 test"})
+        self.assertEqual(status, HTTPStatus.OK)
+        self.assertTrue(post_body.get("ok"))
+        self.assertEqual(post_body.get("revision"), 1)
+        self.assertTrue(post_body.get("backupFile"))
+
+        # 3. GET /api/save now returns exists: True with saved state
+        status, get_body, _ = self._get("/api/save")
+        self.assertEqual(status, HTTPStatus.OK)
+        self.assertTrue(get_body.get("exists"))
+        self.assertEqual(get_body.get("revision"), 1)
+        self.assertEqual(get_body["save"]["state"]["skills"][0]["id"], "saw")
+
+        # 4. Save revision 2
+        sample_state["revision"] = 2
+        sample_state["skills"].append({"id": "plane", "branchId": "wood", "title": "Строгание"})
+        status, post_body2, _ = self._post("/api/save", {"state": sample_state, "note": "rev 2 test"})
+        self.assertEqual(status, HTTPStatus.OK)
+        backup2_file = post_body2.get("backupFile")
+
+        # 5. GET /api/backups returns both backups and git info
+        status, backups_body, _ = self._get("/api/backups")
+        self.assertEqual(status, HTTPStatus.OK)
+        self.assertGreaterEqual(backups_body.get("totalBackups", 0), 2)
+        self.assertIn("git", backups_body)
+
+        # 6. POST /api/restore to restore revision 1 backup
+        first_backup = post_body.get("backupFile")
+        status, restore_body, _ = self._post("/api/restore", {"filename": first_backup})
+        self.assertEqual(status, HTTPStatus.OK)
+        self.assertTrue(restore_body.get("ok"))
+        self.assertEqual(restore_body["save"]["state"]["revision"], 1)
+
+        # Verify current save is now revision 1
+        status, get_restored, _ = self._get("/api/save")
+        self.assertEqual(status, HTTPStatus.OK)
+        self.assertEqual(get_restored.get("revision"), 1)
+
+    def test_save_invalid_payload_rejected(self):
+        # Empty body or missing required state
+        status, body, _ = self._post("/api/save", {"invalid": True})
+        self.assertEqual(status, HTTPStatus.BAD_REQUEST)
+
+        # Missing schemaVersion in state
+        status, body, _ = self._post("/api/save", {"state": {"foo": "bar"}})
+        self.assertEqual(status, HTTPStatus.BAD_REQUEST)
+
+    def test_restore_invalid_filename_rejected(self):
+        # Directory traversal attempt
+        status, body, _ = self._post("/api/restore", {"filename": "../../../etc/passwd"})
+        self.assertEqual(status, HTTPStatus.BAD_REQUEST)
+
+        # Nonexistent backup
+        status, body, _ = self._post("/api/restore", {"filename": "save_999999_rev999.json"})
+        self.assertEqual(status, HTTPStatus.NOT_FOUND)
+
+    def test_manual_backup_endpoint(self):
+        sample_state = {
+            "schemaVersion": 4,
+            "revision": 10,
+            "branches": [{"id": "wood", "title": "Дерево"}],
+            "skills": [{"id": "saw", "branchId": "wood", "title": "Пиление"}],
+            "events": [],
+            "projects": [],
+            "tools": [],
+            "inventory": {},
+            "mastery": {},
+            "notes": {},
+            "goals": {},
+            "audit": [],
+            "settings": {"theme": "light"}
+        }
+        # First ensure a save exists
+        self._post("/api/save", {"state": sample_state, "note": "prep manual backup"})
+        status, body, _ = self._post("/api/backup", {})
+        self.assertEqual(status, HTTPStatus.OK)
+        self.assertTrue(body.get("ok"))
+        self.assertTrue(body.get("backupFile"))
+
+    def test_git_commit_endpoint(self):
+        sample_state = {
+            "schemaVersion": 4,
+            "revision": 20,
+            "branches": [{"id": "wood", "title": "Дерево"}],
+            "skills": [{"id": "saw", "branchId": "wood", "title": "Пиление"}],
+            "events": [],
+            "projects": [],
+            "tools": [],
+            "inventory": {},
+            "mastery": {},
+            "notes": {},
+            "goals": {},
+            "audit": [],
+            "settings": {"theme": "light"}
+        }
+        # First ensure a save exists
+        self._post("/api/save", {"state": sample_state, "note": "prep git commit"})
+        status, body, _ = self._post("/api/git-commit", {"message": "Тестовый коммит"})
+        self.assertEqual(status, HTTPStatus.OK)
+        self.assertTrue(body.get("ok"))
+        self.assertIn("git", body)
+
+    def test_save_endpoints_access_control(self):
+        self.config.access_key = "secret-save-key"
+        try:
+            # Without key from public host -> 403
+            status, _, _ = self._get("/api/save", headers={"Host": "public.example.com"})
+            self.assertEqual(status, HTTPStatus.FORBIDDEN)
+
+            status, _, _ = self._post("/api/save", {"state": {}}, headers={"Host": "public.example.com"})
+            self.assertEqual(status, HTTPStatus.FORBIDDEN)
+
+            status, _, _ = self._get("/api/backups", headers={"Host": "public.example.com"})
+            self.assertEqual(status, HTTPStatus.FORBIDDEN)
+
+            # With correct key -> allowed
+            status, body, _ = self._get("/api/save", headers={"Host": "public.example.com", "X-Workshop-Key": "secret-save-key"})
+            self.assertEqual(status, HTTPStatus.OK)
+        finally:
+            self.config.access_key = ""
 
 
 if __name__ == "__main__":

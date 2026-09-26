@@ -43,6 +43,17 @@
 .mastery-box h4{margin-top:4px;font-size:15px}
 .mastery-box.progress{border-color:var(--gold)}
 .mastery-box.mastered{border-color:var(--accent);background:var(--soft)}
+
+.save-indicator{display:inline-flex;align-items:center;gap:6px;font-size:12px;padding:6px 11px;border-radius:9px;border:1px solid var(--line);background:var(--card);color:var(--muted);white-space:nowrap;user-select:none;cursor:default}
+.save-indicator .icon{width:16px;height:16px}
+.save-indicator.synced{color:var(--accent);border-color:color-mix(in srgb,var(--accent) 30%,var(--line));background:var(--soft)}
+.save-indicator.saving{color:var(--gold);border-color:color-mix(in srgb,var(--gold) 30%,var(--line));background:var(--goldbg)}
+.save-indicator.offline{color:var(--muted);opacity:.85}
+.save-indicator.error{color:var(--danger);border-color:var(--dangerbg);background:var(--dangerbg)}
+.backup-table{width:100%;border-collapse:collapse;margin-top:12px;font-size:12px}
+.backup-table th,.backup-table td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--line)}
+.backup-table th{color:var(--muted);font-weight:600}
+.backup-table tr:hover td{background:var(--soft)}
 .mastery-box .checklist{margin-top:13px}
 .mastery-box .checkline{padding:6px 0}
 @media(max-width:590px){.skill-row{grid-template-columns:25px 1fr;gap:9px}.skill-open{gap:9px}.mastery-count b{font-size:25px}}

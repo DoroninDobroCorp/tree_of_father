@@ -28,7 +28,7 @@
 
 ## 2. Структура состояния (Схема v4)
 
-Состояние игры хранится в `localStorage` браузера (ключ `svoya-masterskaya-rpg-v3`, имя сохранено ради совместимости) в формате JSON, `schemaVersion: 4`.
+Состояние игры хранится на сервере в `data/save.json`, версионируется в локальном Git-репозитории и автоматически резервируется в `data/backups/`. В автономном режиме (без сервера) состояние хранится в `localStorage` браузера (ключ `svoya-masterskaya-rpg-v3`). Формат JSON, `schemaVersion: 4`.
 
 ```typescript
 interface State {
@@ -157,31 +157,47 @@ interface Mastery { mastered: boolean; checks: number[]; date: string | null }
 Сервер построен на базе стандартного `http.server.ThreadingHTTPServer`:
 
 ```
-+-------------------------------------------------------------+
-|                      Браузер (Клиент)                       |
-|          http://127.0.0.1:8765 или через nginx /api/        |
-+------------------------------+------------------------------+
-                               |
-   [GET / · index.html]        |            [POST /api/propose]
-     (только белый список)     | (X-Workshop-Token [+ X-Workshop-Key])
-                               v
-+-------------------------------------------------------------+
-|                     server.py (Локальный)                    |
-|                                                             |
-|  - RateLimiter: скользящее окно 1 час (макс. 20 запр./час)  |
-|  - Доступ: WORKSHOP_ACCESS_KEY или локальный Host           |
-|  - Проверка X-Workshop-Token против session_token           |
-|  - Загрузка системных правил (ai_instructions.txt)          |
-|  - Валидация JSON Schema (proposal.schema.json)             |
-|  - Fallback: max_completion_tokens / max_tokens             |
-+------------------------------+------------------------------+
-                               |
-               [HTTPS]         | Bearer OPENAI_API_KEY
-        (Structured Outputs)   | JSON Schema
-                               v
-+-------------------------------------------------------------+
-|        {OPENAI_BASE_URL}/chat/completions                   |
-|        OpenAI или совместимый прокси (VibeProxy)            |
++-------------------------------------------------------------------------+
+|                            Браузер (Клиент)                             |
+|               http://127.0.0.1:8765 или через reverse-proxy              |
++------------------------------------+------------------------------------+
+                                     |
+    [GET /index.html]                | [POST /api/propose] (ИИ-наставник)
+    [GET /api/save]                  | [POST /api/save] (Серверное сохранение)
+    [GET /api/backups]               | [POST /api/restore] (Откат к бэкапу)
+    [GET /api/health]                | [POST /api/backup] (Ручной снимок)
+                                     | [POST /api/git-commit] (Git-коммит)
+                                     v
++-------------------------------------------------------------------------+
+|                          server.py (Локальный)                          |
+|                                                                         |
+|  - RateLimiter: скользящее окно 1 час (макс. 20 запр./час)              |
+|  - Доступ: WORKSHOP_ACCESS_KEY или локальный Host                       |
+|  - Хранение: data/save.json (атомарная запись через tmp-файл)           |
+|  - Ротация резервных копий: data/backups/ (до 50 снимков)               |
+|  - Git-интеграция: автокоммиты ревизий в локальный репозиторий          |
+|  - ИИ-прокси: OpenAI Structured Outputs + Form Helpers                  |
++------------------------------------+------------------------------------+
+                                     |
+               [HTTPS]               | Bearer OPENAI_API_KEY
+        (Structured Outputs)         | JSON Schema
+                                     v
++-------------------------------------------------------------------------+
+|        {OPENAI_BASE_URL}/chat/completions                               |
+|        OpenAI или совместимый прокси (VibeProxy)                        |
++-------------------------------------------------------------------------+
+```
+
+### Эндпоинты сервера:
+- `GET /` и `/index.html` — отдача приложения.
+- `GET /api/health` — статус сервера, модели и сессионный токен.
+- `GET /api/save` — получение текущего состояния из `data/save.json`.
+- `POST /api/save` — атомарная запись `data/save.json`, создание резервного снимка в `data/backups/` и коммит в Git.
+- `GET /api/backups` — список доступных серверных копий и статус локального Git-репозитория.
+- `POST /api/restore` — откат к выбранному бэкапу (с созданием pre-restore снимка) и коммит в Git.
+- `POST /api/backup` — создание ручного снимка состояния на сервере.
+- `POST /api/git-commit` — ручной коммит файла сохранения в Git с сообщением пользователя.
+- `POST /api/propose` — проксирование запросов к OpenAI API.
 +-------------------------------------------------------------+
 ```
 

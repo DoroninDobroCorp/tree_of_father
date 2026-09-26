@@ -12,17 +12,23 @@ import json
 import mimetypes
 import os
 import pathlib
+import re
 import secrets
+import subprocess
 import sys
 import threading
 import time
 import urllib.error
 import urllib.request
 import webbrowser
+from datetime import datetime, timezone
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 BASE_DIR = pathlib.Path(__file__).resolve().parent
+DATA_DIR = BASE_DIR / "data"
+SAVE_FILE = DATA_DIR / "save.json"
+BACKUPS_DIR = DATA_DIR / "backups"
 
 # Only these files are ever served; sources, .env and .git stay private.
 PUBLIC_FILES = {
@@ -122,7 +128,12 @@ def load_env_file(path: pathlib.Path) -> dict[str, str]:
 class Config:
     """Server and OpenAI API configuration."""
 
-    def __init__(self, cli_port: int | None = None, cli_host: str | None = None) -> None:
+    def __init__(
+        self,
+        cli_port: int | None = None,
+        cli_host: str | None = None,
+        data_dir: pathlib.Path | None = None,
+    ) -> None:
         file_env = load_env_file(BASE_DIR / ".env")
 
         def get_val(key: str, default: str) -> str:
@@ -137,7 +148,20 @@ class Config:
         self.access_key = get_val("WORKSHOP_ACCESS_KEY", "").strip()
         # Opt-in: let anyone reaching the server use the AI (hourly limit still applies).
         self.public_api = get_val("WORKSHOP_PUBLIC_API", "").strip().lower() in ("1", "true", "yes")
-        
+
+        # Persistence & Git settings
+        self.git_autosave = get_val("WORKSHOP_GIT_AUTOSAVE", "1").strip().lower() in ("1", "true", "yes")
+        self.max_backups = int(get_val("WORKSHOP_MAX_BACKUPS", "50"))
+        custom_data_dir = get_val("WORKSHOP_DATA_DIR", "").strip()
+        if data_dir is not None:
+            self.data_dir = data_dir
+        elif custom_data_dir:
+            self.data_dir = pathlib.Path(custom_data_dir).resolve()
+        else:
+            self.data_dir = DATA_DIR
+        self.save_file = self.data_dir / "save.json"
+        self.backups_dir = self.data_dir / "backups"
+
         default_port = int(get_val("PORT", "8765"))
         self.port = cli_port if cli_port is not None else default_port
         self.host = cli_host or "127.0.0.1"
@@ -182,6 +206,7 @@ class WorkshopServer:
         self.config = config
         self.rate_limiter = RateLimiter(config.max_requests_per_hour)
         self.session_token = secrets.token_urlsafe(32)
+        self.save_lock = threading.Lock()
         self.schema = self._load_schema()
         self.suggest_schemas = {
             mode: json.loads((BASE_DIR / "src" / file).read_text(encoding="utf-8"))
@@ -197,6 +222,237 @@ class WorkshopServer:
         if not rules:
             raise RuntimeError("src/ai_instructions.txt is empty")
         return rules
+
+    def git_commit(self, message: str) -> bool:
+        """Commit save file to git if inside repository."""
+        git_dir = BASE_DIR / ".git"
+        if not git_dir.is_dir():
+            return False
+        try:
+            rel_path = self.config.save_file.relative_to(BASE_DIR)
+        except ValueError:
+            return False
+
+        try:
+            add_res = subprocess.run(
+                ["git", "add", str(rel_path)],
+                cwd=str(BASE_DIR),
+                capture_output=True,
+                text=True,
+                timeout=5,
+            )
+            if add_res.returncode != 0:
+                return False
+
+            cmd = ["git"]
+            user_check = subprocess.run(["git", "config", "user.name"], cwd=str(BASE_DIR), capture_output=True, text=True)
+            if not user_check.stdout.strip():
+                cmd.extend(["-c", "user.name=Своя мастерская", "-c", "user.email=workshop@local"])
+            cmd.extend(["commit", "-m", message])
+
+            commit_res = subprocess.run(
+                cmd,
+                cwd=str(BASE_DIR),
+                capture_output=True,
+                text=True,
+                timeout=5,
+            )
+            return commit_res.returncode == 0
+        except Exception as e:
+            print(f"[{time.strftime('%H:%M:%S')}] Ошибка git-коммита: {e}", file=sys.stderr)
+            return False
+
+    def get_git_info(self) -> dict:
+        """Get git repository status information."""
+        git_dir = BASE_DIR / ".git"
+        if not git_dir.is_dir():
+            return {"available": False, "reason": "Локальный git-репозиторий не инициализирован"}
+        try:
+            branch_res = subprocess.run(
+                ["git", "branch", "--show-current"],
+                cwd=str(BASE_DIR),
+                capture_output=True,
+                text=True,
+                timeout=3,
+            )
+            branch = branch_res.stdout.strip() or "master"
+
+            log_res = subprocess.run(
+                ["git", "log", "-1", "--format=%h %s (%cd)", "--date=short"],
+                cwd=str(BASE_DIR),
+                capture_output=True,
+                text=True,
+                timeout=3,
+            )
+            last_commit = log_res.stdout.strip()
+
+            remote_res = subprocess.run(
+                ["git", "remote", "-v"],
+                cwd=str(BASE_DIR),
+                capture_output=True,
+                text=True,
+                timeout=3,
+            )
+            remotes = [line.strip() for line in remote_res.stdout.splitlines() if line.strip()]
+
+            return {
+                "available": True,
+                "branch": branch,
+                "lastCommit": last_commit,
+                "remotes": remotes,
+                "hasRemote": len(remotes) > 0,
+            }
+        except Exception as e:
+            return {"available": False, "error": str(e)}
+
+    def save_state(self, payload: dict, note: str = "") -> dict:
+        """Save state to save.json atomically, create timestamped backup, and commit to git."""
+        with self.save_lock:
+            state = payload.get("state") if isinstance(payload, dict) and "state" in payload else payload
+            if not isinstance(state, dict):
+                raise ValueError("Некорректный формат: ожидается объект с полем state")
+            if "schemaVersion" not in state or "skills" not in state:
+                raise ValueError("Некорректная структура состояния: отсутствуют обязательные поля")
+
+            now_iso = datetime.now(timezone.utc).isoformat()
+            data = {
+                "app": "svoya-masterskaya",
+                "version": state.get("schemaVersion", 4),
+                "savedAt": now_iso,
+                "note": note,
+                "state": state,
+                "undo": payload.get("undo", []) if isinstance(payload, dict) else [],
+            }
+
+            self.config.data_dir.mkdir(parents=True, exist_ok=True)
+            self.config.backups_dir.mkdir(parents=True, exist_ok=True)
+
+            content = json.dumps(data, ensure_ascii=False, indent=2) + "\n"
+
+            # 1. Atomic write to save.json
+            tmp_file = self.config.data_dir / f"save.json.{os.getpid()}_{time.time_ns()}.tmp"
+            try:
+                tmp_file.write_text(content, encoding="utf-8")
+                os.replace(tmp_file, self.config.save_file)
+            finally:
+                if tmp_file.is_file():
+                    try:
+                        tmp_file.unlink()
+                    except OSError:
+                        pass
+
+            # 2. Timestamped backup
+            rev = state.get("revision", 0)
+            ts = time.strftime("%Y%m%d_%H%M%S")
+            backup_filename = f"save_{ts}_rev{rev}.json"
+            backup_path = self.config.backups_dir / backup_filename
+            backup_path.write_text(content, encoding="utf-8")
+
+            # 3. Rotate backups
+            self._rotate_backups()
+
+            # 4. Git commit
+            git_committed = False
+            if self.config.git_autosave:
+                msg = f"save: revision {rev}" + (f" - {note}" if note else "")
+                git_committed = self.git_commit(msg)
+
+            return {
+                "ok": True,
+                "revision": rev,
+                "savedAt": now_iso,
+                "backupFile": backup_filename,
+                "gitCommitted": git_committed,
+            }
+
+    def _rotate_backups(self) -> None:
+        """Keep only the latest max_backups files."""
+        try:
+            files = [p for p in self.config.backups_dir.glob("save_*.json") if p.is_file()]
+            if len(files) <= self.config.max_backups:
+                return
+            files.sort(key=lambda p: p.stat().st_mtime, reverse=True)
+            for old in files[self.config.max_backups:]:
+                try:
+                    old.unlink()
+                except OSError:
+                    pass
+        except Exception as e:
+            print(f"[{time.strftime('%H:%M:%S')}] Ошибка ротации бэкапов: {e}", file=sys.stderr)
+
+    def list_backups(self) -> list[dict]:
+        """List existing backup snapshots sorted newest first."""
+        if not self.config.backups_dir.is_dir():
+            return []
+        result = []
+        files = [p for p in self.config.backups_dir.glob("save_*.json") if p.is_file()]
+        files.sort(key=lambda p: p.stat().st_mtime, reverse=True)
+        for p in files[:50]:
+            st = p.stat()
+            rev = None
+            for part in p.stem.split("_"):
+                if part.startswith("rev") and part[3:].isdigit():
+                    rev = int(part[3:])
+                    break
+            result.append({
+                "filename": p.name,
+                "size": st.st_size,
+                "mtime": datetime.fromtimestamp(st.st_mtime, tz=timezone.utc).isoformat(),
+                "revision": rev,
+            })
+        return result
+
+    def restore_backup(self, filename: str) -> dict:
+        """Restore state from an existing backup snapshot."""
+        with self.save_lock:
+            if not re.match(r"^save_[a-zA-Z0-9_\-\.]+\.json$", filename):
+                raise ValueError("Недопустимое имя файла резервной копии")
+
+            backup_file = self.config.backups_dir / filename
+            if not backup_file.is_file():
+                raise FileNotFoundError(f"Файл {filename} не найден")
+
+            # 1. Pre-restore backup of existing save.json if it exists
+            if self.config.save_file.is_file():
+                pre_name = f"save_pre_restore_{time.strftime('%Y%m%d_%H%M%S')}.json"
+                pre_path = self.config.backups_dir / pre_name
+                pre_path.write_text(self.config.save_file.read_text(encoding="utf-8"), encoding="utf-8")
+
+            # 2. Read and validate backup
+            content = backup_file.read_text(encoding="utf-8")
+            parsed = json.loads(content)
+            state = parsed.get("state", parsed)
+            if "schemaVersion" not in state or "skills" not in state:
+                raise ValueError("Файл резервной копии повреждён или имеет некорректную структуру")
+
+            # 3. Replace save.json atomically
+            tmp_file = self.config.data_dir / f"save.json.{os.getpid()}_{time.time_ns()}.tmp"
+            try:
+                tmp_file.write_text(content, encoding="utf-8")
+                os.replace(tmp_file, self.config.save_file)
+            finally:
+                if tmp_file.is_file():
+                    try:
+                        tmp_file.unlink()
+                    except OSError:
+                        pass
+
+            # 4. Git commit
+            if self.config.git_autosave:
+                self.git_commit(f"restore: from backup {filename}")
+
+            return parsed
+
+    def load_state(self) -> dict | None:
+        """Load current state from save.json if present."""
+        if not self.config.save_file.is_file():
+            return None
+        try:
+            content = self.config.save_file.read_text(encoding="utf-8")
+            return json.loads(content)
+        except Exception as e:
+            print(f"[{time.strftime('%H:%M:%S')}] Ошибка чтения {self.config.save_file}: {e}", file=sys.stderr)
+            return None
 
 
 class WorkshopRequestHandler(BaseHTTPRequestHandler):
@@ -245,6 +501,12 @@ class WorkshopRequestHandler(BaseHTTPRequestHandler):
         if path == "/api/health":
             self._handle_health()
             return
+        if path == "/api/save":
+            self._handle_get_save()
+            return
+        if path == "/api/backups":
+            self._handle_get_backups()
+            return
 
         # Static file serving
         self._serve_static(path)
@@ -256,8 +518,175 @@ class WorkshopRequestHandler(BaseHTTPRequestHandler):
         if path == "/api/propose":
             self._handle_propose()
             return
+        if path == "/api/save":
+            self._handle_post_save()
+            return
+        if path == "/api/restore":
+            self._handle_post_restore()
+            return
+        if path == "/api/backup":
+            self._handle_post_backup()
+            return
+        if path == "/api/git-commit":
+            self._handle_post_git_commit()
+            return
 
         self._send_json(HTTPStatus.NOT_FOUND, {"error": "Эндпоинт не найден"})
+
+    def _handle_get_save(self) -> None:
+        """Get the current server save."""
+        if not self._has_access():
+            self._send_json(HTTPStatus.FORBIDDEN, {"error": "Нет доступа к этому серверу."})
+            return
+        save_data = self.server_app.load_state()
+        if save_data is None:
+            self._send_json(HTTPStatus.OK, {"exists": False})
+            return
+        st = self.server_app.config.save_file.stat()
+        self._send_json(HTTPStatus.OK, {
+            "exists": True,
+            "save": save_data,
+            "savedAt": datetime.fromtimestamp(st.st_mtime, tz=timezone.utc).isoformat(),
+            "revision": save_data.get("state", {}).get("revision", 0),
+            "fileSize": st.st_size,
+        })
+
+    def _handle_post_save(self) -> None:
+        """Save state to server."""
+        if not self._has_access():
+            self._send_json(HTTPStatus.FORBIDDEN, {"error": "Нет доступа к этому серверу."})
+            return
+        try:
+            length = int(self.headers.get("Content-Length", 0))
+            if length > 15 * 1024 * 1024:
+                self._send_json(HTTPStatus.REQUEST_ENTITY_TOO_LARGE, {"error": "Размер сохранения превышает 15 МБ"})
+                return
+            body = self.rfile.read(length).decode("utf-8")
+            data = json.loads(body)
+        except Exception as e:
+            self._send_json(HTTPStatus.BAD_REQUEST, {"error": f"Не удалось прочитать тело запроса: {e}"})
+            return
+
+        try:
+            res = self.server_app.save_state(data, note=data.get("note", ""))
+            self._send_json(HTTPStatus.OK, res)
+            print(f"[{time.strftime('%H:%M:%S')}] POST /api/save -> Сохранено на сервере (ревизия {res.get('revision')}, git={res.get('gitCommitted')})")
+        except ValueError as e:
+            self._send_json(HTTPStatus.BAD_REQUEST, {"error": str(e)})
+        except Exception as e:
+            self._send_json(HTTPStatus.INTERNAL_SERVER_ERROR, {"error": f"Ошибка сохранения на сервере: {e}"})
+
+    def _handle_get_backups(self) -> None:
+        """Get backups list and git status."""
+        if not self._has_access():
+            self._send_json(HTTPStatus.FORBIDDEN, {"error": "Нет доступа к этому серверу."})
+            return
+        backups = self.server_app.list_backups()
+        git_info = self.server_app.get_git_info()
+        save_file = self.server_app.config.save_file
+        save_exists = save_file.is_file()
+        current_rev = None
+        if save_exists:
+            current_rev = (self.server_app.load_state() or {}).get("state", {}).get("revision")
+        self._send_json(HTTPStatus.OK, {
+            "backups": backups,
+            "totalBackups": len(backups),
+            "git": git_info,
+            "saveExists": save_exists,
+            "currentRevision": current_rev,
+        })
+
+    def _handle_post_restore(self) -> None:
+        """Restore state from an existing backup."""
+        if not self._has_access():
+            self._send_json(HTTPStatus.FORBIDDEN, {"error": "Нет доступа к этому серверу."})
+            return
+        try:
+            length = int(self.headers.get("Content-Length", 0))
+            body = self.rfile.read(length).decode("utf-8")
+            data = json.loads(body)
+            filename = data.get("filename", "").strip()
+        except Exception as e:
+            self._send_json(HTTPStatus.BAD_REQUEST, {"error": f"Некорректный запрос: {e}"})
+            return
+
+        try:
+            restored = self.server_app.restore_backup(filename)
+            self._send_json(HTTPStatus.OK, {
+                "ok": True,
+                "message": f"Состояние успешно восстановлено из {filename}",
+                "save": restored,
+            })
+            print(f"[{time.strftime('%H:%M:%S')}] POST /api/restore -> Восстановлено из бэкапа {filename}")
+        except FileNotFoundError as e:
+            self._send_json(HTTPStatus.NOT_FOUND, {"error": str(e)})
+        except ValueError as e:
+            self._send_json(HTTPStatus.BAD_REQUEST, {"error": str(e)})
+        except Exception as e:
+            self._send_json(HTTPStatus.INTERNAL_SERVER_ERROR, {"error": f"Ошибка восстановления: {e}"})
+
+    def _handle_post_backup(self) -> None:
+        """Create a manual backup snapshot."""
+        if not self._has_access():
+            self._send_json(HTTPStatus.FORBIDDEN, {"error": "Нет доступа к этому серверу."})
+            return
+        try:
+            length = int(self.headers.get("Content-Length", 0))
+            body = self.rfile.read(length).decode("utf-8") if length > 0 else "{}"
+            data = json.loads(body) if body.strip() else {}
+        except Exception:
+            data = {}
+
+        try:
+            if "state" in data:
+                res = self.server_app.save_state(data, note=data.get("note", "Ручной снимок"))
+            elif self.server_app.config.save_file.is_file():
+                current = self.server_app.load_state()
+                rev = (current or {}).get("state", {}).get("revision", 0)
+                ts = time.strftime("%Y%m%d_%H%M%S")
+                filename = f"save_{ts}_rev{rev}_manual.json"
+                target = self.server_app.config.backups_dir / filename
+                self.server_app.config.backups_dir.mkdir(parents=True, exist_ok=True)
+                target.write_text(self.server_app.config.save_file.read_text(encoding="utf-8"), encoding="utf-8")
+                git_committed = False
+                if self.server_app.config.git_autosave:
+                    git_committed = self.server_app.git_commit(f"backup: manual snapshot {filename}")
+                res = {"ok": True, "backupFile": filename, "revision": rev, "gitCommitted": git_committed}
+            else:
+                self._send_json(HTTPStatus.NOT_FOUND, {"error": "Сохранение на сервере ещё не создано"})
+                return
+            self._send_json(HTTPStatus.OK, res)
+            print(f"[{time.strftime('%H:%M:%S')}] POST /api/backup -> Создан снимок {res.get('backupFile')}")
+        except Exception as e:
+            self._send_json(HTTPStatus.INTERNAL_SERVER_ERROR, {"error": f"Ошибка создания резервной копии: {e}"})
+
+    def _handle_post_git_commit(self) -> None:
+        """Make a git commit of save.json with custom message."""
+        if not self._has_access():
+            self._send_json(HTTPStatus.FORBIDDEN, {"error": "Нет доступа к этому серверу."})
+            return
+        try:
+            length = int(self.headers.get("Content-Length", 0))
+            body = self.rfile.read(length).decode("utf-8") if length > 0 else "{}"
+            data = json.loads(body) if body.strip() else {}
+            msg = data.get("message", "").strip() or "Ручное сохранение прогресса"
+            msg = re.sub(r"[\r\n]+", " ", msg)[:200]
+        except Exception:
+            msg = "Ручное сохранение прогресса"
+
+        if not self.server_app.config.save_file.is_file():
+            self._send_json(HTTPStatus.NOT_FOUND, {"error": "Файл сохранения save.json ещё не создан"})
+            return
+
+        committed = self.server_app.git_commit(msg)
+        git_info = self.server_app.get_git_info()
+        self._send_json(HTTPStatus.OK, {
+            "ok": True,
+            "committed": committed,
+            "git": git_info,
+            "message": "Коммит выполнен" if committed else "Нет новых изменений для коммита или ошибка git",
+        })
+        print(f"[{time.strftime('%H:%M:%S')}] POST /api/git-commit -> {msg} (committed={committed})")
 
     def _handle_health(self) -> None:
         """Health check endpoint."""
@@ -539,12 +968,17 @@ def run_server():
 
     url = f"http://{config.host}:{config.port}"
     api_status = f"Настроен (модель: {config.model})" if config.is_configured else "Не настроен (укажите OPENAI_API_KEY в .env)"
+    git_info = workshop_app.get_git_info()
+    git_status_str = f"Ветка {git_info.get('branch')} (автокоммит: {'включен' if config.git_autosave else 'выключен'})" if git_info.get("available") else "Git не подключен"
 
     print("==================================================================")
     print("      Своя мастерская · Skill RPG — Локальный сервер")
     print("==================================================================")
     print(f"  Адрес:         {url}")
     print(f"  API статус:    {api_status}")
+    print(f"  Хранилище:     {config.save_file}")
+    print(f"  Бэкапы:        {config.backups_dir}")
+    print(f"  Git:           {git_status_str}")
     print(f"  Лимит запросов:{config.max_requests_per_hour}/час")
     print(f"  Доступ к API:  {'открыт всем (WORKSHOP_PUBLIC_API)' if config.public_api else 'по ключу WORKSHOP_ACCESS_KEY' if config.access_key else 'только с localhost'}")
     print("==================================================================")
