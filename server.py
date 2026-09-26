@@ -339,10 +339,19 @@ class WorkshopRequestHandler(BaseHTTPRequestHandler):
             },
         }
 
+        # Resolve target model name (e.g. map gemini-3.8-flash to gemini-3.8-flash-high for vibeproxy)
+        target_model = app.config.model
+        if target_model in ("gemini-3.8-flash", "gemini-3.8", "gemini-3.8-flash-preview"):
+            target_model = "gemini-3.8-flash-high"
+        elif target_model in ("gemini-3.7-flash", "gemini-3.7"):
+            target_model = "gemini-3.7-flash-high"
+        elif target_model in ("gemini-3.6-flash", "gemini-3.6"):
+            target_model = "gemini-3.6-flash-high"
+
         # First attempt with max_completion_tokens (used by gpt-4o, gpt-4o-mini, gpt-5-mini, o1, etc.)
         def make_payload(token_param_name: str) -> dict:
             return {
-                "model": app.config.model,
+                "model": target_model,
                 "messages": messages,
                 "response_format": response_format,
                 token_param_name: app.config.max_tokens,
