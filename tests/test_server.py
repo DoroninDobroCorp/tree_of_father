@@ -62,6 +62,40 @@ class TestConfigAndRateLimiter(unittest.TestCase):
         self.assertTrue(limiter.allow()[0])
 
 
+class TestGitAutopush(unittest.TestCase):
+    """Background push after save commits."""
+
+    def test_pushes_made_during_a_push_are_coalesced(self):
+        with patch.dict(os.environ, {}, clear=True), patch("server.load_env_file", return_value={}):
+            app = WorkshopServer(Config(cli_port=0, cli_host="127.0.0.1"))
+        started, release, calls = threading.Event(), threading.Event(), []
+
+        def fake_run(cmd, **kwargs):
+            calls.append(cmd)
+            started.set()
+            release.wait(5)
+            return MagicMock(returncode=0, stdout="", stderr="")
+
+        with patch("server.subprocess.run", side_effect=fake_run):
+            app.request_push()
+            self.assertTrue(started.wait(5))
+            app.request_push()
+            app.request_push()
+            release.set()
+            deadline = time.time() + 5
+            while app._push_running and time.time() < deadline:
+                time.sleep(0.01)
+        self.assertFalse(app._push_running)
+        self.assertEqual(calls, [["git", "push", "--quiet"]] * 2)
+        self.assertTrue(app.last_push["ok"])
+
+    def test_autopush_is_opt_in(self):
+        with patch.dict(os.environ, {}, clear=True), patch("server.load_env_file", return_value={}):
+            self.assertFalse(Config().git_autopush)
+        with patch.dict(os.environ, {"WORKSHOP_GIT_AUTOPUSH": "1"}, clear=True), patch("server.load_env_file", return_value={}):
+            self.assertTrue(Config().git_autopush)
+
+
 class TestServerEndpoints(unittest.TestCase):
     """Integration tests running against an in-memory HTTP server."""
 
@@ -74,6 +108,7 @@ class TestServerEndpoints(unittest.TestCase):
         cls.config.access_key = ""
         cls.config.public_api = False
         cls.config.max_requests_per_hour = 20
+        cls.config.git_autopush = False
         cls.workshop_app = WorkshopServer(cls.config)
 
         class TestBoundHandler(WorkshopRequestHandler):

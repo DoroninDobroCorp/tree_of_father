@@ -151,6 +151,8 @@ class Config:
 
         # Persistence & Git settings
         self.git_autosave = get_val("WORKSHOP_GIT_AUTOSAVE", "1").strip().lower() in ("1", "true", "yes")
+        # Opt-in: push every save commit to the branch's upstream (keep that repository private).
+        self.git_autopush = get_val("WORKSHOP_GIT_AUTOPUSH", "").strip().lower() in ("1", "true", "yes")
         self.max_backups = int(get_val("WORKSHOP_MAX_BACKUPS", "50"))
         custom_data_dir = get_val("WORKSHOP_DATA_DIR", "").strip()
         if data_dir is not None:
@@ -213,6 +215,10 @@ class WorkshopServer:
             for mode, (_, _, file) in SUGGEST_MODES.items()
         }
         self.ai_rules = self._load_ai_rules()
+        self._push_lock = threading.Lock()
+        self._push_pending = False
+        self._push_running = False
+        self.last_push: dict = {}
 
     def _load_schema(self) -> dict:
         return json.loads((BASE_DIR / "src" / "proposal.schema.json").read_text(encoding="utf-8"))
@@ -257,10 +263,44 @@ class WorkshopServer:
                 text=True,
                 timeout=5,
             )
+            if commit_res.returncode == 0 and self.config.git_autopush:
+                self.request_push()
             return commit_res.returncode == 0
         except Exception as e:
             print(f"[{time.strftime('%H:%M:%S')}] Ошибка git-коммита: {e}", file=sys.stderr)
             return False
+
+    def request_push(self) -> None:
+        """Push in a background thread; commits made during a push are sent by one more push."""
+        with self._push_lock:
+            self._push_pending = True
+            if self._push_running:
+                return
+            self._push_running = True
+        threading.Thread(target=self._push_worker, daemon=True).start()
+
+    def _push_worker(self) -> None:
+        while True:
+            with self._push_lock:
+                if not self._push_pending:
+                    self._push_running = False
+                    return
+                self._push_pending = False
+            try:
+                res = subprocess.run(
+                    ["git", "push", "--quiet"],
+                    cwd=str(BASE_DIR),
+                    capture_output=True,
+                    text=True,
+                    timeout=60,
+                    env={**os.environ, "GIT_TERMINAL_PROMPT": "0", "GIT_SSH_COMMAND": "ssh -o BatchMode=yes"},
+                )
+                ok, error = res.returncode == 0, (res.stderr or res.stdout).strip()[-500:]
+            except Exception as e:
+                ok, error = False, str(e)
+            self.last_push = {"ok": ok, "at": datetime.now(timezone.utc).isoformat(), "error": "" if ok else error}
+            if not ok:
+                print(f"[{time.strftime('%H:%M:%S')}] Ошибка git push: {error}", file=sys.stderr)
 
     def get_git_info(self) -> dict:
         """Get git repository status information."""
@@ -301,6 +341,8 @@ class WorkshopServer:
                 "lastCommit": last_commit,
                 "remotes": remotes,
                 "hasRemote": len(remotes) > 0,
+                "autopush": self.config.git_autopush,
+                "lastPush": self.last_push,
             }
         except Exception as e:
             return {"available": False, "error": str(e)}
@@ -969,7 +1011,7 @@ def run_server():
     url = f"http://{config.host}:{config.port}"
     api_status = f"Настроен (модель: {config.model})" if config.is_configured else "Не настроен (укажите OPENAI_API_KEY в .env)"
     git_info = workshop_app.get_git_info()
-    git_status_str = f"Ветка {git_info.get('branch')} (автокоммит: {'включен' if config.git_autosave else 'выключен'})" if git_info.get("available") else "Git не подключен"
+    git_status_str = f"Ветка {git_info.get('branch')} (автокоммит: {'включен' if config.git_autosave else 'выключен'}, автопуш: {'включен' if config.git_autopush else 'выключен'})" if git_info.get("available") else "Git не подключен"
 
     print("==================================================================")
     print("      Своя мастерская · Skill RPG — Локальный сервер")
