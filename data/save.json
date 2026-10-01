@@ -1,12 +1,12 @@
 {
   "app": "svoya-masterskaya",
   "version": 4,
-  "savedAt": "2026-09-26T23:24:57.985066+00:00",
-  "note": "Автосохранение",
+  "savedAt": "2026-10-01T00:05:47.735006+00:00",
+  "note": "Добавление инструментов: циркулярка, шлифмашина, комбинированный угольник, лазурь, совок, рыхлитель, кисть",
   "state": {
     "schemaVersion": 4,
-    "catalogVersion": 3,
-    "revision": 107,
+    "catalogVersion": 4,
+    "revision": 108,
     "branches": [
       {
         "id": "base",
@@ -15909,6 +15909,47 @@
           "wood",
           "building"
         ]
+      },
+      {
+        "id": "wood.combi_square",
+        "title": "Комбинированный угольник (300 мм / 12\")",
+        "es": "escuadra combinada 12\" / 300 mm",
+        "description": "Металлическая линейка с подвижной колодкой 90° и 45°, пузырьковым уровнем и чертилкой для точной столярной разметки, контроля глубин и параллелей.",
+        "branchIds": [
+          "wood",
+          "base",
+          "metal"
+        ]
+      },
+      {
+        "id": "finish.lasur",
+        "title": "Лазурь и защитная пропитка для дерева",
+        "es": "lasur / protector para maderas",
+        "description": "Атмосферостойкое защитно-декоративное покрытие для древесины: защита от ультрафиолета, влаги и биопоражений с сохранением видимой текстуры волокон.",
+        "branchIds": [
+          "finish",
+          "wood",
+          "building"
+        ]
+      },
+      {
+        "id": "land.trowel",
+        "title": "Садовый посадочный совок (узкая лопатка)",
+        "es": "palita de trasplante / pala de jardín",
+        "description": "Компактная лопатка для посадки и пересадки рассады, луковичных, точечной работы с грунтом на грядках, в кашпо и клумбах.",
+        "branchIds": [
+          "land",
+          "base"
+        ]
+      },
+      {
+        "id": "land.cultivator",
+        "title": "Ручной садовый рыхлитель (вилка / культиватор)",
+        "es": "cultivador de mano / escardillo de tres puntas",
+        "description": "Трёхзубый ручной культиватор для поверхностной аэрации почвы, разрушения корки и аккуратного удаления сорняков без повреждения корневой системы культурных растений.",
+        "branchIds": [
+          "land"
+        ]
       }
     ],
     "events": [
@@ -16210,7 +16251,14 @@
       "mechanics.fum": "unknown",
       "hacksaw": "have",
       "handsaw": "borrow",
-      "measure": "have"
+      "measure": "have",
+      "circular": "have",
+      "sander": "have",
+      "brush": "have",
+      "wood.combi_square": "have",
+      "finish.lasur": "have",
+      "land.trowel": "have",
+      "land.cultivator": "have"
     },
     "focus": [
       "wood",
