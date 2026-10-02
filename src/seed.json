@@ -1,6 +1,6 @@
 {
   "schemaVersion": 4,
-  "catalogVersion": 4,
+  "catalogVersion": 5,
   "revision": 0,
   "branches": [
     {
@@ -15917,6 +15917,18 @@
       "branchIds": [
         "land"
       ]
+    },
+    {
+      "id": "composite.epoxy_putty",
+      "title": "Эпоксидная ремонтная масса (эпоксидный пластилин)",
+      "es": "masilla epoxi de reparación / plastilina epóxica",
+      "description": "Двухкомпонентный эпоксидный пластилин (холодная сварка / ремонтный состав) для быстрого моделирования, восстановления утраченных фрагментов, заделки сколов, трещин и герметизации соединений.",
+      "branchIds": [
+        "composite",
+        "finish",
+        "mechanics",
+        "base"
+      ]
     }
   ],
   "events": [
@@ -16142,7 +16154,8 @@
     "wood.combi_square": "have",
     "finish.lasur": "have",
     "land.trowel": "have",
-    "land.cultivator": "have"
+    "land.cultivator": "have",
+    "composite.epoxy_putty": "have"
   },
   "focus": [
     "wood",

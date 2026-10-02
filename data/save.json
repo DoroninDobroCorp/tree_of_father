@@ -1,12 +1,12 @@
 {
   "app": "svoya-masterskaya",
   "version": 4,
-  "savedAt": "2026-10-01T00:22:45.585903+00:00",
-  "note": "Автосохранение",
+  "savedAt": "2026-10-02T03:30:06.533918+00:00",
+  "note": "Добавлен инструмент: эпоксидная ремонтная масса (эпоксидный пластилин)",
   "state": {
     "schemaVersion": 4,
-    "catalogVersion": 4,
-    "revision": 107,
+    "catalogVersion": 5,
+    "revision": 108,
     "branches": [
       {
         "id": "base",
@@ -15950,6 +15950,18 @@
         "branchIds": [
           "land"
         ]
+      },
+      {
+        "id": "composite.epoxy_putty",
+        "title": "Эпоксидная ремонтная масса (эпоксидный пластилин)",
+        "es": "masilla epoxi de reparación / plastilina epóxica",
+        "description": "Двухкомпонентный эпоксидный пластилин (холодная сварка / ремонтный состав) для быстрого моделирования, восстановления утраченных фрагментов, заделки сколов, трещин и герметизации соединений.",
+        "branchIds": [
+          "composite",
+          "finish",
+          "mechanics",
+          "base"
+        ]
       }
     ],
     "events": [
@@ -16255,7 +16267,8 @@
       "wood.combi_square": "have",
       "finish.lasur": "have",
       "land.trowel": "have",
-      "land.cultivator": "have"
+      "land.cultivator": "have",
+      "composite.epoxy_putty": "have"
     },
     "focus": [
       "wood",
@@ -16313,6 +16326,11 @@
         "id": "change-7159e7d4-493e-4c7d-aaf0-cc40b8234da8",
         "date": "2026-09-26T23:24:54.482Z",
         "label": "Есть в наличии: Рулетка и линейка"
+      },
+      {
+        "id": "change-8c4c99ae-923b-4ea8-9441-b4e7bfdd505e",
+        "date": "2026-10-02T03:30:06.533918+00:00",
+        "label": "Есть в наличии: Эпоксидная ремонтная масса (эпоксидный пластилин)"
       }
     ],
     "appliedProposalIds": [],
