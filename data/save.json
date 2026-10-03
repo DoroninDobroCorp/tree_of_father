@@ -1,12 +1,12 @@
 {
   "app": "svoya-masterskaya",
   "version": 4,
-  "savedAt": "2026-10-03T01:10:35.791921+00:00",
-  "note": "Автосохранение",
+  "savedAt": "2026-10-03T16:25:24.132812+00:00",
+  "note": "Синхронизация статусов проектов и обновление инвентаря: циркулярка (Hamilton), шлифмашина (Lüsqtoff), ФУМ-лента",
   "state": {
     "schemaVersion": 4,
     "catalogVersion": 5,
-    "revision": 134,
+    "revision": 135,
     "branches": [
       {
         "id": "base",
@@ -14898,7 +14898,7 @@
         "id": "sander",
         "title": "Эксцентриковая шлифмашина",
         "es": "lijadora roto orbital",
-        "description": "Поверхность, а не выравнивание любой кривой доски.",
+        "description": "Финишное и промежуточное шлифование плоских поверхностей с пылеудалением (в мастерской: Lüsqtoff / Lusqtoff Black Series).",
         "branchIds": [
           "wood",
           "composite",
@@ -14909,7 +14909,7 @@
         "id": "circular",
         "title": "Ручная циркулярная пила",
         "es": "sierra circular",
-        "description": "Продольный и поперечный раскрой при правильной опоре.",
+        "description": "Продольный и поперечный раскрой листовых материалов и досок при правильной опоре и направляющей (в мастерской: Hamilton).",
         "branchIds": [
           "wood",
           "building"
@@ -16489,46 +16489,7 @@
         "createdAt": "2026-10-03T01:10:32.726Z"
       }
     ],
-    "work": {
-      "quest-65a9ec14-fd17-41dc-8c60-51b98143f5c2": {
-        "status": "active",
-        "steps": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6
-        ],
-        "note": ""
-      },
-      "quest-4d804326-9bd1-4efe-b1d4-6fd59f4b818d": {
-        "status": "active",
-        "steps": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5
-        ],
-        "note": ""
-      },
-      "quest-7b68ba3d-cf0d-4eac-a294-2715373a8d4f": {
-        "status": "active",
-        "steps": [
-          0,
-          1,
-          2,
-          3,
-          4,
-          5,
-          6
-        ],
-        "note": ""
-      }
-    },
+    "work": {},
     "inventory": {
       "screwdriver": "unknown",
       "screwdriver.ph": "have",
@@ -16549,8 +16510,8 @@
       "base.rope": "have",
       "electrical.tape": "have",
       "finish.sandpaper": "have",
-      "mechanics.threadseal": "have",
-      "mechanics.fum": "unknown",
+      "mechanics.threadseal": "unknown",
+      "mechanics.fum": "have",
       "hacksaw": "have",
       "handsaw": "borrow",
       "measure": "have",
@@ -16558,7 +16519,9 @@
       "finish.lasur": "have",
       "land.trowel": "have",
       "land.cultivator": "have",
-      "composite.epoxy_putty": "have"
+      "composite.epoxy_putty": "have",
+      "circular": "have",
+      "sander": "have"
     },
     "focus": [
       "wood",
@@ -16751,6 +16714,16 @@
         "id": "change-385c9b28-f4f9-4649-8ab2-ed6fc8fcf491",
         "date": "2026-10-03T01:10:32.739Z",
         "label": "Добавлен опыт: Надо починить все три кранчика ванны - течет блин пипец как"
+      },
+      {
+        "id": "change-1791044724132872250-work-cleanup",
+        "date": "2026-10-03T16:25:24.132812+00:00",
+        "label": "Удалены завершённые проекты из активного верстака (сохранены в журнале)"
+      },
+      {
+        "id": "change-1791044724132879836-inv-update",
+        "date": "2026-10-03T16:25:24.132812+00:00",
+        "label": "Обновлён инвентарь: циркулярная пила (Hamilton) и шлифмашина (Lüsqtoff) — есть у меня; ФУМ-лента — есть у меня; нить — отметка снята"
       }
     ],
     "appliedProposalIds": [],

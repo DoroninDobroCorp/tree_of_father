@@ -14732,7 +14732,7 @@
       "id": "sander",
       "title": "Эксцентриковая шлифмашина",
       "es": "lijadora roto orbital",
-      "description": "Поверхность, а не выравнивание любой кривой доски.",
+      "description": "Финишное и промежуточное шлифование плоских поверхностей с пылеудалением (в мастерской: Lüsqtoff / Lusqtoff Black Series).",
       "branchIds": [
         "wood",
         "composite",
@@ -14743,7 +14743,7 @@
       "id": "circular",
       "title": "Ручная циркулярная пила",
       "es": "sierra circular",
-      "description": "Продольный и поперечный раскрой при правильной опоре.",
+      "description": "Продольный и поперечный раскрой листовых материалов и досок при правильной опоре и направляющей (в мастерской: Hamilton).",
       "branchIds": [
         "wood",
         "building"
@@ -16146,7 +16146,6 @@
     "base.rope": "have",
     "electrical.tape": "have",
     "finish.sandpaper": "have",
-    "mechanics.threadseal": "have",
     "mechanics.fum": "have",
     "circular": "have",
     "sander": "have",

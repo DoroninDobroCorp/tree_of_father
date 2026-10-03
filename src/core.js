@@ -98,6 +98,7 @@ function applyProposal(state,proposal,chosen,schema){
    assert(index<0,`ID ${d.id} уже занят`);
    if(category==='events'){
     assert(!s.events.some(e=>eventFingerprint(e)===eventFingerprint(d)),'Похожая запись уже есть: двойной зачёт заблокирован');d.source='ai';d.createdAt=new Date().toISOString();
+    if(d.projectId&&s.work[d.projectId])delete s.work[d.projectId];
    }
    arr.push(d);
   }else{
