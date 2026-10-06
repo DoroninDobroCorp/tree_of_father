@@ -1,6 +1,6 @@
 {
   "schemaVersion": 4,
-  "catalogVersion": 5,
+  "catalogVersion": 6,
   "revision": 0,
   "branches": [
     {
@@ -14687,8 +14687,8 @@
     {
       "id": "driver",
       "title": "Дрель-шуруповёрт",
-      "es": "taladro atornillador",
-      "description": "Отверстия и сборка; оснастка подбирается отдельно.",
+      "es": "taladro atornillador inalámbrico brushless",
+      "description": "Сверление отверстий, закручивание крепежа и сборка конструкций с регулировкой крутящего момента (в мастерской: бесщёточный аккумуляторный шуруповёрт TOTAL).",
       "branchIds": [
         "base",
         "wood",
@@ -14743,7 +14743,7 @@
       "id": "circular",
       "title": "Ручная циркулярная пила",
       "es": "sierra circular",
-      "description": "Продольный и поперечный раскрой листовых материалов и досок при правильной опоре и направляющей (в мастерской: Hamilton).",
+      "description": "Продольный и поперечный раскрой листовых материалов и досок при правильной опоре и направляющей (в мастерской: Hamilton, пильный диск 40 зубьев).",
       "branchIds": [
         "wood",
         "building"
@@ -14813,8 +14813,8 @@
     {
       "id": "glue",
       "title": "Клей для дерева",
-      "es": "adhesivo para madera",
-      "description": "Подбирается по условиям службы и инструкции.",
+      "es": "adhesivo para madera / cola vinílica (PVA)",
+      "description": "Столярный клей для дерева для склейки щитов, шиповых соединений и шкантов (в мастерской: столярный клей для дерева, объём 1 л).",
       "branchIds": [
         "wood"
       ]
@@ -15235,9 +15235,9 @@
     },
     {
       "id": "extractor",
-      "title": "Моющий экстрактор",
-      "es": "lava aspiradora / extractor",
-      "description": "Чистка, влагоконтроль и сушка; не любая поверхность подходит.",
+      "title": "Моющий пылесос-экстрактор",
+      "es": "lava aspiradora / extractor (Kärcher Puzzi 16/4)",
+      "description": "Глубокая влажная экстракционная чистка текстиля, ковров и мягкой мебели с подачей и сбором моющего раствора (в мастерской: Kärcher Puzzi 16/4).",
       "branchIds": [
         "finish"
       ]
@@ -15678,11 +15678,13 @@
     },
     {
       "id": "finish.rags",
-      "title": "Ветошь и микрофибра",
-      "es": "trapos / paños de microfibra",
-      "description": "Безворсовая ветошь для масел и воска и микрофибра для чистки; промасленную ветошь обезвреживают по инструкции продукта.",
+      "title": "Микрофибровые тряпки и ветошь",
+      "es": "paños de microfibra / trapos sin pelusa",
+      "description": "Салфетки из микрофибры для деликатной очистки, сушки и сбора моющих средств без разводов и ворса, а также безворсовая ветошь для масел и воска.",
       "branchIds": [
-        "finish"
+        "finish",
+        "base",
+        "transport"
       ]
     },
     {
@@ -15823,9 +15825,9 @@
     },
     {
       "id": "finish.sandpaper",
-      "title": "Наждачная бумага разной зернистости",
-      "es": "papel de lija (granos varios)",
-      "description": "Листы абразивной бумаги от грубой (P80–P120) до мелкой (P240–P600+) для ручной шлифовки древесины, зачистки кромок, межслойного матирования и снятия заусенцев.",
+      "title": "Наждачные круги (80, 120, 180) и наждачная бумага",
+      "es": "papel de lija / discos abrasivos (granos 80, 120, 180)",
+      "description": "Абразивные материалы для ручной шлифовки и круги на липучке для эксцентриковой шлифмашины (в мастерской: шлифовальные круги P80, P120 и P180, а также наждачная бумага).",
       "branchIds": [
         "finish",
         "wood",
@@ -15928,6 +15930,75 @@
         "finish",
         "mechanics",
         "base"
+      ]
+    },
+    {
+      "id": "wood.circular_blade",
+      "title": "Пильный диск для циркулярной пилы (40 зубьев)",
+      "es": "disco para sierra circular (40 dientes / 40T)",
+      "description": "Пильный диск 40T с твердосплавными зубьями для ручной циркулярной пилы; чистый поперечный и продольный раскрой древесины, фанеры и плитных материалов с минимумом сколов (для пилы Hamilton).",
+      "branchIds": [
+        "wood",
+        "building"
+      ]
+    },
+    {
+      "id": "base.earmuffs",
+      "title": "Строительные защитные наушники",
+      "es": "protectores auditivos / auriculares de seguridad",
+      "description": "Противошумные строительные наушники для защиты слуха при работе с шумным электроинструментом (циркулярная пила, шлифмашина, фрезер, УШМ, перфоратор).",
+      "branchIds": [
+        "base",
+        "wood",
+        "metal",
+        "building"
+      ]
+    },
+    {
+      "id": "base.respirator",
+      "title": "Респираторы (защита дыхания)",
+      "es": "respiradores / mascarillas de protección (FFP2/FFP3)",
+      "description": "Противоаэрозольные респираторы и маски для защиты органов дыхания от мелкой пыли древесины, минеральных смесей, композитов и аэрозолей при шлифовке, пилении и распылении.",
+      "branchIds": [
+        "base",
+        "wood",
+        "finish",
+        "composite",
+        "building",
+        "metal"
+      ]
+    },
+    {
+      "id": "finish.spray_bottle",
+      "title": "Пульверизатор (ручной распылитель)",
+      "es": "pulverizador / rociador trigger",
+      "description": "Ручной помповый или триггерный распылитель для равномерного нанесения моющих растворов, преспрея, воды и очистителей на очищаемые поверхности.",
+      "branchIds": [
+        "finish",
+        "base",
+        "land"
+      ]
+    },
+    {
+      "id": "finish.neutral_cleaner",
+      "title": "Нейтральное моющее средство (pH-нейтральное)",
+      "es": "detergente neutro / limpiador pH neutro",
+      "description": "Безопасное pH-нейтральное моющее средство для деликатной влажной и экстракционной чистки текстиля, обивки мебели, автосалона и твёрдых поверхностей без повреждения волокон.",
+      "branchIds": [
+        "finish",
+        "base",
+        "transport"
+      ]
+    },
+    {
+      "id": "finish.soft_brush",
+      "title": "Мягкая щётка для химчистки и уборки",
+      "es": "cepillo de cerdas suaves para tapicería y limpieza",
+      "description": "Щётка с мягким ворсом для деликатного взбивания пены, очистки обивки мебели, текстиля, ковров и автосалона без повреждения волокон ткани.",
+      "branchIds": [
+        "finish",
+        "textile",
+        "transport"
       ]
     }
   ],
@@ -16154,7 +16225,17 @@
     "finish.lasur": "have",
     "land.trowel": "have",
     "land.cultivator": "have",
-    "composite.epoxy_putty": "have"
+    "composite.epoxy_putty": "have",
+    "extractor": "have",
+    "driver": "have",
+    "glue": "have",
+    "wood.circular_blade": "have",
+    "base.earmuffs": "have",
+    "base.respirator": "have",
+    "finish.spray_bottle": "have",
+    "finish.neutral_cleaner": "have",
+    "finish.rags": "have",
+    "finish.soft_brush": "have"
   },
   "focus": [
     "wood",

@@ -1777,6 +1777,9 @@
 "tools:base.detector": [
 "nvzpei"
 ],
+"tools:base.earmuffs": [
+"1gi693r"
+],
 "tools:base.firstaid": [
 "1qqrve5"
 ],
@@ -1791,6 +1794,9 @@
 ],
 "tools:base.plugs": [
 "13m66qm"
+],
+"tools:base.respirator": [
+"1g6odvt"
 ],
 "tools:base.rope": [
 "1q755rq"
@@ -1824,7 +1830,8 @@
 ],
 "tools:circular": [
 "1hgs426",
-"l1k7fl"
+"l1k7fl",
+"ol3gyr"
 ],
 "tools:clamp": [
 "ym1k4t"
@@ -1848,7 +1855,8 @@
 "gjujy3"
 ],
 "tools:driver": [
-"4xf2o5"
+"4xf2o5",
+"17sdegp"
 ],
 "tools:electrical.stripper": [
 "1qyp4yf"
@@ -1872,7 +1880,8 @@
 "14j6jul"
 ],
 "tools:extractor": [
-"dnu1rf"
+"dnu1rf",
+"ed21ka"
 ],
 "tools:file": [
 "8bbn1e"
@@ -1880,14 +1889,26 @@
 "tools:finish.lasur": [
 "1lyhf3z"
 ],
+"tools:finish.neutral_cleaner": [
+"1dl8jgp"
+],
 "tools:finish.rags": [
-"10mei7i"
+"10mei7i",
+"9r92w7"
 ],
 "tools:finish.sandpaper": [
-"1uzooji"
+"1uzooji",
+"1y5k837",
+"155vpiv"
 ],
 "tools:finish.scraper": [
 "158xjpq"
+],
+"tools:finish.soft_brush": [
+"xz21pk"
+],
+"tools:finish.spray_bottle": [
+"7k618e"
 ],
 "tools:finish.wirebrush": [
 "1qf8v5o"
@@ -1896,7 +1917,8 @@
 "q3sc3s"
 ],
 "tools:glue": [
-"y5o99w"
+"y5o99w",
+"irw92f"
 ],
 "tools:guide": [
 "12e20hb"
@@ -2144,6 +2166,9 @@
 ],
 "tools:wood.backsaw": [
 "1ryvcl6"
+],
+"tools:wood.circular_blade": [
+"dhb9o3"
 ],
 "tools:wood.combi_square": [
 "174y8l7"
