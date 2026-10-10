@@ -16,6 +16,7 @@ if set(classification)!=set(t['id'] for t in data['tasks']):raise ValueError('In
 for task in data['tasks']:task['level']=classification[task['id']]
 from expand_data import expand
 data=expand(data)
+data["budgetPlanning"]=json.loads((ROOT/"budget-planning.json").read_text())
 (ROOT/'expanded-data.json').write_text(json.dumps(data,ensure_ascii=False,indent=2))
 guide=(ROOT/'app.js').read_text().split('function renderGuide(){',1)[1].split('function renderSettings(){',1)[0]
 guide='function renderGuide(){'+guide

@@ -42,6 +42,14 @@ class HoursStoreTests(unittest.TestCase):
             if state['steps'][0]['deps']:state['steps'][1]['deps']=[state['steps'][0]['id']]
             with self.assertRaises(ValueError):self.store.write(self.req(1,state))
             self.assertEqual(self.store.path.read_bytes(),before)
+    def test_calendar_settings_roundtrip_and_validation(self):
+        state=copy.deepcopy(STATE);state['config'].update(hoursPerMonth=50,timeMode='calendar',startDate='2026-10-10',reservePercent=15)
+        self.assertEqual(self.store.write(self.req(0,state))['state'],state)
+        before=self.store.path.read_bytes()
+        for patch in [{'startDate':'2026-02-30'},{'startDate':''},{'startDate':[]},{'timeMode':'invalid'},{'reservePercent':101}]:
+            bad=copy.deepcopy(state);bad['config'].update(patch)
+            with self.assertRaises(ValueError):self.store.write(self.req(1,bad))
+            self.assertEqual(self.store.path.read_bytes(),before)
     def test_unique_purchases_and_unknown_budgets(self):
         state=copy.deepcopy(STATE);state['steps'][0]['items']=['x-sewing-kit']
         with self.assertRaises(ValueError):validate(state,CATALOG)

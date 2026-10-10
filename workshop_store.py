@@ -6,7 +6,7 @@ import os
 import re
 import tempfile
 from pathlib import Path
-from datetime import datetime, timezone
+from datetime import datetime, timezone, date
 
 class Conflict(ValueError):
     pass
@@ -22,6 +22,15 @@ def validate(state, catalog):
     config=state.get('config', {})
     for key,lo,hi in [('hoursPerMonth',.25,2000),('elapsedMonths',0,10000),('monthlyBudget',0,1e9),('fx',.01,1e7)]:
         require(number(config.get(key),lo,hi), 'Некорректная настройка '+key)
+    require(config.get('timeMode','manual') in ['manual','calendar'], 'Некорректный способ сравнения')
+    start=config.get('startDate','')
+    require(isinstance(start,str), 'Некорректная дата старта')
+    if start:
+        try: parsed=date.fromisoformat(start)
+        except (ValueError,TypeError): raise ValueError('Некорректная дата старта')
+        require(parsed.isoformat()==start and '1900-01-01'<=start<='2100-12-31','Некорректная дата старта')
+    require(config.get('timeMode')!='calendar' or bool(start), 'Нужна дата старта')
+    if 'reservePercent' in config: require(number(config['reservePercent'],0,100), 'Некорректный резерв')
     steps=state.get('steps'); entries=state.get('entries'); items=state.get('items')
     require(isinstance(steps,list) and len(steps)<=5000, 'Некорректные шаги')
     require(isinstance(entries,list) and len(entries)<=50000, 'Некорректный журнал')
