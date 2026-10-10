@@ -1,0 +1,3200 @@
+{
+  "version": 3,
+  "date": "2026-10-09",
+  "modules": [
+    {
+      "id": "base",
+      "number": "00",
+      "title": "Основа и первая оснастка",
+      "description": "Рабочее место, электрика, пылеудаление, козлы, шина и верстак.",
+      "capability": "Верстак и повторяемый раскрой",
+      "requires": []
+    },
+    {
+      "id": "furniture",
+      "number": "01",
+      "title": "Первая мебель",
+      "description": "Скамья, полка, стол и кровать из покупной сухой доски.",
+      "capability": "Простая мебель для дома",
+      "requires": [
+        "base"
+      ]
+    },
+    {
+      "id": "digital",
+      "number": "02",
+      "title": "3D-печать и кондукторы",
+      "description": "Калибровка принтера, CAD и полезная оснастка.",
+      "capability": "Кондукторы и печатные детали",
+      "requires": [
+        "base"
+      ]
+    },
+    {
+      "id": "wood",
+      "number": "03",
+      "title": "Массив и подготовка доски",
+      "description": "Рейсмус, фугование, стружкоотсос, фрезер и опытная партия древесины.",
+      "capability": "Щиты и соединения из массива",
+      "requires": [
+        "furniture"
+      ]
+    },
+    {
+      "id": "metal",
+      "number": "04",
+      "title": "Сварка и слесарная работа",
+      "description": "Отдельный пост, обучение MIG/MAG, стол, рама, сверление и гибка.",
+      "capability": "Рамы и кронштейны из стали",
+      "requires": [
+        "base"
+      ]
+    },
+    {
+      "id": "lowrider",
+      "number": "05",
+      "title": "LowRider 4",
+      "description": "Полный цикл: размеры → BOM → сборка → измерения → первый шкаф.",
+      "capability": "Раскрой листов и мастер-модели",
+      "requires": [
+        "digital",
+        "furniture"
+      ]
+    },
+    {
+      "id": "house",
+      "number": "06",
+      "title": "Окна, двери и панель",
+      "description": "Пробные узлы и учебная панель; перед несущим строительством — проект местного специалиста.",
+      "capability": "Прототип рамы и учебная стеновая панель",
+      "requires": [
+        "wood"
+      ]
+    },
+    {
+      "id": "electronics",
+      "number": "07",
+      "title": "Электроника и дом",
+      "description": "Низковольтные датчики, пайка и мониторинг влажности.",
+      "capability": "Датчики и автоматизация наблюдения",
+      "requires": [
+        "base"
+      ]
+    },
+    {
+      "id": "composites",
+      "number": "08",
+      "title": "Формы, композиты, отделка",
+      "description": "Малый образец, форма, вакуумный мешок, ловушка смолы и отделка.",
+      "capability": "Формы, отливки и стеклопластик",
+      "requires": [
+        "digital",
+        "base"
+      ]
+    },
+    {
+      "id": "auto",
+      "number": "09",
+      "title": "Автомобиль",
+      "description": "Безопасный подъём, диагностика и один ремонт по руководству автомобиля.",
+      "capability": "Базовое обслуживание и восстановление",
+      "requires": [
+        "metal"
+      ]
+    },
+    {
+      "id": "stone",
+      "number": "10",
+      "title": "Камень и GFRC",
+      "description": "Отдельное мокрое место, пробники и небольшое изделие.",
+      "capability": "Полировка и бетонные формы",
+      "requires": [
+        "base"
+      ]
+    },
+    {
+      "id": "lathe",
+      "number": "11",
+      "title": "Токарный",
+      "description": "Под конкретные втулки, валы и резьбы.",
+      "capability": "Тела вращения и резьбы",
+      "requires": [
+        "metal"
+      ]
+    },
+    {
+      "id": "printnc",
+      "number": "12",
+      "title": "PrintNC MetalCutter",
+      "description": "Размеры по реальным деталям, сборка и контроль пробной детали.",
+      "capability": "Фрезерованные детали из алюминия",
+      "requires": [
+        "lowrider",
+        "metal"
+      ]
+    },
+    {
+      "id": "kiln",
+      "number": "13",
+      "title": "Камерная сушка",
+      "description": "После пробной воздушной сушки и сравнения полной стоимости.",
+      "capability": "Управляемая досушка своей партии",
+      "requires": [
+        "wood",
+        "electronics"
+      ]
+    },
+    {
+      "id": "plasma",
+      "number": "14",
+      "title": "ЧПУ-плазма",
+      "description": "Только после сравнения заказа резки и своего объёма; отдельный стол.",
+      "capability": "Раскрой стального листа",
+      "requires": [
+        "metal",
+        "electronics"
+      ]
+    },
+    {
+      "id": "later",
+      "number": "+",
+      "title": "Дополнительные возможности",
+      "description": "AC/DC TIG, обивка, лазер, литьё и другие направления — по отдельному проекту.",
+      "capability": "Расширение под конкретную задачу",
+      "requires": []
+    }
+  ],
+  "catalog": [
+    {
+      "id": "h-circ",
+      "title": "Циркулярная пила",
+      "note": "С шиной режет листы почти как станок.",
+      "oldStage": "0",
+      "kind": "have",
+      "optional": false,
+      "quote": null,
+      "module": "base"
+    },
+    {
+      "id": "h-drill",
+      "title": "Шуруповёрт",
+      "note": "",
+      "oldStage": "0",
+      "kind": "have",
+      "optional": false,
+      "quote": null,
+      "module": "base"
+    },
+    {
+      "id": "h-sander",
+      "title": "Эксцентриковая шлифмашина",
+      "note": "Главная на финише, шпаклёвке и стеклопластике. Нужен адаптер на пылесос (ниже).",
+      "oldStage": "0",
+      "kind": "have",
+      "optional": false,
+      "quote": null,
+      "module": "base"
+    },
+    {
+      "id": "h-puzzi",
+      "title": "Kärcher Puzzi 4/16",
+      "note": "Моющий экстрактор: салон машины, обивка, ковры, влажная уборка. Сухой мусор и пыль сначала убираем строительным пылесосом, потом моем Puzzi.",
+      "oldStage": "0",
+      "kind": "have",
+      "optional": false,
+      "quote": null,
+      "module": "base"
+    },
+    {
+      "id": "s0-bench",
+      "title": "Верстак из бруса и фанеры",
+      "note": "Жёсткое основание, ровная рабочая поверхность, крепление заготовок. Высоту проверить макетом под свои операции.",
+      "oldStage": "0",
+      "kind": "diy",
+      "optional": false,
+      "quote": {
+        "amount": 64199,
+        "currency": "ARS",
+        "tax": 0,
+        "quantity": 1,
+        "model": "Фенольная фанера 18 мм, 1220×2440 мм, 1 лист",
+        "vendor": "Sodimac Argentina",
+        "url": "https://www.sodimac.com.ar/sodimac-ar/product/112644X/placa-fenolico-18-mm-122-x-244/112644X/",
+        "terms": "Один лист как ориентир материала столешницы. Брус, крепёж, раскрой и доставка не включены; количество уточнить по чертежу.",
+        "partial": true,
+        "access": "search",
+        "checked": "2026-10-09"
+      },
+      "module": "base"
+    },
+    {
+      "id": "s0-rail",
+      "title": "Самодельная направляющая и поперечный упор",
+      "note": "Проверить прямолинейность и повторяемость на пробных заготовках. Заводская кромка листа не считается измеренным эталоном.",
+      "oldStage": "0",
+      "kind": "diy",
+      "optional": false,
+      "quote": null,
+      "module": "base"
+    },
+    {
+      "id": "s0-omni",
+      "title": "AEG OMNI 300 и полотна",
+      "note": "Биметалл по дереву с гвоздями, твердосплав по раствору и плитке, скребок. Ремонт дома, подрезка, обрезка стеклопластика.",
+      "oldStage": "0",
+      "kind": "buy",
+      "optional": true,
+      "quote": null,
+      "module": "house"
+    },
+    {
+      "id": "s0-sds",
+      "title": "Перфоратор SDS-plus",
+      "note": "Бетон и кирпич старого дома: анкеры, отверстия, штробы под проводку.",
+      "oldStage": "0",
+      "kind": "buy",
+      "optional": true,
+      "quote": {
+        "amount": 278699,
+        "currency": "ARS",
+        "tax": 0,
+        "quantity": 1,
+        "model": "Bosch GBH 2-24, 800 Вт",
+        "vendor": "Sodimac Argentina",
+        "url": "https://www.sodimac.com.ar/sodimac-ar/product/1928821/rotomartillo-electrico-800-w-27-j-con-maletin-gbh-2-24/1928821/",
+        "terms": "Промоцена из индекса; обычная 309 599 ARS. Буры под конкретные работы отдельно.",
+        "partial": false,
+        "access": "search",
+        "checked": "2026-10-09"
+      },
+      "module": "house"
+    },
+    {
+      "id": "s0-level",
+      "title": "Лазерный нивелир с крестом",
+      "note": "",
+      "oldStage": "0",
+      "kind": "buy",
+      "optional": true,
+      "quote": {
+        "amount": 149488.99,
+        "currency": "ARS",
+        "tax": 0,
+        "quantity": 1,
+        "model": "Bosch GLL 2-12",
+        "vendor": "Mercado Libre",
+        "url": "https://www.mercadolibre.com.ar/nivel-laser-bosch-professional-gll-2-12-con-bolsa-protectora/p/MLA23985211",
+        "terms": "Проверить комплект крепления/штатив под ремонт.",
+        "partial": false,
+        "access": "search",
+        "checked": "2026-10-09"
+      },
+      "module": "house"
+    },
+    {
+      "id": "s0-meter",
+      "title": "Влагомер древесины и отдельный гигрометр",
+      "note": "Поправки на породу и температуру по инструкции. Показания по стенам не равны влажности древесины.",
+      "oldStage": "0",
+      "kind": "buy",
+      "optional": false,
+      "quote": {
+        "amount": 30000,
+        "currency": "ARS",
+        "tax": 0,
+        "quantity": 1,
+        "model": "EMT01, контактный влагомер древесины",
+        "vendor": "Mercado Libre",
+        "url": "https://www.mercadolibre.com.ar/higrometro-medidor-humedad-madera-digital-emt01-full/up/MLAU228073033",
+        "terms": "Только влагомер. Гигрометр помещения отдельно; проверить поправки и сверить показания на контрольном образце.",
+        "partial": true,
+        "access": "search",
+        "checked": "2026-10-09"
+      },
+      "module": "base"
+    },
+    {
+      "id": "s0-vac",
+      "title": "Пылесос класса M для ручного инструмента",
+      "note": "Нужна сертификация всей машины, подходящий расход и плотные переходники. Puzzi остаётся для текстиля. Найден дорогой местный ориентир; перед покупкой сравнить другие машины класса M и аренду.",
+      "oldStage": "0",
+      "kind": "diy",
+      "optional": false,
+      "quote": {
+        "amount": 1684,
+        "currency": "USD",
+        "tax": 21,
+        "quantity": 1,
+        "model": "Hilti VC 40M-X",
+        "vendor": "Leiten Argentina",
+        "url": "https://www.leiten.com.ar/productos/herramientas-electricas/aspiradoras/aspiradora-hilti-vc-40m-x",
+        "terms": "Местная цена в USD + IVA. Дорогой ориентир класса M; перед покупкой сравнить другие сертифицированные модели и аренду.",
+        "partial": false,
+        "access": "page",
+        "checked": "2026-10-09"
+      },
+      "module": "base"
+    },
+    {
+      "id": "s0-grinder",
+      "title": "УШМ 125 мм с регулировкой оборотов",
+      "note": "",
+      "oldStage": "0",
+      "kind": "buy",
+      "optional": false,
+      "quote": {
+        "amount": 229000,
+        "currency": "ARS",
+        "tax": 0,
+        "quantity": 1,
+        "model": "Einhell TE-AG 125/1010 CE Q",
+        "vendor": "Tienda Einhell",
+        "url": "https://www.tiendaeinhell.com.ar/productos/amoladora-angular-te-ag-125-1010/",
+        "terms": "Регулировка оборотов. Диски не входят в комплект.",
+        "partial": false,
+        "access": "search",
+        "checked": "2026-10-09"
+      },
+      "module": "base"
+    },
+    {
+      "id": "s0-adapter",
+      "title": "Адаптер пылесоса для эксцентриковой шлифмашины",
+      "note": "Герметичный переходник под конкретный инструмент. Проверить захват пыли в работе; наличие шланга не гарантирует полного улавливания.",
+      "oldStage": "0",
+      "kind": "buy",
+      "optional": false,
+      "quote": null,
+      "module": "base"
+    },
+    {
+      "id": "s0-jigsaw",
+      "title": "Электролобзик",
+      "note": "Кривые резы и вырезы. Позже точные кривые заберёт ЧПУ, так что без дорогих моделей.",
+      "oldStage": "0",
+      "kind": "buy",
+      "optional": false,
+      "quote": {
+        "amount": 172600.5,
+        "currency": "ARS",
+        "tax": 0,
+        "quantity": 1,
+        "model": "Einhell TC-JS 85, 620 Вт",
+        "vendor": "Tienda Einhell",
+        "url": "https://www.tiendaeinhell.com.ar/productos/caladoras2/",
+        "terms": "Цена с налогами; доставка до Эль-Больсона не подтверждена.",
+        "partial": false,
+        "access": "search",
+        "checked": "2026-10-09"
+      },
+      "module": "base"
+    },
+    {
+      "id": "s0-clamps",
+      "title": "Струбцины, 8–12 штук",
+      "note": "",
+      "oldStage": "0",
+      "kind": "buy",
+      "optional": false,
+      "quote": {
+        "amount": 10999,
+        "currency": "ARS",
+        "tax": 0,
+        "quantity": 8,
+        "model": "Winman, быстрозажимная 600 мм",
+        "vendor": "Mercado Libre",
+        "url": "https://www.mercadolibre.com.ar/prensa-sargento-carpintero-600-mm-24-pulg-rapido-automatico/p/MLA66719161",
+        "terms": "8 одинаковых струбцин — ценовой пример. Для конкретного изделия уточнить длины и усилие.",
+        "partial": false,
+        "access": "search",
+        "checked": "2026-10-09"
+      },
+      "module": "base"
+    },
+    {
+      "id": "s0-measure",
+      "title": "Штангенциркуль, угольник, рейсмус",
+      "note": "",
+      "oldStage": "0",
+      "kind": "buy",
+      "optional": false,
+      "quote": {
+        "amount": 69046,
+        "currency": "ARS",
+        "tax": 0,
+        "quantity": 1,
+        "model": "Hamilton C40, штангенциркуль 150 мм",
+        "vendor": "Mercado Libre",
+        "url": "https://www.mercadolibre.com.ar/calibre-digital-hamilton-de-acero-inoxidable-150mm-con-estuche/p/MLA32598842",
+        "terms": "Цена только штангенциркуля. Угольник, линейка и разметочный рейсмус отдельно. Разрешение дисплея не равно точности.",
+        "partial": true,
+        "access": "search",
+        "checked": "2026-10-09"
+      },
+      "module": "base"
+    },
+    {
+      "id": "s0-hand",
+      "title": "Стамески, рубанок, японская пила, алмазные бруски",
+      "note": "Дешёвая широта: подгонка, фаски, заточка.",
+      "oldStage": "0",
+      "kind": "buy",
+      "optional": false,
+      "quote": null,
+      "module": "base"
+    },
+    {
+      "id": "s0-ppe",
+      "title": "Защита глаз, слуха и дыхания, аптечка, огнетушитель",
+      "note": "Респиратор и фильтры подбираются по материалу, операции и паспорту безопасности; проверить прилегание. A2/P3 не универсальная защита для любой покраски. Средства пожарной защиты подобрать с местным специалистом.",
+      "oldStage": "0",
+      "kind": "buy",
+      "optional": false,
+      "quote": null,
+      "module": "base"
+    },
+    {
+      "id": "s0-ppr",
+      "title": "Аппарат для сварки полипропиленовых труб",
+      "note": "Покупать после определения материала существующих труб и совместимой системы фитингов.",
+      "oldStage": "0",
+      "kind": "buy",
+      "optional": true,
+      "quote": null,
+      "module": "house"
+    },
+    {
+      "id": "s0-heat",
+      "title": "Строительный фен",
+      "note": "Термоусадка, размягчение клея и подходящих покрытий по инструкции. Для сушки досок и решения сырости стен нужен отдельный процесс.",
+      "oldStage": "0",
+      "kind": "buy",
+      "optional": true,
+      "quote": {
+        "amount": 89000,
+        "currency": "ARS",
+        "tax": 0,
+        "quantity": 1,
+        "model": "Einhell TC-HA 2000/1",
+        "vendor": "Tienda Einhell",
+        "url": "https://www.tiendaeinhell.com.ar/productos/pistolas-de-calor1/",
+        "terms": "Цена с налогами.",
+        "partial": false,
+        "access": "search",
+        "checked": "2026-10-09"
+      },
+      "module": "house"
+    },
+    {
+      "id": "s0-power",
+      "title": "Обследование и электропитание мастерской",
+      "note": "Электрик проверяет ввод, заземление, защиту и нагрузки по паспортам выбранных станков. Смета индивидуальная; сеть не проектируем по универсальному числу ампер.",
+      "oldStage": "0",
+      "kind": "buy",
+      "optional": false,
+      "quote": null,
+      "module": "base"
+    },
+    {
+      "id": "s0-lumber",
+      "title": "Малая пробная партия сырой доски",
+      "note": "Сохранить документы происхождения, породу, толщину, дату и входную влажность. Срок сушки уточнять замерами; первые изделия — из покупной сухой доски.",
+      "oldStage": "0",
+      "kind": "buy",
+      "optional": false,
+      "quote": null,
+      "module": "wood"
+    },
+    {
+      "id": "s1-printer",
+      "title": "3D-принтер с рабочим полем под оснастку",
+      "note": "Для деталей LowRider нужно не менее 200×200×190 мм. CoreXY и закрытая камера — выбор под материалы; для PLA не обязательны. Сначала проверить, подходит ли уже имеющийся принтер.",
+      "oldStage": "1",
+      "kind": "buy",
+      "optional": false,
+      "quote": {
+        "amount": 1059435,
+        "currency": "ARS",
+        "tax": 0,
+        "quantity": 1,
+        "model": "Creality K1C",
+        "vendor": "3DInsumos",
+        "url": "https://3dinsumos.com.ar/Producto/3DPrinter-Impresora3DCrealityK1C",
+        "terms": "Цена при банковском переводе. Наличие указано в индексе; повторно проверить перед заказом. Если свой принтер подходит, отметь «Уже было».",
+        "partial": false,
+        "access": "search",
+        "checked": "2026-10-09"
+      },
+      "module": "digital"
+    },
+    {
+      "id": "s1-router",
+      "title": "Ручной фрезер 1,2–1,6 кВт и базовые фрезы",
+      "note": "Пазы, четверти, кромки, копирование по шаблону — в том числе дерева, пластика и кромок формованных деталей.",
+      "oldStage": "1",
+      "kind": "buy",
+      "optional": false,
+      "quote": {
+        "amount": 292899,
+        "currency": "ARS",
+        "tax": 0,
+        "quantity": 1,
+        "model": "Stanley SRR1200AR, 1200 Вт + 6 фрез",
+        "vendor": "Mercado Libre",
+        "url": "https://www.mercadolibre.com.ar/fresadora-router-rebajadora-rebajador-stanley-1200w-fresas/p/MLA47659834",
+        "terms": "Базовый набор; специальные фрезы под проекты докупаются.",
+        "partial": false,
+        "access": "search",
+        "checked": "2026-10-09"
+      },
+      "module": "wood"
+    },
+    {
+      "id": "s1-rtable",
+      "title": "Фрезерный стол",
+      "note": "",
+      "oldStage": "1",
+      "kind": "diy",
+      "optional": false,
+      "quote": null,
+      "module": "wood"
+    },
+    {
+      "id": "s1-bandsaw",
+      "title": "Ленточная пила по дереву под требуемую высоту реза",
+      "note": "Выбирать по высоте пропила, направляющим и мощности, не только диаметру колёс. Пример малой пилы не заменяет станок для роспуска толстых слэбов.",
+      "oldStage": "1",
+      "kind": "buy",
+      "optional": false,
+      "quote": {
+        "amount": 499000,
+        "currency": "ARS",
+        "tax": 0,
+        "quantity": 1,
+        "model": "Einhell TC-SB 200/1 — малый станок",
+        "vendor": "Herramientas Einhell",
+        "url": "https://www.herramientaseinhell.com.ar/producto/sierras-de-cinta-tc-sb-200-1/",
+        "terms": "Ориентир только для небольшой пилы: высота реза до 80 мм. Не годится как ценовая замена станку для роспуска толстых слэбов; окончательная модель ещё не выбрана.",
+        "partial": false,
+        "access": "search",
+        "checked": "2026-10-09",
+        "exampleOnly": true
+      },
+      "module": "wood"
+    },
+    {
+      "id": "s1-planer",
+      "title": "Рейсмус 330 мм",
+      "note": "Рейсмус делает толщину относительно опорной пласти. Нужна предварительная фуговка, проверенные салазки или услуга; не подменять его словом «фуговально-рейсмусовый».",
+      "oldStage": "1",
+      "kind": "buy",
+      "optional": false,
+      "quote": {
+        "amount": 379812.57,
+        "currency": "ARS",
+        "tax": 0,
+        "quantity": 1,
+        "model": "Lusqtoff CML1850-8, 330 мм",
+        "vendor": "Mercado Libre",
+        "url": "https://www.mercadolibre.com.ar/cepilladora-de-banco-lusqtoff-cml1850-8-cepillo-1850w-8500rpm/p/MLA21776520",
+        "terms": "Цена из поискового индекса. Рейсмус без функции фугования.",
+        "partial": false,
+        "access": "search",
+        "checked": "2026-10-09"
+      },
+      "module": "wood"
+    },
+    {
+      "id": "s1-kiln",
+      "title": "Сушильная камера с осушителем",
+      "note": "Отдельный проект после измерений климата, выхода годного материала и сравнения цены сухой доски. Режим по породе и толщине; осушитель должен допускать рабочую температуру камеры.",
+      "oldStage": "1",
+      "kind": "diy",
+      "optional": false,
+      "quote": null,
+      "module": "kiln"
+    },
+    {
+      "id": "s1-saw",
+      "title": "Бензопила и рама для продольной распиловки",
+      "note": "Если есть свои брёвна: слэбы для столов, доска из своего дерева. Для объёма дешевле услуга распиловки.",
+      "oldStage": "1",
+      "kind": "buy",
+      "optional": true,
+      "quote": null,
+      "module": "wood"
+    },
+    {
+      "id": "s2-bench",
+      "title": "Паяльная станция, мультиметр CAT III, лабораторный БП, паяльный фен",
+      "note": "",
+      "oldStage": "2",
+      "kind": "buy",
+      "optional": false,
+      "quote": null,
+      "module": "electronics"
+    },
+    {
+      "id": "s2-kit",
+      "title": "Логический анализатор, ESP32, датчики, реле",
+      "note": "",
+      "oldStage": "2",
+      "kind": "buy",
+      "optional": false,
+      "quote": {
+        "amount": 15269,
+        "currency": "ARS",
+        "tax": 0,
+        "quantity": 1,
+        "model": "Starware WT32-ETH01, ESP32 + Ethernet",
+        "vendor": "Starware Argentina",
+        "url": "https://tienda.starware.com.ar/producto/modulo-adaptador-red-starware-wt32-eth01-embedded-serial-port-pin-soldado/",
+        "terms": "Только одна плата. Датчики, анализатор, питание и корпус требуют отдельной сметы.",
+        "partial": true,
+        "access": "search",
+        "checked": "2026-10-09"
+      },
+      "module": "electronics"
+    },
+    {
+      "id": "s2-ha",
+      "title": "Мини-ПК под Home Assistant",
+      "note": "",
+      "oldStage": "2",
+      "kind": "buy",
+      "optional": false,
+      "quote": null,
+      "module": "electronics"
+    },
+    {
+      "id": "s2-panel",
+      "title": "Учёт энергии и обновление щита по проекту электрика",
+      "note": "Мониторинг не заменяет защиту. Выбор и монтаж аппаратов выполняются по проекту; не дублировать в расходах уже оплаченную электрику этапа основы.",
+      "oldStage": "2",
+      "kind": "diy",
+      "optional": false,
+      "quote": null,
+      "module": "electronics"
+    },
+    {
+      "id": "s2-obd",
+      "title": "Адаптер OBD2/CAN",
+      "note": "Свои скрипты диагностики и логирования для машины.",
+      "oldStage": "2",
+      "kind": "buy",
+      "optional": false,
+      "quote": null,
+      "module": "electronics"
+    },
+    {
+      "id": "s3-welder",
+      "title": "MIG/MAG + MMA для стальных изделий",
+      "note": "Проверить стабильность на малом токе, ПВ и питание конкретного аппарата. Lift-TIG DC не заменяет AC TIG по алюминию. Для TIG нужен отдельный чистый аргон; смесь Ar/CO₂ предназначена для MAG по стали.",
+      "oldStage": "3",
+      "kind": "buy",
+      "optional": false,
+      "quote": {
+        "amount": 525199,
+        "currency": "ARS",
+        "tax": 0,
+        "quantity": 1,
+        "model": "Lusqtoff EVOMIG-175",
+        "vendor": "Lusqtoff Argentina",
+        "url": "https://www.lusqtoff.com.ar/ver-producto/EVOMIG-175",
+        "terms": "Рекомендованная розничная цена. Аппарат класса 160 А: проверить ПВ, малый ток и пригодность под толщины своих проектов. Газ и защита отдельно.",
+        "partial": false,
+        "access": "pvp",
+        "checked": "2026-10-09"
+      },
+      "module": "metal"
+    },
+    {
+      "id": "s3-ppe",
+      "title": "Маска-хамелеон, краги, куртка, магниты, сварочные струбцины",
+      "note": "",
+      "oldStage": "3",
+      "kind": "buy",
+      "optional": false,
+      "quote": {
+        "amount": 44199,
+        "currency": "ARS",
+        "tax": 0,
+        "quantity": 1,
+        "model": "Lusqtoff ST-1N — маска MIG/MAG",
+        "vendor": "Lusqtoff Argentina",
+        "url": "https://www.lusqtoff.com.ar/ver-producto/ST-1N",
+        "terms": "Только маска. Выбрать затемнение по процессу и току; перчатки, одежда, обувь, крепления и экраны отдельно.",
+        "partial": true,
+        "access": "pvp",
+        "checked": "2026-10-09"
+      },
+      "module": "metal"
+    },
+    {
+      "id": "s3-gas",
+      "title": "Баллон смеси Ar/CO2",
+      "note": "Смесь под выбранную сталь и процесс, совместимый редуктор и закрепление баллона. До покупки согласовать местную заправку и обмен; цена пустого баллона не включает газ.",
+      "oldStage": "3",
+      "kind": "buy",
+      "optional": false,
+      "quote": {
+        "amount": 500250,
+        "currency": "ARS",
+        "tax": 0,
+        "quantity": 1,
+        "model": "Баллон DRAGO/MOZART T2, 2 м³ без заправки",
+        "vendor": "MAXSOLD / Mercado Libre",
+        "url": "https://www.mercadolibre.com.ar/tubo-2-metros-argon-nuevo-bajo-normas-iram-sin-carga/p/MLA2048266516",
+        "terms": "Пустой баллон. Смесь Ar/CO₂, редуктор, шланги и защита вентиля отдельно; заранее согласовать обмен/заправку в регионе.",
+        "partial": true,
+        "access": "search",
+        "checked": "2026-10-09"
+      },
+      "module": "metal"
+    },
+    {
+      "id": "s3-table",
+      "title": "Сварочный стол и тележка",
+      "note": "Первый сварочный проект и основа всей работы с металлом.",
+      "oldStage": "3",
+      "kind": "diy",
+      "optional": false,
+      "quote": null,
+      "module": "metal"
+    },
+    {
+      "id": "s3-bandsaw",
+      "title": "Ленточнопильный станок по металлу",
+      "note": "Ровный торец под сварку и под токарный.",
+      "oldStage": "3",
+      "kind": "buy",
+      "optional": false,
+      "quote": null,
+      "module": "metal"
+    },
+    {
+      "id": "s3-drill",
+      "title": "Сверлильный станок",
+      "note": "",
+      "oldStage": "3",
+      "kind": "buy",
+      "optional": false,
+      "quote": {
+        "amount": 474999,
+        "currency": "ARS",
+        "tax": 0,
+        "quantity": 1,
+        "model": "Lusqtoff TB-16, патрон 16 мм",
+        "vendor": "Lusqtoff Argentina",
+        "url": "https://www.lusqtoff.com.ar/ver-producto/TB-16",
+        "terms": "PVP производителя. Проверить диапазон оборотов; станочные тиски и свёрла отдельно.",
+        "partial": false,
+        "access": "pvp",
+        "checked": "2026-10-09"
+      },
+      "module": "metal"
+    },
+    {
+      "id": "s3-press",
+      "title": "Гидравлический пресс 20 т",
+      "note": "Подшипники, сайлентблоки, правка, база для гибки.",
+      "oldStage": "3",
+      "kind": "buy",
+      "optional": false,
+      "quote": {
+        "amount": 875199,
+        "currency": "ARS",
+        "tax": 0,
+        "quantity": 1,
+        "model": "Lusqtoff PHL20-9, 20 т",
+        "vendor": "Lusqtoff Argentina",
+        "url": "https://www.lusqtoff.com.ar/ver-producto/PHL20-9",
+        "terms": "PVP производителя; гибочная оснастка отдельно.",
+        "partial": false,
+        "access": "pvp",
+        "checked": "2026-10-09"
+      },
+      "module": "metal"
+    },
+    {
+      "id": "s3-brake",
+      "title": "Насадка-листогиб на пресс, ~300 мм",
+      "note": "Тоннаж, ширина, толщина, прочность металла и раскрытие матрицы должны соответствовать паспорту конкретной насадки. Не переносить пределы чужой модели.",
+      "oldStage": "3",
+      "kind": "buy",
+      "optional": false,
+      "quote": null,
+      "module": "metal"
+    },
+    {
+      "id": "s3-sheetbrake",
+      "title": "Листогиб 1–1,2 м на петлях из уголка",
+      "note": "Длинные гибы тонкого листа: короба, отливы, панели.",
+      "oldStage": "3",
+      "kind": "diy",
+      "optional": false,
+      "quote": null,
+      "module": "metal"
+    },
+    {
+      "id": "s3-bender",
+      "title": "Гибочное приспособление для полосы и прутка",
+      "note": "Перила, кронштейны, крюки, кольца.",
+      "oldStage": "3",
+      "kind": "diy",
+      "optional": false,
+      "quote": null,
+      "module": "metal"
+    },
+    {
+      "id": "s3-plasma",
+      "title": "Ручной плазморез с CNC-разъёмом и поджигом без высокой частоты",
+      "note": "Под будущий ЧПУ: CNC-интерфейс, совместимый поджиг без ВЧ и сигналы высоты. Проверить паспорт, расход сухого воздуха и интерфейс контроллера; дешёвый CUT50 не автоматически подходит.",
+      "oldStage": "3",
+      "kind": "buy",
+      "optional": false,
+      "quote": null,
+      "module": "metal"
+    },
+    {
+      "id": "s3-belt",
+      "title": "Ленточный гриндер 2×72",
+      "note": "Защита ремня и приводов, балансировка, натяжение и отдельный сбор металлической пыли. Не использовать общий древесный пылесборник.",
+      "oldStage": "3",
+      "kind": "diy",
+      "optional": false,
+      "quote": null,
+      "module": "metal"
+    },
+    {
+      "id": "s3-comp",
+      "title": "Компрессор по расходу выбранных потребителей",
+      "note": "Перед покупкой подтвердить FAD при рабочем давлении и ПВ. Ресивер 100–200 л не гарантирует работу HVLP/пескоструя. Рекламный расход на входе нельзя считать выходным. Осушение и фильтры — отдельная строка.",
+      "oldStage": "3",
+      "kind": "buy",
+      "optional": false,
+      "quote": {
+        "amount": 805135.5,
+        "currency": "ARS",
+        "tax": 0,
+        "quantity": 1,
+        "model": "Dyllu DTAP4R11-4, 100 л / 3 HP",
+        "vendor": "Red Ferretera",
+        "url": "https://www.redferretera.com.ar/productos/compresor-a-correa-100-lts-3-hp-dtap4r11-4-dyllu-cod-4deacco100-aom0f/",
+        "terms": "Цена при переводе со скидкой 10%; обычная 894 595 ARS. FAD при рабочем давлении не подтверждён: совместимость с покраской/пескоструем ещё не установлена.",
+        "partial": false,
+        "access": "search",
+        "checked": "2026-10-09"
+      },
+      "module": "metal"
+    },
+    {
+      "id": "s3-brad",
+      "title": "Пневматический финишный гвоздезабиватель (брад-нейлер)",
+      "note": "Для отделки и временной фиксации. Не заменяет конструкционные гвозди и каркасный нейлер.",
+      "oldStage": "3",
+      "kind": "buy",
+      "optional": false,
+      "quote": {
+        "amount": 74599,
+        "currency": "ARS",
+        "tax": 0,
+        "quantity": 1,
+        "model": "Lusqtoff GC9040-50, 18 Ga",
+        "vendor": "Lusqtoff Argentina",
+        "url": "https://www.lusqtoff.com.ar/ver-producto/GC9040-50",
+        "terms": "PVP производителя. Крепёж и воздушная линия отдельно.",
+        "partial": false,
+        "access": "pvp",
+        "checked": "2026-10-09"
+      },
+      "module": "metal"
+    },
+    {
+      "id": "s4-kit",
+      "title": "Смолы, стеклоткань, силикон, полиуретан, разделители",
+      "note": "",
+      "oldStage": "4",
+      "kind": "buy",
+      "optional": false,
+      "quote": null,
+      "module": "composites"
+    },
+    {
+      "id": "s4-vac",
+      "title": "Двухступенчатый вакуумный насос и камера",
+      "note": "Дегазация и вакуумный мешок требуют проверки расхода и допустимой непрерывной работы насоса. Перед насосом — ловушка смолы.",
+      "oldStage": "4",
+      "kind": "diy",
+      "optional": false,
+      "quote": null,
+      "module": "composites"
+    },
+    {
+      "id": "s4-pot",
+      "title": "Заводская камера для литья под давлением",
+      "note": "Паспортное рабочее давление и исправная арматура. Не сверлить и не варить сосуд. Вакуумная камера не заменяет камеру избыточного давления.",
+      "oldStage": "4",
+      "kind": "buy",
+      "optional": false,
+      "quote": null,
+      "module": "composites"
+    },
+    {
+      "id": "s4-vform",
+      "title": "Вакуумформер",
+      "note": "Визоры, броня, крышки, тонкие корпуса.",
+      "oldStage": "4",
+      "kind": "diy",
+      "optional": false,
+      "quote": null,
+      "module": "composites"
+    },
+    {
+      "id": "s4-rotary",
+      "title": "Гравер с гибким валом",
+      "note": "",
+      "oldStage": "4",
+      "kind": "buy",
+      "optional": false,
+      "quote": {
+        "amount": 128400,
+        "currency": "ARS",
+        "tax": 0,
+        "quantity": 1,
+        "model": "Einhell TH-MG 135 E, гибкий вал и набор",
+        "vendor": "Tienda Einhell",
+        "url": "https://www.tiendaeinhell.com.ar/productos/minitorno-th-mg-135-e/",
+        "terms": "Промоцена с налогами; обычная 173 262 ARS.",
+        "partial": false,
+        "access": "search",
+        "checked": "2026-10-09"
+      },
+      "module": "composites"
+    },
+    {
+      "id": "s4-hvlp",
+      "title": "Краскопульт HVLP и аэрограф",
+      "note": "Мебель на водных лаках, детали реплик, мелкие автодетали.",
+      "oldStage": "4",
+      "kind": "buy",
+      "optional": false,
+      "quote": null,
+      "module": "composites"
+    },
+    {
+      "id": "s4-booth",
+      "title": "Отдельное место отделки с рассчитанной вытяжкой",
+      "note": "Подбор по материалам и паспортам безопасности. Водная основа не исключает вредный аэрозоль. Плёнка и вентилятор вне потока сами по себе не образуют безопасную камеру.",
+      "oldStage": "4",
+      "kind": "diy",
+      "optional": false,
+      "quote": null,
+      "module": "composites"
+    },
+    {
+      "id": "s4-drum",
+      "title": "Барабанный калибровально-шлифовальный станок",
+      "note": "Отдельный проект после освоения массива: ограждение, балансировка, крепление абразива, привод и пылеудаление. Мощность выбирается под ширину и съём, без обещания универсальных 0,37 кВт.",
+      "oldStage": "4",
+      "kind": "diy",
+      "optional": true,
+      "quote": null,
+      "module": "wood"
+    },
+    {
+      "id": "s5-jack",
+      "title": "Подкатной домкрат 2,5–3 т, четыре подставки, упоры",
+      "note": "",
+      "oldStage": "5",
+      "kind": "buy",
+      "optional": false,
+      "quote": {
+        "amount": 397799,
+        "currency": "ARS",
+        "tax": 0,
+        "quantity": 1,
+        "model": "Lusqtoff LQ-C3, 3 т",
+        "vendor": "Lusqtoff Argentina",
+        "url": "https://www.lusqtoff.com.ar/ver-producto/LQ-C3",
+        "terms": "Только домкрат. Четыре подставки и упоры в эту цену не входят.",
+        "partial": true,
+        "access": "pvp",
+        "checked": "2026-10-09"
+      },
+      "module": "auto"
+    },
+    {
+      "id": "s5-torque",
+      "title": "Два динамометрических ключа и хороший набор головок",
+      "note": "",
+      "oldStage": "5",
+      "kind": "buy",
+      "optional": false,
+      "quote": null,
+      "module": "auto"
+    },
+    {
+      "id": "s5-impact",
+      "title": "Пневмогайковёрт 1/2\"",
+      "note": "",
+      "oldStage": "5",
+      "kind": "buy",
+      "optional": false,
+      "quote": null,
+      "module": "auto"
+    },
+    {
+      "id": "s5-body",
+      "title": "Рихтовочный набор, ножницы по металлу, высечка",
+      "note": "",
+      "oldStage": "5",
+      "kind": "buy",
+      "optional": false,
+      "quote": null,
+      "module": "auto"
+    },
+    {
+      "id": "s5-blast",
+      "title": "Пескоструйная камера",
+      "note": "Абразив — корунд или стеклошарик. Кварцевый песок нельзя.",
+      "oldStage": "5",
+      "kind": "diy",
+      "optional": false,
+      "quote": null,
+      "module": "auto"
+    },
+    {
+      "id": "s6-lr",
+      "title": "LowRider 4: печатные детали, комплект железа, трубы",
+      "note": "Поле под местный размер листа. Стандартный Z даёт около 50 мм глубины; 100 мм требуют пониженного ложа. Печатные детали ≈2,7 кг, трубы по спецификации V1E; импортный комплект — отдельная смета доставки.",
+      "oldStage": "6",
+      "kind": "diy",
+      "optional": false,
+      "quote": null,
+      "module": "lowrider"
+    },
+    {
+      "id": "s6-spindle",
+      "title": "Кромочный фрезер как шпиндель (класс Makita 700)",
+      "note": "Снимается и работает руками.",
+      "oldStage": "6",
+      "kind": "buy",
+      "optional": false,
+      "quote": {
+        "amount": 548789,
+        "currency": "ARS",
+        "tax": 0,
+        "quantity": 1,
+        "model": "Makita RT0700C, 710 Вт",
+        "vendor": "Mercado Libre",
+        "url": "https://www.mercadolibre.com.ar/router-makita-rt0700c-710w-velocidad-variable-rebajador-mkb/up/MLAU281955537",
+        "terms": "Проверить крепление под текущий LowRider, подходящие цанги и комплектацию.",
+        "partial": false,
+        "access": "search",
+        "checked": "2026-10-09"
+      },
+      "module": "lowrider"
+    },
+    {
+      "id": "s6-table",
+      "title": "Стол-основание, он же сборочный стол",
+      "note": "",
+      "oldStage": "6",
+      "kind": "diy",
+      "optional": false,
+      "quote": null,
+      "module": "lowrider"
+    },
+    {
+      "id": "s6-bits",
+      "title": "Фрезы: прямые, компрессионные, сферические, для выравнивания слэбов",
+      "note": "",
+      "oldStage": "6",
+      "kind": "buy",
+      "optional": false,
+      "quote": null,
+      "module": "lowrider"
+    },
+    {
+      "id": "s7-polisher",
+      "title": "Мокрая полировальная машина с регулировкой и алмазные круги 50–3000",
+      "note": "Только инструмент, предназначенный для мокрой работы. Сбор шлама, защита питания и подходящий режим; обычную УШМ не превращать в мокрую полировальную машину.",
+      "oldStage": "7",
+      "kind": "buy",
+      "optional": false,
+      "quote": null,
+      "module": "stone"
+    },
+    {
+      "id": "s7-tilesaw",
+      "title": "Плиткорез с водяным охлаждением",
+      "note": "",
+      "oldStage": "7",
+      "kind": "buy",
+      "optional": false,
+      "quote": null,
+      "module": "stone"
+    },
+    {
+      "id": "s7-diamond",
+      "title": "Алмазные диски, чашки, коронки",
+      "note": "",
+      "oldStage": "7",
+      "kind": "buy",
+      "optional": false,
+      "quote": {
+        "amount": 37712.59,
+        "currency": "ARS",
+        "tax": 0,
+        "quantity": 1,
+        "model": "KWB, алмазная коронка 35 мм",
+        "vendor": "Tienda Einhell",
+        "url": "https://www.tiendaeinhell.com.ar/productos/sierra-de-corona-revestida-de-diamante-35mm/",
+        "terms": "Цена одной коронки, не всего набора дисков и чашек.",
+        "partial": true,
+        "access": "search",
+        "checked": "2026-10-09"
+      },
+      "module": "stone"
+    },
+    {
+      "id": "s7-air",
+      "title": "Пневмомолоток и зубила по камню",
+      "note": "Работает от того же компрессора.",
+      "oldStage": "7",
+      "kind": "buy",
+      "optional": false,
+      "quote": null,
+      "module": "stone"
+    },
+    {
+      "id": "s7-hand",
+      "title": "Ручные зубила, бучарда, киянка",
+      "note": "",
+      "oldStage": "7",
+      "kind": "buy",
+      "optional": false,
+      "quote": null,
+      "module": "stone"
+    },
+    {
+      "id": "s7-gfrc",
+      "title": "Бетон со стекловолокном: формы из меламина, фибра, пигменты, вибро",
+      "note": "Щёлочестойкая AR-фибра для цементной матрицы, совместимый состав и режим выдержки. Начать с небольших пробников; раковине нужны герметизация и испытание на протечки.",
+      "oldStage": "7",
+      "kind": "buy",
+      "optional": false,
+      "quote": null,
+      "module": "stone"
+    },
+    {
+      "id": "s8-pnc",
+      "title": "PrintNC V4 MetalCutter: механика и управление",
+      "note": "Размер берём из выбранной версии CAD; в wiki пресет ≈625×625 мм, документацию перепроверить. Геометрия, повторяемость и точность детали проверяются отдельно, гарантии 0,03 мм нет.",
+      "oldStage": "8",
+      "kind": "diy",
+      "optional": false,
+      "quote": null,
+      "module": "printnc"
+    },
+    {
+      "id": "s8-tooling",
+      "title": "Тиски, цанги, фрезы, кожух, обдув",
+      "note": "",
+      "oldStage": "8",
+      "kind": "buy",
+      "optional": false,
+      "quote": null,
+      "module": "printnc"
+    },
+    {
+      "id": "s9-lathe",
+      "title": "Настольный токарный по металлу",
+      "note": "",
+      "oldStage": "9",
+      "kind": "buy",
+      "optional": false,
+      "quote": {
+        "amount": 3146499,
+        "currency": "ARS",
+        "tax": 0,
+        "quantity": 1,
+        "model": "Lusqtoff TBL-20520",
+        "vendor": "Lusqtoff Argentina",
+        "url": "https://www.lusqtoff.com.ar/ver-producto/TBL-20520",
+        "terms": "PVP производителя. Перед выбором подтвердить паспортные размеры, питание, комплект и сервис. Оснастка отдельной строкой.",
+        "partial": false,
+        "access": "pvp",
+        "checked": "2026-10-09"
+      },
+      "module": "lathe"
+    },
+    {
+      "id": "s9-tooling",
+      "title": "Резцы, 4-кулачковый патрон, вращающийся центр, индикатор",
+      "note": "",
+      "oldStage": "9",
+      "kind": "buy",
+      "optional": false,
+      "quote": null,
+      "module": "lathe"
+    },
+    {
+      "id": "s10-gantry",
+      "title": "Отдельный плазменный портал и стальной стол",
+      "note": "Компоновку брать из проверенного плазменного проекта. Учитывать нагрев, шлак, дым и защиту приводов; деревообрабатывающий стол LowRider для этого не используется.",
+      "oldStage": "10",
+      "kind": "diy",
+      "optional": false,
+      "quote": null,
+      "module": "plasma"
+    },
+    {
+      "id": "s10-thc",
+      "title": "Управление плазмой и контроль высоты THC",
+      "note": "LinuxCNC/QtPlasmaC — один вариант. Есть grblHAL с plasma-плагином, но требуется проверить поддержку платы и ограничения. Комплект должен включать нужные входы, развязку и датчики, а не только THCAD.",
+      "oldStage": "10",
+      "kind": "buy",
+      "optional": false,
+      "quote": null,
+      "module": "plasma"
+    },
+    {
+      "id": "l-tig",
+      "title": "Аппарат AC/DC TIG для алюминия",
+      "note": "Активировать при регулярных задачах по алюминию. AC/DC TIG, чистый аргон и отдельная оснастка; не ждать условного третьего года.",
+      "oldStage": "later",
+      "kind": "buy",
+      "optional": true,
+      "quote": null,
+      "module": "later"
+    },
+    {
+      "id": "l-powder",
+      "title": "Порошковая покраска: пистолет и выделенная печь",
+      "note": "Отдельный проект с контролем температуры, вентиляцией и выделенной печью, не используемой для пищи; сначала сравнить услугу.",
+      "oldStage": "later",
+      "kind": "diy",
+      "optional": true,
+      "quote": null,
+      "module": "later"
+    },
+    {
+      "id": "l-woodlathe",
+      "title": "Токарный по дереву для ножек и чаш",
+      "note": "",
+      "oldStage": "later",
+      "kind": "buy",
+      "optional": true,
+      "quote": null,
+      "module": "later"
+    },
+    {
+      "id": "l-sew",
+      "title": "Швейная машина с шагающей лапкой",
+      "note": "Обивка мебели и салонов.",
+      "oldStage": "later",
+      "kind": "buy",
+      "optional": true,
+      "quote": null,
+      "module": "later"
+    },
+    {
+      "id": "l-laser",
+      "title": "Лазер: кожа, ткань, акрил, трафареты",
+      "note": "Выбор длины волны под материал; диодный лазер не универсален для прозрачного акрила. Закрытый корпус и вытяжка, материалы — по инструкции производителя.",
+      "oldStage": "later",
+      "kind": "buy",
+      "optional": true,
+      "quote": null,
+      "module": "later"
+    },
+    {
+      "id": "l-4th",
+      "title": "4-я ось на PrintNC",
+      "note": "Габарит заготовки, патрон, задняя бабка, вылет фрезы и CAM проверяются в CAD. Не увеличивать Z без оценки жёсткости.",
+      "oldStage": "later",
+      "kind": "buy",
+      "optional": true,
+      "quote": null,
+      "module": "later"
+    },
+    {
+      "id": "l-cnclathe",
+      "title": "ЧПУ-переделка токарного",
+      "note": "",
+      "oldStage": "later",
+      "kind": "diy",
+      "optional": true,
+      "quote": null,
+      "module": "later"
+    },
+    {
+      "id": "l-hang",
+      "title": "Hangprinter — печать размером с комнату",
+      "note": "Экспериментальное направление: сначала уточнить актуальную версию, требования к помещению и полную спецификацию.",
+      "oldStage": "later",
+      "kind": "diy",
+      "optional": true,
+      "quote": null,
+      "module": "later"
+    },
+    {
+      "id": "l-cast",
+      "title": "Литьё алюминия по выжигаемым PLA-моделям",
+      "note": "Отдельный проект с обучением и подходящим местом. Начать с заказа отливки по своей модели, затем оценить собственное оборудование.",
+      "oldStage": "later",
+      "kind": "diy",
+      "optional": true,
+      "quote": null,
+      "module": "later"
+    },
+    {
+      "id": "l-scan",
+      "title": "3D-сканер для копирования автодеталей",
+      "note": "",
+      "oldStage": "later",
+      "kind": "buy",
+      "optional": true,
+      "quote": null,
+      "module": "later"
+    },
+    {
+      "id": "l-stapler",
+      "title": "Пневматический степлер для обивки",
+      "note": "Берём вместе со швейной машиной, когда дойдёшь до обивки.",
+      "oldStage": "later",
+      "kind": "buy",
+      "optional": true,
+      "quote": null,
+      "module": "later"
+    },
+    {
+      "id": "b-sawhorses",
+      "title": "Два козла и опоры для длинных заготовок",
+      "module": "base",
+      "note": "Складирование отдельно от рабочего прохода. Для первых козел материал можно заказать уже раскроенным.",
+      "kind": "diy",
+      "optional": false,
+      "quote": null
+    },
+    {
+      "id": "b-storage",
+      "title": "Хранение, освещение и мобильные основания",
+      "module": "base",
+      "note": "Отдельно сухой пиломатериал, листы, химия и оснастка. Колёса с фиксацией, допустимая нагрузка пола.",
+      "kind": "diy",
+      "optional": false,
+      "quote": null
+    },
+    {
+      "id": "b-cyclone",
+      "title": "Циклон и герметичная ёмкость перед пылесосом",
+      "module": "base",
+      "note": "Дополнительный предсепаратор под допустимое разрежение. Не заменяет сертифицированную фильтрацию; учитывать потери расхода и указания производителя.",
+      "kind": "buy",
+      "optional": true,
+      "quote": null
+    },
+    {
+      "id": "b-vice",
+      "title": "Слесарные тиски и мягкие губки",
+      "module": "base",
+      "note": "",
+      "kind": "buy",
+      "optional": false,
+      "quote": {
+        "amount": 367174,
+        "currency": "ARS",
+        "tax": 0,
+        "quantity": 1,
+        "model": "Black Series, 125 мм",
+        "vendor": "Mercado Libre",
+        "url": "https://www.mercadolibre.com.ar/morsa-de-banco-5-pulgadas-125mm-2500-kg-black-series/up/MLAU2984321828",
+        "terms": "Цена тисков; мягкие губки и крепление отдельно.",
+        "partial": true,
+        "access": "search",
+        "checked": "2026-10-09"
+      }
+    },
+    {
+      "id": "b-jigs",
+      "title": "Кондукторы для повторных резов и сверления",
+      "module": "base",
+      "note": "Проверять на пробниках; струбцины и упоры учитываются отдельно.",
+      "kind": "diy",
+      "optional": false,
+      "quote": null
+    },
+    {
+      "id": "b-drywood",
+      "title": "Сухая доска и листы для первых изделий",
+      "module": "furniture",
+      "note": "Смета по карте раскроя, породе, влажности и выходу годного материала.",
+      "kind": "buy",
+      "optional": false,
+      "quote": null
+    },
+    {
+      "id": "w-collector",
+      "title": "Стружкоотсос для стационарных станков",
+      "module": "wood",
+      "note": "Расход и шланги по паспорту станка. Мешок общего назначения не подтверждает пригодность для мелкой пыли; фильтрация уточняется отдельно.",
+      "kind": "buy",
+      "optional": false,
+      "quote": {
+        "amount": 1285000,
+        "currency": "ARS",
+        "tax": 0,
+        "quantity": 1,
+        "model": "MB Brezzo MB011, 2 HP, однофазный",
+        "vendor": "MB Brezzo / Mercado Libre",
+        "url": "https://www.mercadolibre.com.ar/aspirador-de-polvo-para-carpinterias-de-2-hp-monofasico/p/MLA47033232",
+        "terms": "Без рукавов. Эффективность штатного мешка по мелкой пыли не подтверждена; фильтры и воздуховоды отдельной строкой. Расход проверять при сопротивлении системы.",
+        "partial": false,
+        "access": "search",
+        "checked": "2026-10-09"
+      }
+    },
+    {
+      "id": "w-filter",
+      "title": "Фильтры, рукава и заслонки стружкоотсоса",
+      "module": "wood",
+      "note": "Отдельная смета всей системы, не только вентилятора.",
+      "kind": "buy",
+      "optional": false,
+      "quote": null
+    },
+    {
+      "id": "w-jointer",
+      "title": "Фуговка: услуга, фуганок или проверенные салазки",
+      "module": "wood",
+      "note": "Выбрать один путь до покупки рейсмуса. Комбинированный станок — альтернатива, а не дополнительная обязательная покупка.",
+      "kind": "service",
+      "optional": false,
+      "quote": null
+    },
+    {
+      "id": "w-air",
+      "title": "Дополнительная фильтрация воздуха помещения",
+      "module": "wood",
+      "note": "Дополняет захват пыли у источника, не заменяет его.",
+      "kind": "buy",
+      "optional": true,
+      "quote": null
+    },
+    {
+      "id": "d-filament",
+      "title": "PLA для оснастки и LowRider, 3 кг",
+      "module": "digital",
+      "note": "Учитывать остатки, не покупать повторно пластик, уже вошедший в комплект.",
+      "kind": "buy",
+      "optional": false,
+      "quote": {
+        "amount": 34680,
+        "currency": "ARS",
+        "tax": 0,
+        "quantity": 3,
+        "model": "Creality CR-PLA, 1 кг",
+        "vendor": "Creaxis 3D",
+        "url": "https://creaxis.com.ar/producto/filamento-pla-creality-cr-pla-gris-1-75-mm-1-kg/",
+        "terms": "Цена списка за 1 кг, в смете 3 кг. Для LowRider проверить рекомендованный пластик текущей версии.",
+        "partial": false,
+        "access": "search",
+        "checked": "2026-10-09"
+      }
+    },
+    {
+      "id": "m-extract",
+      "title": "Отдельный сварочный пост и местная вытяжка",
+      "module": "metal",
+      "note": "Для обычной стали тоже. Искры, стружка, смолы и краска физически разделены.",
+      "kind": "service",
+      "optional": false,
+      "quote": null
+    },
+    {
+      "id": "m-taps",
+      "title": "Свёрла, метчики, кернер, масло и крепёж",
+      "module": "metal",
+      "note": "",
+      "kind": "buy",
+      "optional": false,
+      "quote": null
+    },
+    {
+      "id": "m-airprep",
+      "title": "Подготовка воздуха, шланги и фитинги",
+      "module": "metal",
+      "note": "Осушение, фильтрация и пропускная способность под конкретный процесс.",
+      "kind": "buy",
+      "optional": false,
+      "quote": null
+    },
+    {
+      "id": "c-bag",
+      "title": "Вакуумный мешок, ленты, расходники и ловушка смолы",
+      "module": "composites",
+      "note": "Отдельно от вакуумформера нагретого пластика; начать с малой плоской панели.",
+      "kind": "buy",
+      "optional": false,
+      "quote": null
+    },
+    {
+      "id": "h-window",
+      "title": "Заготовки, уплотнения и фурнитура пробной рамы",
+      "module": "house",
+      "note": "Сначала тестовая рама и узел отвода воды; стеклопакет заказать отдельно.",
+      "kind": "buy",
+      "optional": false,
+      "quote": null
+    },
+    {
+      "id": "h-panel",
+      "title": "Материалы учебной панели 1,2×2,4 м",
+      "module": "house",
+      "note": "Не несущий элемент дома: исследуем узлы, утепление и последовательность монтажа.",
+      "kind": "buy",
+      "optional": false,
+      "quote": null
+    },
+    {
+      "id": "h-framer",
+      "title": "Каркасный нейлер под конструкционный крепёж",
+      "module": "house",
+      "note": "Только под проект каркасной конструкции; крепёж по расчёту.",
+      "kind": "buy",
+      "optional": true,
+      "quote": {
+        "amount": 514999,
+        "currency": "ARS",
+        "tax": 0,
+        "quantity": 1,
+        "model": "Lusqtoff CN90 — кандидат под согласованный крепёж",
+        "vendor": "Lusqtoff Argentina",
+        "url": "https://www.lusqtoff.com.ar/ver-producto/CN90",
+        "terms": "PVP; паллетный барабанный нейлер. Допустимость конкретных гвоздей для несущего каркаса подтверждается проектом. Не автоматически равнозначен любому каркасному нейлеру.",
+        "partial": false,
+        "access": "pvp",
+        "checked": "2026-10-09"
+      }
+    },
+    {
+      "id": "h-insulation",
+      "title": "Задувка утеплителя: аренда или услуга",
+      "module": "house",
+      "note": "Сначала сравнить стоимость услуги и аренды; оборудование не покупать впрок.",
+      "kind": "service",
+      "optional": true,
+      "quote": null
+    },
+    {
+      "id": "s-wetbench",
+      "title": "Мокрый стол, сбор и утилизация шлама",
+      "module": "stone",
+      "note": "Отдельная зона; не допускать высыхания шлама и вторичного пыления.",
+      "kind": "diy",
+      "optional": false,
+      "quote": null
+    },
+    {
+      "id": "lr-import",
+      "title": "Доставка и импорт компонентов LowRider",
+      "module": "lowrider",
+      "note": "Запросить полную цену до Эль-Больсона. Учитывать пошлины, комиссии и 220 В / 50 Гц.",
+      "kind": "service",
+      "optional": false,
+      "quote": null
+    },
+    {
+      "id": "pnc-import",
+      "title": "Доставка, крепёж и электрошкаф PrintNC",
+      "module": "printnc",
+      "note": "Отдельная ведомость по фактическому проекту, не процент от цены станка.",
+      "kind": "service",
+      "optional": false,
+      "quote": null
+    },
+    {
+      "id": "auto-consumables",
+      "title": "Расходники и документация под конкретный автомобиль",
+      "module": "auto",
+      "note": "Моменты затяжки, точки подъёма и процедуры по руководству машины.",
+      "kind": "buy",
+      "optional": false,
+      "quote": null
+    }
+  ],
+  "tasks": [
+    {
+      "id": "b01",
+      "module": "base",
+      "title": "Обмерить помещение, двери и пути подачи материала",
+      "hours": 2,
+      "deps": [],
+      "result": "План с размерами, высотой и местом хранения. Отметить мокрую, горячую и чистую зоны.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "b02",
+      "module": "base",
+      "title": "Проверить имеющийся инструмент и выбрать первые изделия",
+      "hours": 2,
+      "deps": [
+        "b01"
+      ],
+      "result": "Список исправного инструмента; размеры верстака, скамьи и полки.",
+      "items": [
+        "h-circ",
+        "h-drill",
+        "h-sander",
+        "h-puzzi"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "b03",
+      "module": "base",
+      "title": "Обследовать питание вместе с электриком",
+      "hours": 2,
+      "deps": [
+        "b01"
+      ],
+      "result": "Заключение по вводу, заземлению, защите и выделенным линиям.",
+      "items": [
+        "s0-power"
+      ],
+      "lag": 0,
+      "gate": "Работы с сетью выполняет электрик; время здесь — твоё участие.",
+      "project": ""
+    },
+    {
+      "id": "b04",
+      "module": "base",
+      "title": "Получить местные сметы и заказать стартовый комплект",
+      "hours": 3,
+      "deps": [
+        "b02",
+        "b03"
+      ],
+      "result": "Записаны реальные цены и ожидаемые даты доставки. Заказать раскрой для первых козел.",
+      "items": [
+        "s0-vac",
+        "s0-clamps",
+        "s0-measure",
+        "s0-ppe",
+        "b-vice"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "b05",
+      "module": "base",
+      "title": "Освободить место и организовать хранение",
+      "hours": 4,
+      "deps": [
+        "b02"
+      ],
+      "result": "Проходы свободны, свет работает, химия закрыта.",
+      "items": [
+        "b-storage"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "b06",
+      "module": "base",
+      "title": "Принять электрику и стартовые поставки",
+      "hours": 2,
+      "deps": [
+        "b04"
+      ],
+      "result": "Проверены комплектность, защита и возможность работы; фактическая доставка внесена.",
+      "items": [
+        "s0-power"
+      ],
+      "lag": 7,
+      "gate": "7 дней — плановое ожидание, его можно заменить датой поставщика.",
+      "project": ""
+    },
+    {
+      "id": "b07",
+      "module": "base",
+      "title": "Настроить пылесос и подключение инструмента",
+      "hours": 3,
+      "deps": [
+        "b05",
+        "b06"
+      ],
+      "result": "Подключение плотное; проверены фильтр, шланги и захват пыли.",
+      "items": [
+        "s0-vac",
+        "s0-adapter",
+        "s0-ppe"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "b08",
+      "module": "base",
+      "title": "Собрать два козла и опору подачи",
+      "hours": 4,
+      "deps": [
+        "b07"
+      ],
+      "result": "Устойчивость и фиксация проверены на пробной нагрузке.",
+      "items": [
+        "b-sawhorses"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "b09",
+      "module": "base",
+      "title": "Сделать направляющую и поперечный упор",
+      "hours": 4,
+      "deps": [
+        "b08"
+      ],
+      "result": "Два повторных реза и проверка прямоугольности на пробниках.",
+      "items": [
+        "s0-rail",
+        "b-jigs"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "b10",
+      "module": "base",
+      "title": "Практика разметки, крепления и повторных пропилов",
+      "hours": 4,
+      "deps": [
+        "b09"
+      ],
+      "result": "Пять одинаковых деталей; записана фактическая погрешность.",
+      "items": [
+        "s0-measure",
+        "s0-clamps"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "b11",
+      "module": "base",
+      "title": "Смоделировать верстак и составить карту раскроя",
+      "hours": 3,
+      "deps": [
+        "b10"
+      ],
+      "result": "Чертёж с крепежом, местами зажимов и удобной высотой.",
+      "items": [
+        "s0-bench"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "b12",
+      "module": "base",
+      "title": "Раскроить детали верстака",
+      "hours": 4,
+      "deps": [
+        "b11"
+      ],
+      "result": "Промаркированы детали, проверены размеры и диагонали.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "b13",
+      "module": "base",
+      "title": "Собрать и выровнять верстак",
+      "hours": 6,
+      "deps": [
+        "b12"
+      ],
+      "result": "Верстак не качается, поверхность проверена, заготовки фиксируются.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "b14",
+      "module": "base",
+      "title": "Испытать рабочее место и оформить исходные измерения",
+      "hours": 2,
+      "deps": [
+        "b13"
+      ],
+      "result": "Фото, размеры, замечания и первая запись фактических затрат.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": "Рабочее место готово"
+    },
+    {
+      "id": "f01",
+      "module": "furniture",
+      "title": "Выбрать сухую доску и уточнить карту раскроя скамьи",
+      "hours": 3,
+      "deps": [
+        "b14"
+      ],
+      "result": "Материал проверен по влажности; крепёж и отделка выбраны.",
+      "items": [
+        "b-drywood",
+        "s0-meter"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "f02",
+      "module": "furniture",
+      "title": "Раскрой и пробные соединения скамьи",
+      "hours": 5,
+      "deps": [
+        "f01"
+      ],
+      "result": "Примерка проходит без перекоса; торцы и кромки обработаны.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "f03",
+      "module": "furniture",
+      "title": "Собрать скамью",
+      "hours": 4,
+      "deps": [
+        "f02"
+      ],
+      "result": "Сборка прямоугольная; клей выдерживается по инструкции.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "f04",
+      "module": "furniture",
+      "title": "Отделать и проверить скамью",
+      "hours": 4,
+      "deps": [
+        "f03"
+      ],
+      "result": "Нет качки и острых кромок; отделка выдержана по паспорту.",
+      "items": [],
+      "lag": 2,
+      "gate": "",
+      "project": "Скамья"
+    },
+    {
+      "id": "f05",
+      "module": "furniture",
+      "title": "Спроектировать и изготовить простую полку",
+      "hours": 7,
+      "deps": [
+        "f04"
+      ],
+      "result": "Полка собрана, крепления выбраны под основание; нагрузка проверена.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": "Полка"
+    },
+    {
+      "id": "f06",
+      "module": "furniture",
+      "title": "Спроектировать стол и заказать материал",
+      "hours": 4,
+      "deps": [
+        "f05"
+      ],
+      "result": "Есть размеры, крепление столешницы с учётом движения древесины и смета.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "f07",
+      "module": "furniture",
+      "title": "Раскроить и собрать стол",
+      "hours": 10,
+      "deps": [
+        "f06"
+      ],
+      "result": "Геометрия проверена; соединения повторяемы.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "f08",
+      "module": "furniture",
+      "title": "Выполнить отделку и испытание стола",
+      "hours": 5,
+      "deps": [
+        "f07"
+      ],
+      "result": "Финиш высох по инструкции, стол устойчив.",
+      "items": [],
+      "lag": 2,
+      "gate": "",
+      "project": "Стол"
+    },
+    {
+      "id": "f09",
+      "module": "furniture",
+      "title": "Спроектировать кровать и проверить узлы",
+      "hours": 4,
+      "deps": [
+        "f08"
+      ],
+      "result": "Размеры под матрас, разборные соединения и опоры определены.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "f10",
+      "module": "furniture",
+      "title": "Изготовить и испытать кровать",
+      "hours": 14,
+      "deps": [
+        "f09"
+      ],
+      "result": "Сборка и опоры проверены; записаны трудозатраты.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": "Кровать"
+    },
+    {
+      "id": "d01",
+      "module": "digital",
+      "title": "Выбрать или проверить принтер под оснастку",
+      "hours": 3,
+      "deps": [
+        "b14"
+      ],
+      "result": "Поле печати соответствует деталям; сделан выбор купить или использовать имеющийся.",
+      "items": [
+        "s1-printer",
+        "d-filament"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "d02",
+      "module": "digital",
+      "title": "Принять и откалибровать принтер",
+      "hours": 5,
+      "deps": [
+        "d01"
+      ],
+      "result": "Тест размеров и перекоса, устойчивое приклеивание, профиль материала.",
+      "items": [],
+      "lag": 7,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "d03",
+      "module": "digital",
+      "title": "Восстановить навыки CAD на кондукторе",
+      "hours": 5,
+      "deps": [
+        "d02"
+      ],
+      "result": "Параметрическая модель под реальный размер инструмента.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "d04",
+      "module": "digital",
+      "title": "Напечатать и испытать кондукторы",
+      "hours": 6,
+      "deps": [
+        "d03"
+      ],
+      "result": "Три полезные детали проверены в работе, модели сохранены.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": "Печатная оснастка"
+    },
+    {
+      "id": "w01",
+      "module": "wood",
+      "title": "Измерить климат дома и заложить пробную партию",
+      "hours": 4,
+      "deps": [
+        "b14"
+      ],
+      "result": "Журнал породы, размеров и влажности; штабель на прокладках.",
+      "items": [
+        "s0-lumber",
+        "s0-meter"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "w02",
+      "module": "wood",
+      "title": "Сравнить фуговку на стороне и собственную подготовку",
+      "hours": 4,
+      "deps": [
+        "f05"
+      ],
+      "result": "Смета на одинаковый объём, выход годного и выбор пути.",
+      "items": [
+        "s1-planer",
+        "w-jointer",
+        "w-collector",
+        "w-filter"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "w03",
+      "module": "wood",
+      "title": "Принять рейсмус, фуговку и систему стружкоудаления",
+      "hours": 6,
+      "deps": [
+        "w02"
+      ],
+      "result": "Настроены ограждения, подача, фильтры и патрубки; есть инструкция.",
+      "items": [],
+      "lag": 14,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "w04",
+      "module": "wood",
+      "title": "Подготовить пробные заготовки из сухой доски",
+      "hours": 6,
+      "deps": [
+        "w03"
+      ],
+      "result": "Опорная пласть и кромка проверены, толщина повторяется.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "w05",
+      "module": "wood",
+      "title": "Настроить ручной фрезер и изготовить шаблон",
+      "hours": 6,
+      "deps": [
+        "w04"
+      ],
+      "result": "Пазы и четверти на пробниках; безопасное крепление.",
+      "items": [
+        "s1-router",
+        "s1-rtable"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "w06",
+      "module": "wood",
+      "title": "Склеить и обработать небольшой щит",
+      "hours": 8,
+      "deps": [
+        "w05"
+      ],
+      "result": "Щит ровный, влажность и припуски записаны; клей выдержан.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": "Мебельный щит"
+    },
+    {
+      "id": "w07",
+      "module": "wood",
+      "title": "Проверить пробную партию воздушной сушки",
+      "hours": 2,
+      "deps": [
+        "w01"
+      ],
+      "result": "Сравнить центр и края партии, дефекты и журнал; срок не означает готовность.",
+      "items": [],
+      "lag": 90,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "w08",
+      "module": "wood",
+      "title": "Выбрать ленточную пилу под реальную заготовку",
+      "hours": 4,
+      "deps": [
+        "w06"
+      ],
+      "result": "Высота реза и место подачи проверены; решение купить или отложить.",
+      "items": [
+        "s1-bandsaw"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "w09",
+      "module": "wood",
+      "title": "Настроить ленточную пилу и испытать роспуск",
+      "hours": 6,
+      "deps": [
+        "w08"
+      ],
+      "result": "Натяжение и направляющие по инструкции, получены повторяемые пробники.",
+      "items": [],
+      "lag": 14,
+      "gate": "",
+      "project": "Подготовка массива"
+    },
+    {
+      "id": "m01",
+      "module": "metal",
+      "title": "Спроектировать отдельный сварочный пост",
+      "hours": 4,
+      "deps": [
+        "b14"
+      ],
+      "result": "Негорючая зона и местная вытяжка; нет общего сбора древесной и металлической пыли.",
+      "items": [
+        "m-extract",
+        "s3-ppe"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "m02",
+      "module": "metal",
+      "title": "Выбрать сварочник и газ, проверить питание",
+      "hours": 4,
+      "deps": [
+        "m01"
+      ],
+      "result": "Уточнены ПВ, ток ввода, газ, доставка баллона и оснастка.",
+      "items": [
+        "s3-welder",
+        "s3-gas"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "m03",
+      "module": "metal",
+      "title": "Принять пост и аппарат, пройти вводное занятие",
+      "hours": 6,
+      "deps": [
+        "m02"
+      ],
+      "result": "Инструктор проверил настройку, зажим массы и рабочую позу.",
+      "items": [],
+      "lag": 10,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "m04",
+      "module": "metal",
+      "title": "Практика сварки на образцах",
+      "hours": 10,
+      "deps": [
+        "m03"
+      ],
+      "result": "Несколько соединений разрезаны/испытаны; исправлены дефекты.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "m05",
+      "module": "metal",
+      "title": "Изготовить сварочный стол и тележку",
+      "hours": 12,
+      "deps": [
+        "m04"
+      ],
+      "result": "Стол проверен на геометрию и устойчивость.",
+      "items": [
+        "s3-table"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": "Сварочный стол"
+    },
+    {
+      "id": "m06",
+      "module": "metal",
+      "title": "Настроить резку, сверление и нарезание резьбы",
+      "hours": 8,
+      "deps": [
+        "m05"
+      ],
+      "result": "Заготовки зажимаются, отверстия и резьбы проходят контроль.",
+      "items": [
+        "s3-drill",
+        "s3-bandsaw",
+        "m-taps"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "m07",
+      "module": "metal",
+      "title": "Изготовить стальное основание стола",
+      "hours": 10,
+      "deps": [
+        "m06"
+      ],
+      "result": "Рама геометрична, сварка и крепление столешницы проверены.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": "Стальная рама"
+    },
+    {
+      "id": "m08",
+      "module": "metal",
+      "title": "Подобрать пресс и оснастку гибки под кронштейн",
+      "hours": 4,
+      "deps": [
+        "m06"
+      ],
+      "result": "Расчёт усилия/паспорт насадки, экран и опоры.",
+      "items": [
+        "s3-press",
+        "s3-brake"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "m09",
+      "module": "metal",
+      "title": "Испытать гибку и изготовить кронштейны",
+      "hours": 6,
+      "deps": [
+        "m08"
+      ],
+      "result": "Пробники измерены, пружинение учтено.",
+      "items": [],
+      "lag": 10,
+      "gate": "",
+      "project": "Кронштейн"
+    },
+    {
+      "id": "m10",
+      "module": "metal",
+      "title": "Согласовать потребителей воздуха и выбрать компрессор",
+      "hours": 4,
+      "deps": [
+        "m07"
+      ],
+      "result": "FAD при рабочем давлении подтверждён; смета фильтров, сушки, шлангов.",
+      "items": [
+        "s3-comp",
+        "m-airprep"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "m11",
+      "module": "metal",
+      "title": "Установить и проверить воздушную линию",
+      "hours": 5,
+      "deps": [
+        "m10"
+      ],
+      "result": "Нет утечек, конденсат удаляется, давление под нагрузкой измерено.",
+      "items": [],
+      "lag": 10,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "l01",
+      "module": "lowrider",
+      "title": "Выбрать поле LowRider и нарисовать стол с проходами",
+      "hours": 5,
+      "deps": [
+        "d04",
+        "f05"
+      ],
+      "result": "Размер листа, габарит стола, доступ и высота заготовки подтверждены.",
+      "items": [
+        "s6-table"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "l02",
+      "module": "lowrider",
+      "title": "Сформировать BOM и заказать комплект",
+      "hours": 6,
+      "deps": [
+        "l01"
+      ],
+      "result": "Спецификация версии сохранена; доставка до дома и совместимость подтверждены.",
+      "items": [
+        "s6-lr",
+        "s6-spindle",
+        "s6-bits",
+        "lr-import"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "l03",
+      "module": "lowrider",
+      "title": "Изготовить стол и место хранения портала",
+      "hours": 14,
+      "deps": [
+        "l02"
+      ],
+      "result": "Стол стабилен; портал можно снять и вернуть без повреждения.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "l04",
+      "module": "lowrider",
+      "title": "Подготовить печатные детали и принять комплект",
+      "hours": 6,
+      "deps": [
+        "l02"
+      ],
+      "result": "Размеры деталей, трубы и комплектность проверены.",
+      "items": [],
+      "lag": 30,
+      "gate": "Ожидание импорта — начальное допущение. Машинное время печати не равно твоим рабочим часам.",
+      "project": ""
+    },
+    {
+      "id": "l05",
+      "module": "lowrider",
+      "title": "Собрать механику LowRider",
+      "hours": 18,
+      "deps": [
+        "l03",
+        "l04"
+      ],
+      "result": "Все оси перемещаются свободно, проводка закреплена.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "l06",
+      "module": "lowrider",
+      "title": "Подключить управление и проверить остановку",
+      "hours": 8,
+      "deps": [
+        "l05"
+      ],
+      "result": "Направления, концевики, остановка и пылеудаление испытаны без резания.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "l07",
+      "module": "lowrider",
+      "title": "Проверить геометрию и выполнить первые резы",
+      "hours": 10,
+      "deps": [
+        "l06"
+      ],
+      "result": "Квадрат, диагонали и повторяемость измерены; профиль CAM сохранён.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "l08",
+      "module": "lowrider",
+      "title": "Раскроить, собрать и проверить шкаф",
+      "hours": 16,
+      "deps": [
+        "l07"
+      ],
+      "result": "Шкаф собран из листа; расход материала и время записаны.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": "Шкаф на LowRider"
+    },
+    {
+      "id": "l09",
+      "module": "lowrider",
+      "title": "Вырезать слоистую мастер-модель",
+      "hours": 8,
+      "deps": [
+        "l08"
+      ],
+      "result": "Совпадение слоёв и поверхность проверены.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": "Крупная мастер-модель"
+    },
+    {
+      "id": "h01",
+      "module": "house",
+      "title": "Обследовать дом и выбрать один ремонт",
+      "hours": 4,
+      "deps": [
+        "b14"
+      ],
+      "result": "Приоритет по протечкам и повреждениям, материалам и доступу; список нужного инструмента.",
+      "items": [
+        "s0-omni",
+        "s0-sds",
+        "s0-level"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "h02",
+      "module": "house",
+      "title": "Выполнить выбранный небольшой ремонт",
+      "hours": 8,
+      "deps": [
+        "h01"
+      ],
+      "result": "Фотографии до/после, фактическая стоимость и приёмка.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "h03",
+      "module": "house",
+      "title": "Спроектировать пробный оконный узел",
+      "hours": 6,
+      "deps": [
+        "w06"
+      ],
+      "result": "Профиль, уплотнение, отвод воды, фурнитура и заказной стеклопакет.",
+      "items": [
+        "h-window"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "h04",
+      "module": "house",
+      "title": "Изготовить и испытать пробную раму",
+      "hours": 16,
+      "deps": [
+        "h03"
+      ],
+      "result": "Геометрия, открывание, уплотнения и вода проверены на образце.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": "Пробная оконная рама"
+    },
+    {
+      "id": "h05",
+      "module": "house",
+      "title": "Спроектировать учебную стеновую панель",
+      "hours": 8,
+      "deps": [
+        "h04"
+      ],
+      "result": "Слои, узлы влагообмена и оконный проём проверены со специалистом.",
+      "items": [
+        "h-panel"
+      ],
+      "lag": 0,
+      "gate": "Это учебный образец. Несущие конструкции требуют отдельного местного проекта.",
+      "project": ""
+    },
+    {
+      "id": "h06",
+      "module": "house",
+      "title": "Собрать панель 1,2×2,4 м и описать монтаж",
+      "hours": 16,
+      "deps": [
+        "h05"
+      ],
+      "result": "Замер геометрии, узлы и трудозатраты; список улучшений.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": "Учебная панель"
+    },
+    {
+      "id": "e01",
+      "module": "electronics",
+      "title": "Подготовить низковольтное рабочее место",
+      "hours": 4,
+      "deps": [
+        "b14"
+      ],
+      "result": "Проверены инструменты, блок питания с ограничением тока.",
+      "items": [
+        "s2-bench",
+        "s2-kit"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "e02",
+      "module": "electronics",
+      "title": "Собрать датчики температуры и влажности",
+      "hours": 6,
+      "deps": [
+        "e01"
+      ],
+      "result": "Датчики сравнены рядом, сохранены показания и расположение.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "e03",
+      "module": "electronics",
+      "title": "Настроить мониторинг и резервное копирование",
+      "hours": 6,
+      "deps": [
+        "e02"
+      ],
+      "result": "Графики за неделю, оповещение при потере датчика, копия конфигурации.",
+      "items": [
+        "s2-ha"
+      ],
+      "lag": 7,
+      "gate": "",
+      "project": "Мониторинг дома"
+    },
+    {
+      "id": "c01",
+      "module": "composites",
+      "title": "Выбрать смолу и подготовить отдельное место",
+      "hours": 5,
+      "deps": [
+        "d04"
+      ],
+      "result": "Прочитаны SDS, организованы хранение и вытяжка; материалы совместимы.",
+      "items": [
+        "s4-kit",
+        "s4-booth"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "c02",
+      "module": "composites",
+      "title": "Сделать малую мастер-модель и силиконовую форму",
+      "hours": 8,
+      "deps": [
+        "c01"
+      ],
+      "result": "Форма отверждена, совместимость разделителя проверена.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "c03",
+      "module": "composites",
+      "title": "Выполнить пробные отливки",
+      "hours": 6,
+      "deps": [
+        "c02"
+      ],
+      "result": "Записаны пропорции, температура, дефекты и способ их устранения.",
+      "items": [],
+      "lag": 2,
+      "gate": "",
+      "project": "Форма и отливки"
+    },
+    {
+      "id": "c04",
+      "module": "composites",
+      "title": "Собрать вакуумную систему с ловушкой",
+      "hours": 6,
+      "deps": [
+        "c03"
+      ],
+      "result": "Испытание утечек и совместимости насоса с режимом.",
+      "items": [
+        "s4-vac",
+        "c-bag"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "c05",
+      "module": "composites",
+      "title": "Сделать плоский образец в вакуумном мешке",
+      "hours": 8,
+      "deps": [
+        "c04"
+      ],
+      "result": "Проверены масса, толщина, дефекты и отверждение.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": "Вакуумная выклейка"
+    },
+    {
+      "id": "c06",
+      "module": "composites",
+      "title": "Отработать отделку на пробной панели",
+      "hours": 8,
+      "deps": [
+        "c05"
+      ],
+      "result": "Совместимость покрытия, вытяжка и качество проверены на образце.",
+      "items": [
+        "s4-hvlp"
+      ],
+      "lag": 3,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "a01",
+      "module": "auto",
+      "title": "Подготовить руководство, подъём и инструмент",
+      "hours": 4,
+      "deps": [
+        "m07"
+      ],
+      "result": "Модель машины, точки подъёма и моменты затяжки подтверждены.",
+      "items": [
+        "s5-jack",
+        "s5-torque",
+        "auto-consumables"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "a02",
+      "module": "auto",
+      "title": "Провести диагностику и выбрать один ремонт",
+      "hours": 4,
+      "deps": [
+        "a01"
+      ],
+      "result": "Записаны коды, измерения и порядок проверки; детали определены.",
+      "items": [
+        "s2-obd"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "a03",
+      "module": "auto",
+      "title": "Выполнить обслуживание по руководству",
+      "hours": 8,
+      "deps": [
+        "a02"
+      ],
+      "result": "Контроль герметичности/крепежа и проверка результата.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": "Первое обслуживание"
+    },
+    {
+      "id": "a04",
+      "module": "auto",
+      "title": "Отработать кузовную заплатку на образце",
+      "hours": 10,
+      "deps": [
+        "a03",
+        "m04"
+      ],
+      "result": "Настройки и деформация проверены до ремонта кузова.",
+      "items": [
+        "s5-body"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": "Кузовной пробник"
+    },
+    {
+      "id": "s01",
+      "module": "stone",
+      "title": "Подготовить мокрое место и заказать пробники",
+      "hours": 4,
+      "deps": [
+        "b14"
+      ],
+      "result": "Подача воды, защита питания, сбор шлама; кварцевый агломерат исключён.",
+      "items": [
+        "s-wetbench",
+        "s7-polisher",
+        "s7-tilesaw"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "s02",
+      "module": "stone",
+      "title": "Отработать резку и полировку обрезка",
+      "hours": 6,
+      "deps": [
+        "s01"
+      ],
+      "result": "Режимы и кромки проверены; высохший шлам не остаётся в помещении.",
+      "items": [
+        "s7-diamond"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "s03",
+      "module": "stone",
+      "title": "Сделать небольшой подоконник",
+      "hours": 8,
+      "deps": [
+        "s02"
+      ],
+      "result": "Размеры, кромки и крепление проверены.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": "Каменный подоконник"
+    },
+    {
+      "id": "s04",
+      "module": "stone",
+      "title": "Сделать пробники GFRC и форму",
+      "hours": 6,
+      "deps": [
+        "s03"
+      ],
+      "result": "AR-фибра и состав по инструкции, записаны дозировки и условия.",
+      "items": [
+        "s7-gfrc"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "s05",
+      "module": "stone",
+      "title": "Проверить выдержанные образцы и сделать кашпо",
+      "hours": 6,
+      "deps": [
+        "s04"
+      ],
+      "result": "Дефекты и герметизация проверены. Срок выдержки уточняется по составу.",
+      "items": [],
+      "lag": 28,
+      "gate": "",
+      "project": "Изделие GFRC"
+    },
+    {
+      "id": "t01",
+      "module": "lathe",
+      "title": "Выбрать токарный по трём реальным деталям",
+      "hours": 5,
+      "deps": [
+        "m06"
+      ],
+      "result": "Диаметры, длина, резьбы, проход шпинделя и оснастка определены.",
+      "items": [
+        "s9-lathe",
+        "s9-tooling"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "t02",
+      "module": "lathe",
+      "title": "Установить и проверить станок",
+      "hours": 8,
+      "deps": [
+        "t01"
+      ],
+      "result": "Крепление, биение, управление и ограждения проверены.",
+      "items": [],
+      "lag": 21,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "t03",
+      "module": "lathe",
+      "title": "Освоить точение и расточку на пробниках",
+      "hours": 12,
+      "deps": [
+        "t02"
+      ],
+      "result": "Размеры измерены, режимы и приёмы записаны.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "t04",
+      "module": "lathe",
+      "title": "Изготовить втулку и пробную резьбу",
+      "hours": 10,
+      "deps": [
+        "t03"
+      ],
+      "result": "Размер и посадка проверены; деталь не для ответственного узла без проверки.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": "Втулка и резьба"
+    },
+    {
+      "id": "p01",
+      "module": "printnc",
+      "title": "Выбрать размеры PrintNC и проверить текущую CAD-модель",
+      "hours": 8,
+      "deps": [
+        "l08",
+        "m06"
+      ],
+      "result": "Три детали, поле, Z, жёсткость, доступ и полная BOM.",
+      "items": [
+        "s8-pnc",
+        "s8-tooling",
+        "pnc-import"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "p02",
+      "module": "printnc",
+      "title": "Заказать комплект и подготовить раму",
+      "hours": 16,
+      "deps": [
+        "p01"
+      ],
+      "result": "Сталь, отверстия и крепёж подготовлены; доставка подтверждена.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "p03",
+      "module": "printnc",
+      "title": "Принять комплект и собрать механику",
+      "hours": 28,
+      "deps": [
+        "p02"
+      ],
+      "result": "Рельсы выставлены, люфты и ход проверены.",
+      "items": [],
+      "lag": 35,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "p04",
+      "module": "printnc",
+      "title": "Собрать электрику, кожух и управление",
+      "hours": 18,
+      "deps": [
+        "p03"
+      ],
+      "result": "Сеть проверена специалистом; остановка, концевики и защита работают.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "p05",
+      "module": "printnc",
+      "title": "Выполнить калибровку и пробные резы",
+      "hours": 18,
+      "deps": [
+        "p04"
+      ],
+      "result": "Отдельно измерены геометрия, повторяемость и готовая деталь.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "p06",
+      "module": "printnc",
+      "title": "Изготовить алюминиевую деталь с карманами и отверстиями",
+      "hours": 16,
+      "deps": [
+        "p05"
+      ],
+      "result": "Чертёж с допусками и протокол фактических измерений.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": "Деталь на PrintNC"
+    },
+    {
+      "id": "k01",
+      "module": "kiln",
+      "title": "Посчитать экономику пробной сушки",
+      "hours": 5,
+      "deps": [
+        "w07",
+        "e03"
+      ],
+      "result": "Сравнить сухую/сырую доску, выход годного, энергию и хранение.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "k02",
+      "module": "kiln",
+      "title": "Спроектировать малую камеру и независимую защиту",
+      "hours": 10,
+      "deps": [
+        "k01"
+      ],
+      "result": "Режим по породе; осушитель, циркуляция и аппаратное отключение согласованы.",
+      "items": [
+        "s1-kiln"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "k03",
+      "module": "kiln",
+      "title": "Собрать камеру и испытать без древесины",
+      "hours": 20,
+      "deps": [
+        "k02"
+      ],
+      "result": "Датчики и аварийное отключение проверены; отсутствует перегрев.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "k04",
+      "module": "kiln",
+      "title": "Загрузить малую партию и начать журнал",
+      "hours": 4,
+      "deps": [
+        "k03"
+      ],
+      "result": "Контрольные образцы, влажность и масса записаны.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "k05",
+      "module": "kiln",
+      "title": "Проверить партию и оценить дефекты",
+      "hours": 4,
+      "deps": [
+        "k04"
+      ],
+      "result": "Влажность по условиям будущей эксплуатации; 21 день — окно проверки, не обещание готовности.",
+      "items": [],
+      "lag": 21,
+      "gate": "",
+      "project": "Пробная камерная сушка"
+    },
+    {
+      "id": "z01",
+      "module": "plasma",
+      "title": "Сравнить внешнюю резку и свою плазму",
+      "hours": 5,
+      "deps": [
+        "m09",
+        "e03"
+      ],
+      "result": "Объём деталей и полная стоимость рабочего места, воздуха и расходников.",
+      "items": [
+        "s3-plasma"
+      ],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "z02",
+      "module": "plasma",
+      "title": "Согласовать аппарат, THC и отдельный стол",
+      "hours": 10,
+      "deps": [
+        "z01"
+      ],
+      "result": "Выбранная плата, развязка, сигналы, вентиляция и паспорт аппарата.",
+      "items": [
+        "s10-gantry",
+        "s10-thc"
+      ],
+      "lag": 0,
+      "gate": "Водяная ванна не универсальна для алюминия: возможен водород. Этот проект рассчитан на сталь.",
+      "project": ""
+    },
+    {
+      "id": "z03",
+      "module": "plasma",
+      "title": "Изготовить стол и собрать портал",
+      "hours": 24,
+      "deps": [
+        "z02"
+      ],
+      "result": "Геометрия и перемещения проверены, горючие материалы отделены.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "z04",
+      "module": "plasma",
+      "title": "Принять электронику, настроить управление и THC",
+      "hours": 18,
+      "deps": [
+        "z03"
+      ],
+      "result": "Подъём, поиск листа, Arc OK и остановка проверены.",
+      "items": [],
+      "lag": 21,
+      "gate": "",
+      "project": ""
+    },
+    {
+      "id": "z05",
+      "module": "plasma",
+      "title": "Отработать рез на пробниках и изготовить кронштейны",
+      "hours": 12,
+      "deps": [
+        "z04"
+      ],
+      "result": "Карта режимов и качество кромки записаны.",
+      "items": [],
+      "lag": 0,
+      "gate": "",
+      "project": "Раскрой стали по DXF"
+    }
+  ],
+  "fx": {
+    "rate": 1535,
+    "date": "2026-10-09",
+    "label": "BNA, dólar billete, venta · 17:00",
+    "url": "https://www.bna.com.ar/Personas"
+  },
+  "defaultModules": [
+    "base",
+    "furniture",
+    "digital",
+    "wood",
+    "metal",
+    "lowrider",
+    "house",
+    "electronics",
+    "composites",
+    "auto",
+    "stone",
+    "lathe",
+    "printnc",
+    "kiln",
+    "plasma"
+  ]
+}

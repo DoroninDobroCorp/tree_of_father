@@ -21,6 +21,7 @@ import time
 import urllib.error
 import urllib.request
 import webbrowser
+from workshop_store import Store as HoursStore, Conflict as HoursConflict
 from datetime import datetime, timezone
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -35,6 +36,8 @@ PUBLIC_FILES = {
     "/": "index.html",
     "/index.html": "index.html",
     "/robots.txt": "robots.txt",
+    "/workshop/": "workshop.html",
+    "/workshop": "workshop.html",
 }
 LOCAL_HOSTS = {"127.0.0.1", "localhost", "[::1]"}
 
@@ -209,6 +212,7 @@ class WorkshopServer:
         self.rate_limiter = RateLimiter(config.max_requests_per_hour)
         self.session_token = secrets.token_urlsafe(32)
         self.save_lock = threading.Lock()
+        self.hours_store = HoursStore(config.data_dir, json.loads((BASE_DIR / "workshop-data.json").read_text(encoding="utf-8")), self.save_lock, config.max_backups)
         self.schema = self._load_schema()
         self.suggest_schemas = {
             mode: json.loads((BASE_DIR / "src" / file).read_text(encoding="utf-8"))
@@ -550,6 +554,10 @@ class WorkshopRequestHandler(BaseHTTPRequestHandler):
             self._handle_get_backups()
             return
 
+        if path == "/api/workshop":
+            self._handle_hours(False)
+            return
+
         # Static file serving
         self._serve_static(path)
 
@@ -557,6 +565,9 @@ class WorkshopRequestHandler(BaseHTTPRequestHandler):
         """Route POST requests."""
         path = self.path.split("?", 1)[0]
 
+        if path == "/api/workshop":
+            self._handle_hours(True)
+            return
         if path == "/api/propose":
             self._handle_propose()
             return
@@ -574,6 +585,33 @@ class WorkshopRequestHandler(BaseHTTPRequestHandler):
             return
 
         self._send_json(HTTPStatus.NOT_FOUND, {"error": "Эндпоинт не найден"})
+
+    def _handle_hours(self, write):
+        if not self._has_access():
+            self._send_json(403, {"error": "Нет доступа к этому серверу"})
+            return
+        origin = self.headers.get("Origin")
+        if write and origin and origin not in ("http://" + self.headers.get("Host", ""), "https://" + self.headers.get("Host", "")):
+            self._send_json(403, {"error": "Запрос с другого сайта запрещён"})
+            return
+        try:
+            if write:
+                length = int(self.headers.get("Content-Length", "0"))
+                if not 0 < length <= 10_000_000:
+                    self._send_json(413, {"error": "Недопустимый размер плана"})
+                    return
+                payload = json.loads(self.rfile.read(length))
+                result = self.server_app.hours_store.write(payload)
+                result = {"ok": True, "revision": result["revision"], "savedAt": result["savedAt"]}
+            else:
+                result = self.server_app.hours_store.read()
+            self._send_json(200, result, {"Cache-Control": "no-store"})
+        except HoursConflict as exc:
+            self._send_json(409, {"error": str(exc)})
+        except (ValueError, TypeError, KeyError, AttributeError) as exc:
+            self._send_json(400, {"error": "План не принят: " + str(exc)})
+        except OSError:
+            self._send_json(500, {"error": "Не удалось сохранить файл на сервере"})
 
     def _handle_get_save(self) -> None:
         """Get the current server save."""

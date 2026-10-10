@@ -129,7 +129,7 @@ def build():
         "<!-- HISTORY -->": inline_json(history),
         "<!-- AI_RULES -->": rules,
         "<!-- CORE -->": (SRC / "core.js").read_text(encoding="utf-8").strip(),
-        "<!-- APP -->": (SRC / "app.js").read_text(encoding="utf-8").strip(),
+        "<!-- APP -->": (SRC / "app.js").read_text(encoding="utf-8").strip().replace("__WORKSHOP_LINKS__", inline_json(json.loads((SRC / "workshop-links.json").read_text(encoding="utf-8")))),
     }
     for marker, content in parts.items():
         if html.count(marker) != 1:

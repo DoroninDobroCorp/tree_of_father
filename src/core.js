@@ -119,6 +119,8 @@ function hash(str){let h=0x811c9dc5;for(let i=0;i<str.length;i++){h^=str.charCod
 function itemHash(item){const o={};for(const k of Object.keys(item).sort())if(k!=='archived'&&!(k==='criteria'&&!item[k].length))o[k]=item[k];return hash(JSON.stringify(o))}
 function catalogHashes(seed){const out={};for(const k of CATALOG)for(const x of seed[k])out[k+':'+x.id]=itemHash(x);return out}
 function mergeCatalog(state,seed,history){
+ // Catalog 7 is an additive route expansion: the live catalog is the source of truth.
+ const preserveExisting=state.catalogVersion===6&&seed.catalogVersion===7;
  const s=clone(state),report={added:0,updated:0,kept:0};
  for(const k of CATALOG){
   const mine=new Map(s[k].map(x=>[x.id,x])),shipped=new Set(seed[k].map(x=>x.id));const next=[];
@@ -126,7 +128,7 @@ function mergeCatalog(state,seed,history){
    const cur=mine.get(fresh.id);
    if(!cur){next.push(clone(fresh));report.added++;continue}
    const known=(history[k+':'+fresh.id]||[]).includes(itemHash(cur));
-   if(known&&itemHash(cur)!==itemHash(fresh)){const upd=clone(fresh);if('archived'in cur)upd.archived=cur.archived;if(k==='skills'&&s.mastery[upd.id]&&JSON.stringify(cur.criteria)!==JSON.stringify(upd.criteria))s.mastery[upd.id].checks=[];next.push(upd);report.updated++}
+   if(!preserveExisting&&known&&itemHash(cur)!==itemHash(fresh)){const upd=clone(fresh);if('archived'in cur)upd.archived=cur.archived;if(k==='skills'&&s.mastery[upd.id]&&JSON.stringify(cur.criteria)!==JSON.stringify(upd.criteria))s.mastery[upd.id].checks=[];next.push(upd);report.updated++}
    else{if(k==='skills'&&!(cur.criteria||[]).length)cur.criteria=clone(fresh.criteria);if(!known&&itemHash(cur)!==itemHash(fresh))report.kept++;next.push(cur)}
   }
   for(const x of s[k])if(!shipped.has(x.id))next.push(x);

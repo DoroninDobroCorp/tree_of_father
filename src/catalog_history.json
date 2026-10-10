@@ -401,9 +401,152 @@
 "projects:q-workplace": [
 "1bcn3o6"
 ],
+"projects:route-auto": [
+"qv837m",
+"17o1sv1"
+],
+"projects:route-base": [
+"153twtd"
+],
+"projects:route-bicycle": [
+"1ib5yyc"
+],
+"projects:route-boats": [
+"1e1fm0c"
+],
+"projects:route-ceramics": [
+"sib37k"
+],
+"projects:route-cleaning": [
+"7ihq47"
+],
+"projects:route-composites": [
+"hqpr3t"
+],
+"projects:route-digital": [
+"1ksn4f7"
+],
+"projects:route-electronics": [
+"1ut6svw"
+],
+"projects:route-energy": [
+"168ylci"
+],
+"projects:route-finishing": [
+"1juejnq"
+],
+"projects:route-furniture": [
+"1s3qshh"
+],
+"projects:route-garden": [
+"6g7dgw"
+],
+"projects:route-glass": [
+"1fcwl28"
+],
+"projects:route-heavy-equipment": [
+"1cn8ysj"
+],
+"projects:route-hot-metal": [
+"1mzinm9"
+],
+"projects:route-house": [
+"y3uwur"
+],
+"projects:route-house-systems": [
+"1chr5k6"
+],
+"projects:route-hvac": [
+"ohr7x6"
+],
+"projects:route-joinery": [
+"1sp906c"
+],
+"projects:route-kiln": [
+"177r7sr"
+],
+"projects:route-landworks": [
+"1ovjlg8",
+"bqfwmn"
+],
+"projects:route-laser": [
+"16ir845"
+],
+"projects:route-lathe": [
+"1yy3g2r"
+],
+"projects:route-leather": [
+"18h7tu6"
+],
+"projects:route-lighting": [
+"g41w70"
+],
+"projects:route-lowrider": [
+"b2dujp"
+],
+"projects:route-maintenance": [
+"jb8k8q"
+],
+"projects:route-mechanisms": [
+"8z9swz"
+],
+"projects:route-metal": [
+"1ojqw7q"
+],
+"projects:route-pcb": [
+"s9709"
+],
+"projects:route-plasma": [
+"1jarinw"
+],
+"projects:route-plumbing": [
+"e7bvj8"
+],
+"projects:route-printnc": [
+"59hpj7"
+],
+"projects:route-rc": [
+"1rd1e6m"
+],
+"projects:route-resin-scan": [
+"h5butn"
+],
+"projects:route-restoration": [
+"cavcsk"
+],
+"projects:route-robotics": [
+"56aeuw"
+],
+"projects:route-sewing": [
+"1ekyauz"
+],
+"projects:route-small-engines": [
+"1wfwnhl"
+],
+"projects:route-stone": [
+"1mpdcrg"
+],
+"projects:route-thermoplastics": [
+"1yqdfms"
+],
+"projects:route-tig": [
+"z6w1ur"
+],
+"projects:route-upholstery": [
+"ap0nvv"
+],
+"projects:route-water": [
+"bin5jv"
+],
+"projects:route-wood": [
+"1rxl8ws"
+],
 "skills:base.anchors": [
 "10vvy5o",
 "1yk1aj8"
+],
+"skills:base.bench_accept": [
+"z2g94j"
 ],
 "skills:base.bolts": [
 "1fk9yli",
@@ -455,6 +598,9 @@
 ],
 "skills:base.level": [
 "wuk0n2"
+],
+"skills:base.machine_commission": [
+"yy9we"
 ],
 "skills:base.measure": [
 "deil9y",
@@ -599,6 +745,9 @@
 "skills:building.wet_zone": [
 "8y4htn"
 ],
+"skills:building.window_fit": [
+"tonkdt"
+],
 "skills:composite.advanced": [
 "fjbiv6",
 "16pl3qd"
@@ -649,6 +798,9 @@
 "oc33o4",
 "66nhqi"
 ],
+"skills:composite.mould_accept": [
+"1ry4pzs"
+],
 "skills:composite.plastic": [
 "1kzdzbx",
 "h053qn"
@@ -697,6 +849,9 @@
 "1u93bvk",
 "19ahed8"
 ],
+"skills:composite.vacuum_log": [
+"1n91swp"
+],
 "skills:composite.waste": [
 "64m1y0"
 ],
@@ -717,6 +872,12 @@
 "skills:digital.cam": [
 "1m2ggwc",
 "ih0fdn"
+],
+"skills:digital.cnc_firstpart": [
+"1osd2th"
+],
+"skills:digital.cnc_workholding": [
+"1f0tfgc"
 ],
 "skills:digital.cutlist": [
 "79xs7j"
@@ -747,6 +908,9 @@
 ],
 "skills:digital.load_basic": [
 "hgosxy"
+],
+"skills:digital.machine_geometry": [
+"1vug7z4"
 ],
 "skills:digital.ordering": [
 "1kkvpll"
@@ -984,6 +1148,9 @@
 ],
 "skills:electronics.steppers": [
 "f2jwdi"
+],
+"skills:electronics.workshop_sensor": [
+"1l5tlx8"
 ],
 "skills:finish.aerosol": [
 "1lhsi3e"
@@ -1313,6 +1480,9 @@
 "bpiiyb",
 "1nvzjyr"
 ],
+"skills:metal.lathe_accept": [
+"1vhkrbc"
+],
 "skills:metal.layout": [
 "1g8s2l"
 ],
@@ -1330,6 +1500,9 @@
 ],
 "skills:metal.plasma": [
 "x444sr"
+],
+"skills:metal.plasma_cnc": [
+"1uufyb0"
 ],
 "skills:metal.rivet": [
 "1yiapnq"
@@ -1359,6 +1532,9 @@
 "skills:metal.weld_basics": [
 "cc9m6x"
 ],
+"skills:metal.welded_frame": [
+"1xxn7vn"
+],
 "skills:metal.wire": [
 "18bhw1i"
 ],
@@ -1378,6 +1554,9 @@
 "skills:mineral.form": [
 "1861nqr",
 "8v7e6w"
+],
+"skills:mineral.gfrc_sample": [
+"6h4ovo"
 ],
 "skills:mineral.glass": [
 "10z488i",
@@ -1585,6 +1764,9 @@
 "1whdheb",
 "1tsojzf"
 ],
+"skills:transport.nonstructural_part": [
+"i1smee"
+],
 "skills:transport.obd": [
 "kd8a9m",
 "ccerk8"
@@ -1644,6 +1826,9 @@
 "skills:wood.drying": [
 "164is06",
 "ug8ao2"
+],
+"skills:wood.drying_control": [
+"12ntg9m"
 ],
 "skills:wood.edge_joint": [
 "dr9wqu"

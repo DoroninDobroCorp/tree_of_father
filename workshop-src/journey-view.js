@@ -1,0 +1,56 @@
+let journeyFamily='',journeyQuery='';
+const families={original:'Первоначальный путь',textile:'Текстиль и кожа',mechanics:'Вода и механизмы',electrical:'Электричество и энергия',electronics:'Электроника и автоматика',land:'Сад и участок',building:'Дом',mineral:'Стекло и керамика',transport:'Транспорт',composite:'Пластики',metal:'Металл',digital:'Цифровая мастерская',finish:'Уход и восстановление',wood:'Столярное дело',base:'Мастерская'};
+function journeyIcon(type){
+ const paths={
+  bench:'<path d="M10 21h44v7H10zM16 28v24m32-24v24M16 41h32M24 21v-6h15v6M35 28v9M7 52h13m25 0h10"/>',
+  chair:'<path d="M19 11h27v23H19zM19 22h27M15 34h35v7H15zM19 41v12m27-12v12M23 11V7m19 4V7"/>',
+  printer:'<path d="M12 9h40v45H12zM17 14h30v34H17zM17 24h30M32 24v7m-4 0h8l-4 6zM24 48v-7h16v7M17 54v3m30-3v3"/>',
+  wood:'<path d="M10 15h44v9H10zM10 30h44v9H10zM10 45h44v9H10zM15 19h23m8 0h3M18 34h30m-33 15h23m8 0h3"/>',
+  metal:'<path d="M12 30h34v6H12zM17 36v18m24-18v18M17 47h24M39 10l11 10-7 7-11-10zM34 26l-6 9m-1-11-4-4m16 13 5 5m-20 4-3 5M47 22l9 8"/>',
+  cnc:'<path d="M8 38h48v9H8zM14 47v8m36-8v8M13 38V17h38v21M13 22h38M27 22v11h10V22m-5 11v6M18 43h18m9 0h6"/>',
+  house:'<path d="M9 29 32 9l23 20M15 25v30h34V25M23 27h18v20H23zM32 27v20M23 36h18M21 55v-4h22v4"/>',
+  electronics:'<path d="M15 15h34v34H15zM25 25h14v14H25zM24 8v7m8-7v7m8-7v7M24 49v7m8-7v7m8-7v7M8 24h7m-7 8h7m-7 8h7M49 24h7m-7 8h7m-7 8h7M18 43h7m18-25v6"/>',
+  mould:'<path d="M10 39h44l-6 15H16zM15 39l5-13h24l5 13M24 26V14h16v12M28 14v-4h8v4M24 46h16m-12-7v7m8-7v7"/>',
+  car:'<path d="M8 39v-8l8-4 7-12h19l9 12 5 5v7H8zM17 27h31M29 15v12M16 39a6 6 0 1 0 12 0m12 0a6 6 0 1 0 12 0M8 33h8m34 0h6"/>',
+  stone:'<path d="M12 12h40v11H12zM17 23h30l-2 32H19zM12 18h40M21 30h21m-20 8h19m-18 8h17M22 55h20"/>',
+  lathe:'<path d="M8 43h48v8H8zM13 22h13v21H13zM17 27h9v10h-9M26 29h19v7H26zM49 22v21m-4-11h4M14 51v5m36-5v5M32 43v-5h7v5"/>',
+  kiln:'<path d="M12 9h40v46H12zM17 14h25v36H17zM46 25v12M22 22h15m-15 8h15m-15 8h15M23 46c-3-2 3-4 0-6m7 6c-3-2 3-4 0-6m7 6c-3-2 3-4 0-6"/>',
+  plasma:'<path d="M8 39h48v11H8zM16 50v6m32-6v6M13 39V16h38v23M13 21h38M29 21v9h6v-9m-3 9v6m-6-2-4 3m16-3 4 3M14 44h4m5 0h4m5 0h4m5 0h4m5 0h4"/>'
+ };
+ return `<svg viewBox="0 0 64 64" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${paths[type]||paths.bench}</svg>`;
+}
+function renderJourney(){
+ const m=C.metrics(D,state),original=Object.fromEntries(D.tasks.map(t=>[t.id,t]));
+ const allStages=D.modules.map(module=>{const ss=m.rs.filter(s=>s.module===module.id);return {...module,ss,hours:C.round(ss.reduce((a,s)=>a+s.hours,0)),story:D.journey[module.id]||{intro:module.description,opens:module.capability,projects:[],icon:'cnc'}};}).filter(s=>s.ss.length);
+ const stages=allStages.filter(s=>(!journeyFamily||(s.family||'original')===journeyFamily)&&(!journeyQuery||(s.title+' '+s.story.intro+' '+s.ss.map(t=>t.title).join(' ')).toLowerCase().includes(journeyQuery.toLowerCase())));
+ const largest=Math.max(1,...stages.map(s=>s.hours));
+ const owned=D.catalog.filter(i=>i.kind==='have').map(i=>i.title);
+ const stageMarkup=stage=>{
+  const active=new Map(stage.ss.map(s=>[s.id,s]));
+  let projects=stage.story.projects.filter(p=>active.has(p.id)).map(p=>({title:original[p.id]?.title===active.get(p.id).title?p.label:active.get(p.id).title}));
+  const custom=stage.ss.filter(s=>!original[s.id]);projects.push(...custom.map(s=>({title:s.title})));
+  if(!projects.length)projects=stage.ss.slice(-3).map(s=>({title:s.title}));
+  const assigned=[...new Set(stage.ss.flatMap(s=>s.items))].map(id=>items[id]).filter(i=>i&&!state.items[i.id]?.exclude);
+  const prerequisites=stage.requires.map(id=>mods[id]).filter(mod=>allStages.some(s=>s.id===mod.id));
+  return `<article class="journey-stage" id="journey-${stage.id}" data-journey-module="${stage.id}" data-hours="${stage.hours}">
+   <header class="journey-stage-head"><div class="journey-number">${h(stage.number)}</div><div class="journey-stage-title"><div class="journey-kicker">${h(stage.capability)}</div><h3 tabindex="-1">${h(stage.title)}</h3></div><div class="journey-hours"><strong>${n(stage.hours)} <span>ч</span></strong><span>оценка твоего труда</span></div><div class="journey-icon">${journeyIcon(stage.story.icon)}</div></header>
+   <div class="journey-stage-body"><p class="journey-story">${h(stage.story.intro)}</p><div class="journey-columns"><div><h4>Что появится</h4><ul class="journey-projects">${projects.map(p=>`<li>${h(p.title)}</li>`).join('')}</ul></div><div><h4>Новые возможности</h4><p>${h(stage.story.opens)}</p></div><div><h4>Оснащение и материалы</h4>${stage.story.kit?`<p>${h(stage.story.kit)}</p><p class="note">Цены, недостающее оснащение и общие инструменты — в покупках этапа.</p>`:assigned.length?`<ul class="journey-kit">${assigned.slice(0,5).map(i=>`<li>${h(i.title)}</li>`).join('')}</ul>${assigned.length>5?`<details class="journey-more-kit"><summary>Ещё ${counted(assigned.length-5,['позиция','позиции','позиций'])}</summary><ul class="journey-kit">${assigned.slice(5).map(i=>`<li>${h(i.title)}</li>`).join('')}</ul></details>`:''}`:'<p class="note">Оснащение можно назначить в разделе покупок. Полную смету можно задать у каждого шага.</p>'}</div></div>
+   ${prerequisites.length?`<p class="journey-prerequisites">Пригодится опыт этапов: ${prerequisites.map(mod=>`<a href="#journey-${mod.id}" data-journey-jump="${mod.id}">${h(mod.title)}</a>`).join(' · ')}.</p>`:''}
+   <details class="journey-work"><summary><span>Как складывается оценка: ${n(stage.hours)} ч</span><span>${counted(stage.ss.length,['шаг','шага','шагов'])}</span></summary><ol>${stage.ss.map(s=>`<li data-journey-step="${s.id}"><div><strong>${h(s.title)}</strong><p>${h(s.result)}</p></div><span class="journey-step-hours">${n(s.hours)} ч</span></li>`).join('')}</ol></details>
+   <div class="journey-stage-footer"><span class="note">${h(stage.mode||'Своя мастерская')} · результат проверяется на практике. ${stage.id!=='later'?`<a href="${h(D.treeURL)}#project=route-${stage.id}">Навыки и проект в дереве ↗</a>`:''}</span><button class="small" data-stage-steps="${stage.id}">Открыть шаги этапа →</button></div></div></article>`;
+ };
+ $('#panel-journey').innerHTML=`<div class="journey-intro"><p class="eyebrow">Весь путь · от инструмента к возможностям</p><h2>Вещи для своего дома.<br>Станки, собранные своими руками.</h2><p>Сначала удобный верстак и первые точные пропилы. Затем мебель, стальные рамы, мастер-модели, детали для машины и старого дома. Теперь путь продолжается через ткань и кожу, сад, воду, энергию, транспорт и десятки новых опытов. Каждый законченный проект оставляет после себя вещь и новый навык.</p></div>
+ ${warning?`<div class="notice warn">${h(warning)}</div>`:''}
+ <div class="journey-facts"><div><strong>${allStages.length}</strong><span>${word(allStages.length,['этап','этапа','этапов'])} в твоём плане</span></div><div><strong>${n(m.hours)} <small>ч</small></strong><span>сумма оценок работы</span></div><div><strong>${m.rs.length}</strong><span>${word(m.rs.length,['конкретный шаг','конкретных шага','конкретных шагов'])}</span></div><div class="journey-facts-note"><span>Приоритет — широта возможностей.<br>Мастерская растёт постепенно, под твои проекты.</span></div></div>
+
+ <form id="journey-filter" class="toolbar"><label class="field">Область<select id="journey-family"><option value="">Все направления</option>${Object.entries(families).map(([id,title])=>`<option value="${id}" ${journeyFamily===id?'selected':''}>${h(title)}</option>`).join('')}</select></label><label class="field">Найти интересное<input id="journey-query" type="search" value="${h(journeyQuery)}" placeholder="Сумка, лодка, PrintNC…"></label><button>Найти</button><span class="note">Показано ${stages.length} из ${allStages.length}</span></form>
+ <div class="journey-map" id="journey-map"><div class="row spread"><div><h3>Карта этапов</h3><p class="note">Длина полосы показывает трудоёмкость. Нажми на этап, чтобы рассмотреть его.</p></div><button class="small" data-go="overview">Мой прогресс →</button></div><div class="journey-map-grid">${stages.map(s=>`<a class="journey-map-row" href="#journey-${s.id}" data-journey-jump="${s.id}"><span class="journey-map-number">${h(s.number)}</span><span class="journey-map-name">${h(s.title)}<span class="journey-map-bar"><span style="width:${100*s.hours/largest}%"></span></span></span><strong>${n(s.hours)} ч</strong></a>`).join('')||'<p class="empty">В плане пока нет этапов. Добавь первый шаг и укажи оценку времени.</p>'}</div></div>
+ <div class="journey-origin"><span class="journey-origin-label">Начинаем с того, что уже есть</span><p>${h(owned.join(' · '))}.</p><p class="note">Программирование, опыт 3D-печати и Fusion 360 тоже становятся частью мастерской.</p></div>
+ <div class="journey-reading"><p><strong>Часы — твой труд.</strong> Доставка, высыхание клея и сушка древесины идут своим ходом; во время ожидания можно заняться другим доступным проектом. Оценки включают подготовку и первые пробы и меняются вместе с шагами. Для новых направлений это вход и первые результаты; дальнейшую практику добавляй по мере интереса.</p><p>Начни с основы, затем выбирай направление под ближайшую вещь. Связи между этапами подсказывают полезный опыт. Каждый крупный станок можно вести как отдельный проект.</p></div>
+ <div class="journey-stage-list">${stages.map(stageMarkup).join('')}</div>
+ ${!stages.some(s=>s.id==='later')?`<div class="journey-later"><p class="eyebrow">Продолжение открыто</p><h3>Идеи для следующих проектов</h3><p>${h(D.expansion?'Все выбранные направления уже включены выше. Здесь остаётся место для следующих собственных идей: нового изделия, повторной практики или большого проекта после знакомства.':mods.later.description)}</p><p class="note">Добавь свои шаги с оценкой часов — они появятся в общей картине и войдут в план.</p><div class="row"><button data-stage-steps="later">Добавить своё направление</button><button class="quiet" data-go="budget">Посмотреть каталог</button></div></div>`:''}
+ <div class="journey-ending"><h3>Один ближайший проект — и мастерская уже становится больше.</h3><p>Выбери вещь, которую хочется сделать сейчас. Подробные шаги, записи времени и расходы всегда рядом.</p><div class="row"><button class="primary" data-go="steps">Выбрать следующий шаг</button><button data-go="overview">Посмотреть свой прогресс</button><a href="#journey-map" class="journey-back">К карте этапов ↑</a></div></div>`;
+}
+
+document.addEventListener('submit',e=>{if(e.target.id==='journey-filter'){e.preventDefault();journeyFamily=$('#journey-family').value;journeyQuery=$('#journey-query').value.trim();renderJourney();}});
+document.addEventListener('change',e=>{if(e.target.id==='journey-family'){journeyFamily=e.target.value;journeyQuery=$('#journey-query').value.trim();renderJourney();}});
