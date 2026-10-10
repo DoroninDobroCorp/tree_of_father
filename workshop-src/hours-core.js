@@ -48,7 +48,8 @@ function stepBudget(data,state,step){
  if(step.budget!==null)return {value:step.budget,complete:true,unknown:0,manual:true};
  const values=step.items.map(id=>itemEstimate(data.catalog.find(i=>i.id===id),state));return {value:round(values.reduce((a,i)=>a+i.value,0)),complete:values.length>0&&values.every(i=>i.complete),unknown:values.length?values.filter(i=>!i.complete).length:1,manual:false};
 }
-function rows(data,state){let cursor=0;return active(state).map(s=>{const start=cursor;cursor=round(cursor+s.hours);const p=percent(state,s),entries=entriesFor(state,s.id),cost=stepBudget(data,state,s);return {...s,start,end:cursor,percent:p,earned:round(s.hours*p/100),actual:round(entries.reduce((a,e)=>a+e.hours,0)),spent:round(entries.reduce((a,e)=>a+(amountUSD(e)??0),0)),hasTime:entries.some(e=>e.hours>0),hasPayment:entries.some(e=>e.amount!==null),cost};});}
+function ordered(data,steps){const order=new Map(data.modules.map((m,i)=>[m.id,i]));return [...steps].sort((a,b)=>(order.get(a.module)??order.size)-(order.get(b.module)??order.size));}
+function rows(data,state){let cursor=0;return ordered(data,active(state)).map(s=>{const start=cursor;cursor=round(cursor+s.hours);const p=percent(state,s),entries=entriesFor(state,s.id),cost=stepBudget(data,state,s);return {...s,start,end:cursor,percent:p,earned:round(s.hours*p/100),actual:round(entries.reduce((a,e)=>a+e.hours,0)),spent:round(entries.reduce((a,e)=>a+(amountUSD(e)??0),0)),hasTime:entries.some(e=>e.hours>0),hasPayment:entries.some(e=>e.amount!==null),cost};});}
 function metrics(data,state){
  const rs=rows(data,state),hours=round(rs.reduce((a,s)=>a+s.hours,0)),earned=round(rs.reduce((a,s)=>a+s.earned,0)),expected=round(Math.min(hours,state.config.hoursPerMonth*state.config.elapsedMonths));
  const actual=round(state.entries.reduce((a,e)=>a+e.hours,0)),spent=round(state.entries.reduce((a,e)=>a+(amountUSD(e)??0),0));
@@ -74,6 +75,6 @@ function validate(state,data){
  for(const [id,i] of Object.entries(state.items)){if(!items.has(id))throw new Error('Неизвестная позиция '+id);object(i,'позиция');for(const key of ['estimate','annual','outsource'])if(i[key]!=null)finite(i[key],0,1e9,key);for(const key of ['model','note','url'])if(i[key]!=null)string(i[key],6000,key);if(i.status!==undefined&&!['planned','ordered','bought','built','tested','mastered','owned'].includes(i.status))throw new Error('Неизвестное состояние покупки');for(const key of ['include','exclude'])if(i[key]!==undefined&&typeof i[key]!=='boolean')throw new Error('Некорректный флаг покупки');}
  if(!Array.isArray(state.changes)||state.changes.length>500)throw new Error('Повреждена история изменений');for(const c of state.changes)string(c,1000,'изменение');object(state.original,'исходная оценка');finite(state.original.hours,0,1e9,'Исходные часы');finite(state.original.stepCount,0,5000,'Исходное число шагов');return state;
 }
-const api={round,clone,finite,quoteUSD,level,itemEstimate,defaults,expand,migrate,active,entriesFor,percent,amountUSD,stepBudget,rows,metrics,archive,validate};
+const api={round,clone,finite,quoteUSD,level,itemEstimate,defaults,expand,migrate,active,ordered,entriesFor,percent,amountUSD,stepBudget,rows,metrics,archive,validate};
 if(typeof module!=='undefined'&&module.exports)module.exports=api;else global.WorkshopCore=api;
 })(typeof window!=='undefined'?window:globalThis);

@@ -37,4 +37,18 @@ def expand(data):
     data['modules'].append(later)
     data['expansion']=dict(id='all-directions-v1',stepIds=ids)
     data['treeURL']='https://tree.54-38-65-155.sslip.io/'
+    route_order=json.loads((ROOT/'journey-order.json').read_text())
+    ordered_ids=[mid for group in route_order['groups'] for mid in group['modules']]
+    modules={m['id']:m for m in data['modules']}
+    assert len(ordered_ids)==len(set(ordered_ids)), 'Repeated route in journey order'
+    assert set(ordered_ids)==set(modules)-{'later'}, 'Journey order must include every route'
+    positions={mid:i for i,mid in enumerate(ordered_ids)}
+    for mid in ordered_ids:
+        assert all(positions[dep]<positions[mid] for dep in modules[mid]['requires']), ('Route prerequisite follows route',mid)
+        modules[mid]['number']=str(positions[mid]).zfill(2)
+    task_modules={t['id']:t['module'] for t in data['tasks']}
+    for task in data['tasks']:
+        assert all(positions[task_modules[dep]]<=positions[task['module']] for dep in task['deps']), ('Step prerequisite follows route',task['id'])
+    data['modules']=[modules[mid] for mid in ordered_ids]+[modules['later']]
+    data['routeOrder']=route_order
     return data
