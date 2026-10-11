@@ -185,7 +185,7 @@ async function flushServer(){if(!hosted||!serverReady||serverBusy||serverConflic
 async function initHoursServer(){if(!hosted)return;syncBadge('Загружаю серверное сохранение…');try{
  const response=await fetch('/api/workshop',{headers:accessHeaders(),cache:'no-store',signal:AbortSignal.timeout(12000)});if(!response.ok)throw Error(response.status===403?'Нужен ключ доступа: открой настройки ИИ в дереве':'Не удалось загрузить план с сервера');const body=await response.json();
  const pendingRaw=localStorage.getItem(pendingKey);serverPending=pendingRaw?JSON.parse(pendingRaw):null;
- if(serverPending){C.validate(serverPending.state,D);localSnapshot(C.expand(serverPending.state,D));serverRevision=serverPending.baseRevision;serverReady=true;await flushServer();}
+ if(serverPending){const pending=serverPending;C.validate(pending.state,D);const expanded=C.expand(pending.state,D);localSnapshot(expanded);serverRevision=pending.baseRevision;serverReady=true;await flushServer();if(!serverPending&&!serverConflict&&JSON.stringify(expanded)!==JSON.stringify(pending.state))queueServer();}
  else{serverRevision=body.revision;const remote=body.state?C.migrate(body.state,D):state;localSnapshot(remote);localStorage.setItem(revisionKey,String(serverRevision));serverReady=true;syncBadge('Сохранено на сервере · копия в этом браузере');if(!body.state||JSON.stringify(remote)!==JSON.stringify(body.state))queueServer();}
  renderHeader();renderCurrent();applyStageHash();
  }catch(e){syncBadge(e.message+' · повтори подключение',true);}
