@@ -24,18 +24,31 @@ function defaults(data){
  const assigned=new Set();for(const step of state.steps){const task=data.tasks.find(t=>t.id===step.id);for(const id of task.items){const i=data.catalog.find(x=>x.id===id);if(i&&i.kind!=='have'&&(!i.optional||task.expanded)&&!assigned.has(id)){step.items.push(id);assigned.add(id);}}}
  for(const i of data.catalog)if(i.kind!=='have'&&!i.optional&&!assigned.has(i.id)){const candidates=state.steps.filter(t=>t.module===i.module);const s=candidates.find(t=>/заказать|заказ|выбрать|выбор|подобрать|принять|подготовить/i.test(t.title)&&t.items.length)||candidates.find(t=>t.items.length)||candidates[0];if(s){s.items.push(i.id);assigned.add(i.id);}}
  for(const s of state.steps)if(!s.items.length)s.budget=0;
- state.original={hours:round(state.steps.reduce((a,s)=>a+s.hours,0)),stepCount:state.steps.length};state.catalogExpansions=(data.expansions||(data.expansion?[data.expansion]:[])).map(m=>m.id);return state;
+ state.original={hours:round(state.steps.reduce((a,s)=>a+s.hours,0)),stepCount:state.steps.length};state.catalogExpansions=[...(data.expansions||(data.expansion?[data.expansion]:[])),...(data.planRevisions||[])].map(m=>m.id);return state;
 }
 function expand(state,data){
  validate(state,data);const manifests=data.expansions||(data.expansion?[data.expansion]:[]);
- if(manifests.every(m=>state.catalogExpansions?.includes(m.id)))return state;
+ const revisions=data.planRevisions||[];
+ if([...manifests,...revisions].every(m=>state.catalogExpansions?.includes(m.id)))return state;
  const out=clone(state),ids=new Set(out.steps.map(s=>s.id)),assigned=new Set(out.steps.flatMap(s=>s.items));
  for(const manifest of manifests){
  if(out.catalogExpansions?.includes(manifest.id))continue;
  const additions=defaults(data).steps.filter(s=>manifest.stepIds.includes(s.id)&&!ids.has(s.id));
  additions.forEach(s=>ids.add(s.id));for(const s of additions){s.deps=s.deps.filter(id=>ids.has(id));s.items=s.items.filter(id=>{if(assigned.has(id))return false;assigned.add(id);return true});if(!s.items.length)s.budget=0;out.steps.push(s);}
  out.catalogExpansions=[...(out.catalogExpansions||[]),manifest.id];out.changes.push((manifest.label||'Добавлены все направления')+': '+additions.length+' шагов. Прежние оценки, записи и покупки сохранены.');
- }out.changes=out.changes.slice(-500);return validate(out,data);
+ }
+ for(const revision of revisions){
+  if(out.catalogExpansions?.includes(revision.id))continue;
+  let changed=0;
+  for(const update of revision.stepUpdates){
+   const s=out.steps.find(s=>s.id===update.id);
+   if(!s||percent(out,s)>0||entriesFor(out,s.id).length)continue;
+   for(const key of ['hours','title','result'])if(key in update.previous&&s[key]===update.previous[key]&&s[key]!==update.replacement[key]){s[key]=update.replacement[key];changed++;}
+  }
+  out.catalogExpansions=[...(out.catalogExpansions||[]),revision.id];
+  out.changes.push(revision.label+'. Уточнено полей: '+changed+'. Свои оценки, начатая работа и журнал сохранены.');
+ }
+ out.changes=out.changes.slice(-500);return validate(out,data);
 }
 function migrate(old,data){
  if(old?.schema===4)return expand(old,data);
