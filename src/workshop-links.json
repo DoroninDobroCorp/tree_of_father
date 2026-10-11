@@ -44,5 +44,17 @@
   "route-cleaning": "cleaning",
   "route-restoration": "restoration",
   "route-joinery": "joinery",
-  "route-maintenance": "maintenance"
+  "route-maintenance": "maintenance",
+  "route-small-room": "small-room",
+  "route-workshop-survey": "workshop-survey",
+  "route-garage-workshop": "garage-workshop",
+  "route-shed-workshop": "shed-workshop",
+  "route-mule-v1": "mule-v1",
+  "route-mule-v2": "mule-v2",
+  "route-mule-hydraulics": "mule-hydraulics",
+  "route-mule-crane": "mule-crane",
+  "route-mule-auger": "mule-auger",
+  "route-mule-backhoe": "mule-backhoe",
+  "route-mule-control": "mule-control",
+  "route-porsche-356": "porsche-356"
 }

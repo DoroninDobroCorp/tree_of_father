@@ -38,6 +38,7 @@ PUBLIC_FILES = {
     "/robots.txt": "robots.txt",
     "/workshop/": "workshop.html",
     "/workshop": "workshop.html",
+    "/workshop/mule-plan-r1.pdf": "workshop-assets/mule-plan-r1.pdf",
 }
 LOCAL_HOSTS = {"127.0.0.1", "localhost", "[::1]"}
 

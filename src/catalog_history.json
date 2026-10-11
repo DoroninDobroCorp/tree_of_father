@@ -438,6 +438,9 @@
 "projects:route-furniture": [
 "1s3qshh"
 ],
+"projects:route-garage-workshop": [
+"1ncurqb"
+],
 "projects:route-garden": [
 "6g7dgw"
 ],
@@ -493,6 +496,27 @@
 "projects:route-metal": [
 "1ojqw7q"
 ],
+"projects:route-mule-auger": [
+"1sqygmh"
+],
+"projects:route-mule-backhoe": [
+"1bnenj5"
+],
+"projects:route-mule-control": [
+"1bn9cui"
+],
+"projects:route-mule-crane": [
+"95ffhf"
+],
+"projects:route-mule-hydraulics": [
+"1amugb8"
+],
+"projects:route-mule-v1": [
+"76tkoe"
+],
+"projects:route-mule-v2": [
+"1z09a3x"
+],
 "projects:route-pcb": [
 "s9709"
 ],
@@ -501,6 +525,9 @@
 ],
 "projects:route-plumbing": [
 "e7bvj8"
+],
+"projects:route-porsche-356": [
+"l78r3a"
 ],
 "projects:route-printnc": [
 "59hpj7"
@@ -520,8 +547,14 @@
 "projects:route-sewing": [
 "1ekyauz"
 ],
+"projects:route-shed-workshop": [
+"3ruqxt"
+],
 "projects:route-small-engines": [
 "1wfwnhl"
+],
+"projects:route-small-room": [
+"1qpfo20"
 ],
 "projects:route-stone": [
 "1mpdcrg"
@@ -540,6 +573,9 @@
 ],
 "projects:route-wood": [
 "1rxl8ws"
+],
+"projects:route-workshop-survey": [
+"1ma75m4"
 ],
 "skills:base.anchors": [
 "10vvy5o",
@@ -747,6 +783,12 @@
 ],
 "skills:building.window_fit": [
 "tonkdt"
+],
+"skills:building.workshop_layout": [
+"ysenqk"
+],
+"skills:building.workshop_survey": [
+"ictr9e"
 ],
 "skills:composite.advanced": [
 "fjbiv6",
@@ -1098,6 +1140,9 @@
 "skills:electronics.labpsu": [
 "q3lel6"
 ],
+"skills:electronics.machine_cycle": [
+"19g9o90"
+],
 "skills:electronics.mqtt": [
 "5675xj"
 ],
@@ -1396,6 +1441,9 @@
 "skills:mechanics.leaks": [
 "oisu6e"
 ],
+"skills:mechanics.load_module": [
+"1uek4dh"
+],
 "skills:mechanics.lubrication": [
 "5psyql"
 ],
@@ -1405,6 +1453,9 @@
 "skills:mechanics.pneumatic": [
 "1jd9hdw",
 "1k8nspc"
+],
+"skills:mechanics.powerpack": [
+"1731t3t"
 ],
 "skills:mechanics.ptfe": [
 "1og1iev",
@@ -1771,9 +1822,21 @@
 "kd8a9m",
 "ccerk8"
 ],
+"skills:transport.prototype_accept": [
+"eilnww"
+],
+"skills:transport.prototype_drive": [
+"1j18j4p"
+],
 "skills:transport.rc": [
 "1ah6fzi",
 "bp3kg0"
+],
+"skills:transport.replica_accept": [
+"zvp9lb"
+],
+"skills:transport.replica_plan": [
+"1b4ez7d"
 ],
 "skills:transport.safety": [
 "1ywrey1",

@@ -37,6 +37,8 @@ def expand(data):
     data['modules'].append(later)
     data['expansion']=dict(id='all-directions-v1',stepIds=ids)
     data['treeURL']='https://tree.54-38-65-155.sslip.io/'
+    from future_overlay import add
+    data=add(data)
     route_order=json.loads((ROOT/'journey-order.json').read_text())
     ordered_ids=[mid for group in route_order['groups'] for mid in group['modules']]
     modules={m['id']:m for m in data['modules']}
