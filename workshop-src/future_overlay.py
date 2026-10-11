@@ -33,7 +33,7 @@ def add(data):
    ref=f['references'][i['quote']['ref']];q={**ref,'model':ref['title'],'vendor':ref['title'].split(' · ')[0],'terms':ref['note'],'quantity':1,'tax':0,'partial':i['quote']['partial']};q.pop('note')
   data['catalog'].append(dict(id=iid,title=i['title'],note=i['basis'],oldStage='',kind='buy',optional=False,quote=q,module=i['module']))
  data['expansions']=[data['expansion'],dict(id=f['id'],stepIds=ids,label=f['label'])]
- data['planRevisions']=[json.loads((R/'building-revision.json').read_text())]
+ data['planRevisions']=[json.loads((R/name).read_text()) for name in ['building-revision.json','room-base-revision.json']]
  data['facilities']=dict(room='Комната ≈ 2×3 м · 6 м²',garage='Гараж ≈ 3×6 м · 18 м²',shed='Сарай ≈ 4×6 м · 24 м²',note='Сейчас доступна только комната в доме. Гараж и сарай непригодны для работы: сначала обследование, восстановление и приёмка каждого здания, затем размещение оборудования. Размеры со слов владельца, уточняются обмером. Состояние и несущая способность обоих фундаментов ещё не подтверждены.')
  data['facilities']['layout']=[
   dict(title='6 м² · чистое начало',text='Складное место для чертежей, низковольтной электроники, текстиля и ручной сборки. Перед новой операцией проверяем шум, выделения и уборку; хранение оставляет дверь и проход свободными.'),
