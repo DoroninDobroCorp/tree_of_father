@@ -93,6 +93,12 @@ function validate(state,data){
  for(const [id,i] of Object.entries(state.items)){if(!items.has(id))throw new Error('Неизвестная позиция '+id);object(i,'позиция');for(const key of ['estimate','annual','outsource'])if(i[key]!=null)finite(i[key],0,1e9,key);for(const key of ['model','note','url'])if(i[key]!=null)string(i[key],6000,key);if(i.status!==undefined&&!['planned','ordered','bought','built','tested','mastered','owned'].includes(i.status))throw new Error('Неизвестное состояние покупки');for(const key of ['include','exclude'])if(i[key]!==undefined&&typeof i[key]!=='boolean')throw new Error('Некорректный флаг покупки');}
  if(!Array.isArray(state.changes)||state.changes.length>500)throw new Error('Повреждена история изменений');for(const c of state.changes)string(c,1000,'изменение');object(state.original,'исходная оценка');finite(state.original.hours,0,1e9,'Исходные часы');finite(state.original.stepCount,0,5000,'Исходное число шагов');return state;
 }
-const api={today,validDate,addMonths,elapsed,itemPlanning,stepPlanning,round,clone,finite,quoteUSD,level,itemEstimate,defaults,expand,migrate,active,ordered,entriesFor,percent,amountUSD,stepBudget,rows,metrics,archive,validate};
+// Direction spending follows the journal, including archived steps.
+function moduleSpending(state){
+ const modules=new Map(state.steps.map(s=>[s.id,s.module])),totals=new Map();
+ for(const e of state.entries){const id=modules.get(e.stepId);if(id!==undefined)totals.set(id,(totals.get(id)||0)+(amountUSD(e)||0));}
+ return Object.fromEntries([...totals].map(([id,value])=>[id,round(value)]));
+}
+const api={today,validDate,addMonths,elapsed,itemPlanning,stepPlanning,round,clone,finite,quoteUSD,level,itemEstimate,defaults,expand,migrate,active,ordered,entriesFor,percent,amountUSD,stepBudget,rows,metrics,archive,validate,moduleSpending};
 if(typeof module!=='undefined'&&module.exports)module.exports=api;else global.WorkshopCore=api;
 })(typeof window!=='undefined'?window:globalThis);

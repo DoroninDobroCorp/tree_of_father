@@ -227,6 +227,19 @@ by['porsche-356']['assumptions']='Гараж примерно 3×6 м: до за
 for r in routes:
  if r['branch']=='mechanisms':r['branch']='mechanics'
  for i in {x for s in r['steps'] for x in s['items']}:items[i]['module']=r['id']
+# Match overview results to their actual preparation, build or test milestone.
+milestones={
+ 'small-room':[5,4], 'workshop-survey':[1,5],
+ 'garage-workshop':[4,9], 'shed-workshop':[4,9],
+ 'mule-v1':[6,9], 'mule-v2':[3,5], 'mule-hydraulics':[4,6],
+ 'mule-crane':[4,6], 'mule-auger':[4,6], 'mule-backhoe':[4,7],
+ 'mule-control':[2,5,8], 'porsche-356':[3,16,18],
+}
+for r in routes:
+ r['projectSteps']=milestones[r['id']]
+ assert len(r['projectSteps'])==len(r['projects'])
+ assert len(set(r['projectSteps']))==len(r['projectSteps'])
+ assert all(1<=n<=len(r['steps']) for n in r['projectSteps'])
 manifest=dict(id='workshop-mule-356-v1',label='Добавлены помещения мастерской, MULE и реплика Porsche 356',routes=routes,items=items,references=refs)
 (R/'future-projects.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n')
 print(len(routes),'directions;',sum(len(r['steps']) for r in routes),'steps;',sum(s['hours'] for r in routes for s in r['steps']),'hours')

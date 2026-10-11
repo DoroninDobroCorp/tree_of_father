@@ -55,7 +55,11 @@
       ],
       "assumptions": "24 ч — дополнительная организация комнаты. Основа с верстаком, электриком, инструментом и пылесосом остаётся отдельным прежним этапом.",
       "icon": "bench",
-      "sources": []
+      "sources": [],
+      "projectSteps": [
+        5,
+        4
+      ]
     },
     {
       "id": "workshop-survey",
@@ -114,7 +118,11 @@
       ],
       "assumptions": "Со слов владельца: гараж примерно 3×6 м (18 м²), сарай примерно 4×6 м (24 м²). Гараж выглядит более сохранным, сарай разваленный. Размеры и состояние ещё нужно подтвердить; оба фундамента обследуются до восстановления.",
       "icon": "house",
-      "sources": []
+      "sources": [],
+      "projectSteps": [
+        1,
+        5
+      ]
     },
     {
       "id": "garage-workshop",
@@ -212,6 +220,10 @@
       "icon": "house",
       "sources": [
         "roof-ar"
+      ],
+      "projectSteps": [
+        4,
+        9
       ]
     },
     {
@@ -310,6 +322,10 @@
       "icon": "house",
       "sources": [
         "roof-ar"
+      ],
+      "projectSteps": [
+        4,
+        9
       ]
     },
     {
@@ -411,6 +427,10 @@
         "mule-motor",
         "mule-axle",
         "mule-road"
+      ],
+      "projectSteps": [
+        6,
+        9
       ]
     },
     {
@@ -483,6 +503,10 @@
       "icon": "car",
       "sources": [
         "mule-r1"
+      ],
+      "projectSteps": [
+        3,
+        5
       ]
     },
     {
@@ -556,6 +580,10 @@
       "icon": "machine",
       "sources": [
         "mule-r1"
+      ],
+      "projectSteps": [
+        4,
+        6
       ]
     },
     {
@@ -626,6 +654,10 @@
       "icon": "machine",
       "sources": [
         "mule-r1"
+      ],
+      "projectSteps": [
+        4,
+        6
       ]
     },
     {
@@ -695,6 +727,10 @@
       "icon": "machine",
       "sources": [
         "mule-r1"
+      ],
+      "projectSteps": [
+        4,
+        6
       ]
     },
     {
@@ -772,6 +808,10 @@
       "icon": "machine",
       "sources": [
         "mule-r1"
+      ],
+      "projectSteps": [
+        4,
+        7
       ]
     },
     {
@@ -865,6 +905,11 @@
       "sources": [
         "mule-r1",
         "mule-control-doc"
+      ],
+      "projectSteps": [
+        2,
+        5,
+        8
       ]
     },
     {
@@ -1049,6 +1094,11 @@
         "356-kit-ar",
         "356-coupe",
         "replica-register"
+      ],
+      "projectSteps": [
+        3,
+        16,
+        18
       ]
     }
   ],
