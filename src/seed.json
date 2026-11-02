@@ -1,6 +1,6 @@
 {
   "schemaVersion": 4,
-  "catalogVersion": 10,
+  "catalogVersion": 11,
   "revision": 0,
   "branches": [
     {
@@ -17547,9 +17547,9 @@
     },
     {
       "id": "clamp",
-      "title": "Струбцины",
-      "es": "sargentos / prensas",
-      "description": "Фиксация детали и сборки, а не предмет роскоши.",
+      "title": "Струбцины быстрозажимные (60 см, с функцией разжима)",
+      "es": "sargentos rápidos / prensas (600 mm, apriete y expansión)",
+      "description": "Фиксация деталей при склейке, пилении, кондукторах и сборке конструкций, а также распирание и раздвижение заготовок (в мастерской: две быстрозажимные струбцины 60 см с двухсторонней функцией — перестановка упорной губки на обратный конец шины превращает зажим в распорку на разжим).",
       "branchIds": [
         "base",
         "wood",
@@ -19130,7 +19130,8 @@
     "finish.spray_bottle": "have",
     "finish.neutral_cleaner": "have",
     "finish.rags": "have",
-    "finish.soft_brush": "have"
+    "finish.soft_brush": "have",
+    "clamp": "have"
   },
   "focus": [
     "wood",

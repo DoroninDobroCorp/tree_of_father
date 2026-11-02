@@ -22,6 +22,7 @@ import urllib.error
 import urllib.request
 import webbrowser
 from workshop_store import Store as HoursStore, Conflict as HoursConflict
+from tech_store import TechStore
 from datetime import datetime, timezone
 from http import HTTPStatus
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -39,6 +40,8 @@ PUBLIC_FILES = {
     "/workshop/": "workshop.html",
     "/workshop": "workshop.html",
     "/workshop/mule-plan-r1.pdf": "workshop-assets/mule-plan-r1.pdf",
+    "/tech/": "tech.html",
+    "/tech": "tech.html",
 }
 LOCAL_HOSTS = {"127.0.0.1", "localhost", "[::1]"}
 
@@ -214,6 +217,8 @@ class WorkshopServer:
         self.session_token = secrets.token_urlsafe(32)
         self.save_lock = threading.Lock()
         self.hours_store = HoursStore(config.data_dir, json.loads((BASE_DIR / "workshop-data.json").read_text(encoding="utf-8")), self.save_lock, config.max_backups)
+        tech_ids = [t["id"] for t in json.loads((BASE_DIR / "tech-src" / "tech-tree.json").read_text(encoding="utf-8"))["techs"]]
+        self.tech_store = TechStore(config.data_dir, tech_ids, self.save_lock, config.max_backups)
         self.schema = self._load_schema()
         self.suggest_schemas = {
             mode: json.loads((BASE_DIR / "src" / file).read_text(encoding="utf-8"))
@@ -558,6 +563,9 @@ class WorkshopRequestHandler(BaseHTTPRequestHandler):
         if path == "/api/workshop":
             self._handle_hours(False)
             return
+        if path == "/api/tech":
+            self._handle_tech(False)
+            return
 
         # Static file serving
         self._serve_static(path)
@@ -568,6 +576,9 @@ class WorkshopRequestHandler(BaseHTTPRequestHandler):
 
         if path == "/api/workshop":
             self._handle_hours(True)
+            return
+        if path == "/api/tech":
+            self._handle_tech(True)
             return
         if path == "/api/propose":
             self._handle_propose()
@@ -611,6 +622,37 @@ class WorkshopRequestHandler(BaseHTTPRequestHandler):
             self._send_json(409, {"error": str(exc)})
         except (ValueError, TypeError, KeyError, AttributeError) as exc:
             self._send_json(400, {"error": "План не принят: " + str(exc)})
+        except OSError:
+            self._send_json(500, {"error": "Не удалось сохранить файл на сервере"})
+
+    def _handle_tech(self, write):
+        """Technology-tree marks; GET also returns the current tool inventory from the tree save."""
+        if not self._has_access():
+            self._send_json(403, {"error": "Нет доступа к этому серверу"})
+            return
+        origin = self.headers.get("Origin")
+        if write and origin and origin not in ("http://" + self.headers.get("Host", ""), "https://" + self.headers.get("Host", "")):
+            self._send_json(403, {"error": "Запрос с другого сайта запрещён"})
+            return
+        try:
+            if write:
+                length = int(self.headers.get("Content-Length", "0"))
+                if not 0 < length <= 200_000:
+                    self._send_json(413, {"error": "Недопустимый размер отметок"})
+                    return
+                payload = json.loads(self.rfile.read(length))
+                result = self.server_app.tech_store.write(payload)
+                result = {"ok": True, "revision": result["revision"], "savedAt": result["savedAt"]}
+            else:
+                result = dict(self.server_app.tech_store.read())
+                save = self.server_app.load_state() or {}
+                inventory = save.get("state", save).get("inventory")
+                result["inventory"] = inventory if isinstance(inventory, dict) else None
+            self._send_json(200, result, {"Cache-Control": "no-store"})
+        except HoursConflict as exc:
+            self._send_json(409, {"error": str(exc)})
+        except (ValueError, TypeError, KeyError, AttributeError) as exc:
+            self._send_json(400, {"error": "Отметки не приняты: " + str(exc)})
         except OSError:
             self._send_json(500, {"error": "Не удалось сохранить файл на сервере"})
 
