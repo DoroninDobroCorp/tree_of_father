@@ -13,3 +13,5 @@ data/workshop.json
 workshop-src/hours.html
 workshop-src/hours-template.html
 workshop-src/expanded-data.json
+data/tech.json
+data/tech-backups/

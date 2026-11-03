@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Дерево технологий мастерской</title>
+<script>try{var t=localStorage.getItem('el-bolson-workshop-v3-theme');if(t==='dark'||t==='light')document.documentElement.dataset.theme=t;}catch(e){}</script>
+<style>__CSS__</style>
+</head>
+<body>
+<header class="hero wrap">
+  <p class="eyebrow">Своя мастерская · дерево технологий</p>
+  <h1>Что изучать дальше</h1>
+  <p class="lead">Как в Civilization: сначала то, что уже есть в руках, потом технологии, а они открывают целые классы проектов. Каждая новая технология делает полезнее прежние: дерево, смола и стеклоткань вместе дают корпуса и лодку, принтер и силикон — малые серии деталей. Порядок пересчитывается по твоим отметкам, инвентарю и прогрессу плана.</p>
+  <div class="hero-links">
+    <a href="/">Дерево навыков ↗</a>
+    <a href="/workshop/">План мастерской · часы ↗</a>
+    <button class="linkbtn" id="theme" type="button">Тема</button>
+  </div>
+  <div class="facts" id="facts"></div>
+</header>
+<div class="bar wrap" role="toolbar" aria-label="Режим и цель">
+  <div class="tabs" role="tablist">
+    <button role="tab" id="tab-tree" aria-selected="true" data-view="tree">Дерево</button>
+    <button role="tab" id="tab-order" aria-selected="false" data-view="order">Порядок</button>
+    <button role="tab" id="tab-combos" aria-selected="false" data-view="combos">Открытия</button>
+  </div>
+  <label class="control">Цель <select id="target"></select></label>
+  <label class="control">Важнее <select id="money">
+    <option value="cheap">экономить деньги</option>
+    <option value="balance" selected>баланс</option>
+    <option value="time">экономить время</option>
+  </select></label>
+  <span class="save" id="save" role="status">Загрузка…</span>
+</div>
+<main class="wrap">
+  <section id="view-tree">
+    <div class="legend"><span><i class="l-done"></i>изучено</span><span><i class="l-active"></i>в работе</span><span><i class="l-avail"></i>доступно</span><span><i class="l-locked"></i>пока закрыто</span><span><i class="l-wonder"></i>большой проект</span><span><i class="l-new"></i>новое, нет в плане</span><span>● номер — рекомендуемый порядок</span></div>
+    <div class="treebox" id="treebox"><div class="canvas" id="canvas"></div></div>
+  </section>
+  <section id="view-order" hidden></section>
+  <section id="view-combos" hidden></section>
+  <footer class="footer">Часы — оценки шагов плана с запасом 25%, как на странице «План мастерской»; для новых технологий — грубая оценка. Деньги — середина диапазонов сметы плана в USD или найденная цена; купленное и исключённое в плане не считается. Технологии с пометкой «pro» требуют специалиста или обучения: число в дереве — не квалификация и не разрешение работать.</footer>
+</main>
+<aside class="panel" id="panel" aria-label="Технология" tabindex="-1"></aside>
+<script type="application/json" id="tech-data">__DATA__</script>
+<script>__JS__</script>
+</body>
+</html>
