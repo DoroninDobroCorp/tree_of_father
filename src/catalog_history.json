@@ -5682,7 +5682,8 @@
 "8",
 "y",
 "2",
-"s"
+"s",
+"k90xxo"
 ],
 "tools:base.brackets": [
 "1axdlbs",
@@ -5760,6 +5761,12 @@
 "t",
 "9"
 ],
+"tools:base.magnets": [
+"16ofuld"
+],
+"tools:base.nails": [
+"tn06wa"
+],
 "tools:base.plugs": [
 "13m66qm",
 "1",
@@ -5819,7 +5826,8 @@
 "s",
 "l",
 "4",
-"7"
+"7",
+"81ecb1"
 ],
 "tools:building.caulkgun": [
 "w9q7si",
@@ -5864,7 +5872,8 @@
 "u",
 "l",
 "7",
-"y"
+"y",
+"15a1tre"
 ],
 "tools:circular": [
 "1hgs426",
@@ -5885,7 +5894,8 @@
 "k",
 "4",
 "t",
-"11y0bam"
+"11y0bam",
+"10w45pw"
 ],
 "tools:composite.epoxy_putty": [
 "1qds03z",
@@ -5949,6 +5959,9 @@
 "e",
 "g",
 "p"
+],
+"tools:electrical.extension": [
+"1bbhezi"
 ],
 "tools:electrical.stripper": [
 "1qyp4yf",
@@ -6031,6 +6044,9 @@
 "1",
 "e"
 ],
+"tools:finish.floor_cleaning": [
+"11k0gvy"
+],
 "tools:finish.lasur": [
 "1lyhf3z",
 "1",
@@ -6040,6 +6056,9 @@
 "f",
 "3",
 "z"
+],
+"tools:finish.masking_tape": [
+"15amv44"
 ],
 "tools:finish.neutral_cleaner": [
 "1dl8jgp",
@@ -6089,6 +6108,9 @@
 "p",
 "k"
 ],
+"tools:finish.solvent": [
+"1buzy8c"
+],
 "tools:finish.spray_bottle": [
 "7k618e",
 "7",
@@ -6125,6 +6147,9 @@
 "2",
 "f"
 ],
+"tools:glue.ca": [
+"1swlrfn"
+],
 "tools:guide": [
 "12e20hb",
 "1",
@@ -6132,7 +6157,8 @@
 "e",
 "0",
 "h",
-"b"
+"b",
+"15p4d3c"
 ],
 "tools:hacksaw": [
 "doftwu",
@@ -6149,7 +6175,8 @@
 "a",
 "z",
 "i",
-"f"
+"f",
+"inbrew"
 ],
 "tools:jackstand": [
 "er95m3",
@@ -6200,7 +6227,8 @@
 "xnnxxb",
 "x",
 "n",
-"b"
+"b",
+"10ujevg"
 ],
 "tools:land.mallet": [
 "1dqqbr",
@@ -6252,7 +6280,8 @@
 "h",
 "9",
 "y",
-"k"
+"k",
+"c7oxsy"
 ],
 "tools:measure": [
 "12oxvqk",
@@ -6273,6 +6302,9 @@
 "b",
 "3"
 ],
+"tools:mechanics.heater": [
+"1pc5h82"
+],
 "tools:mechanics.leakkit": [
 "3jqve2",
 "3",
@@ -6289,7 +6321,8 @@
 "e",
 "l",
 "v",
-"p"
+"p",
+"1502e44"
 ],
 "tools:mechanics.pliers": [
 "kr7c60",
@@ -6380,7 +6413,8 @@
 "h",
 "s",
 "n",
-"2"
+"2",
+"11g0y7e"
 ],
 "tools:metal.solderkit": [
 "1k4c33t",
@@ -6481,7 +6515,8 @@
 "5",
 "m",
 "4",
-"c"
+"c",
+"1omjogw"
 ],
 "tools:multitool": [
 "1755bgh",
@@ -6571,7 +6606,8 @@
 "j",
 "l",
 "9",
-"r"
+"r",
+"k2187a"
 ],
 "tools:rigging": [
 "jt2w1w",
@@ -6606,7 +6642,8 @@
 "z",
 "o",
 "k",
-"a"
+"a",
+"mbm488"
 ],
 "tools:sander": [
 "1k8jse2",
@@ -6695,7 +6732,8 @@
 "9",
 "8",
 "5",
-"n"
+"n",
+"1ddqn9e"
 ],
 "tools:shovel": [
 "13998rx",
@@ -6826,7 +6864,8 @@
 "4",
 "r",
 "o",
-"q"
+"q",
+"10ofxaj"
 ],
 "tools:vacuumkit": [
 "73iqlo",
@@ -6882,6 +6921,9 @@
 "8",
 "l"
 ],
+"tools:wood.dowels": [
+"13fq05c"
+],
 "tools:wood.forstner": [
 "3dj7js",
 "3",
@@ -6905,7 +6947,11 @@
 "e",
 "j",
 "x",
-"8"
+"8",
+"e96q13"
+],
+"tools:wood.pencil": [
+"k5r5js"
 ],
 "tools:wood.pocketjig": [
 "1dlc986",
@@ -6925,6 +6971,9 @@
 "h",
 "p"
 ],
+"tools:wood.sawhorses": [
+"168ise7"
+],
 "tools:wrench": [
 "1y160v7",
 "1",
@@ -6932,6 +6981,7 @@
 "6",
 "0",
 "v",
-"7"
+"7",
+"1l62pji"
 ]
 }

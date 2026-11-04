@@ -17523,9 +17523,9 @@
     },
     {
       "id": "level",
-      "title": "Уровень",
-      "es": "nivel",
-      "description": "Горизонт, вертикаль и относительные отметки.",
+      "title": "Уровень пузырьковый (1 м)",
+      "es": "nivel de burbuja (1 m)",
+      "description": "Пузырьковый строительный уровень 100 см для контроля горизонтали, вертикали и переноса отметок.",
       "branchIds": [
         "base",
         "building",
@@ -17547,9 +17547,9 @@
     },
     {
       "id": "clamp",
-      "title": "Струбцины быстрозажимные (60 см, с функцией разжима)",
-      "es": "sargentos rápidos / prensas (600 mm, apriete y expansión)",
-      "description": "Фиксация деталей при склейке, пилении, кондукторах и сборке конструкций, а также распирание и раздвижение заготовок (в мастерской: две быстрозажимные струбцины 60 см с двухсторонней функцией — перестановка упорной губки на обратный конец шины превращает зажим в распорку на разжим).",
+      "title": "Струбцины (быстрозажимные, угловые и ременная)",
+      "es": "sargentos rápidos, escuadra y prensa de cinta",
+      "description": "Комплект струбцин: быстрозажимные струбцины (с функцией разжима 60 см и средние), угловая струбцина 90° и ременная ленточная струбцина для сборки рамок и корпусов.",
       "branchIds": [
         "base",
         "wood",
@@ -17593,9 +17593,9 @@
     },
     {
       "id": "wrench",
-      "title": "Ключи и головки",
-      "es": "llaves / tubos",
-      "description": "Соответствующий размер и доступ к граням.",
+      "title": "Разводной ключ и гаечные ключи",
+      "es": "llave francesa ajustable / llaves fijas",
+      "description": "Разводной гаечный ключ и комплект ключей для сантехники, резьбовых соединений и регулировок.",
       "branchIds": [
         "base",
         "mechanics",
@@ -17604,9 +17604,9 @@
     },
     {
       "id": "pry",
-      "title": "Гвоздодёр / монтажка",
-      "es": "sacaclavos / palanca",
-      "description": "Разборка с защитой прилегающей поверхности.",
+      "title": "Лом-гвоздодёр / монтировка",
+      "es": "sacaclavos / palanca / pata de cabra",
+      "description": "Прочный стальной лом-гвоздодёр (монтировка) для демонтажа, силового рычага и аккуратного отдирания досок.",
       "branchIds": [
         "base",
         "building",
@@ -17615,9 +17615,9 @@
     },
     {
       "id": "handsaw",
-      "title": "Ручная пила",
-      "es": "serrucho",
-      "description": "Ручной раскрой; заготовку нужно закреплять.",
+      "title": "Ручные пилы по дереву (ножовка и лучковая пила)",
+      "es": "serrucho para madera y sierra de arco",
+      "description": "Ручной раскрой дерева: ножовка с лезвиями по дереву и лучковая пила по дереву для поперечного и грубого пиления.",
       "branchIds": [
         "wood",
         "land"
@@ -17646,9 +17646,9 @@
     },
     {
       "id": "guide",
-      "title": "Направляющая",
-      "es": "guía de corte",
-      "description": "Контроль прямой линии реза.",
+      "title": "Направляющая для пиления с упором",
+      "es": "guía de corte con tope",
+      "description": "Направляющая шина с упором для ровного и повторяемого прямолинейного раскроя листовых материалов циркулярной пилой.",
       "branchIds": [
         "wood",
         "base"
@@ -17675,9 +17675,9 @@
     },
     {
       "id": "router",
-      "title": "Фрезер",
-      "es": "fresadora / router",
-      "description": "Кромки, пазы и шаблоны. Не обязателен для первой мебели.",
+      "title": "Ручной фрезер (Lüsqtoff FRL1400-9)",
+      "es": "fresadora / router (Lüsqtoff FRL1400-9)",
+      "description": "Ручной фрезер 1400 Вт для кромок, пазов и шаблонов (в мастерской: Lüsqtoff FRL1400-9, параллельный упор, копировальная втулка, набор фрез 12 шт и сменные цанги/биты).",
       "branchIds": [
         "wood"
       ]
@@ -17716,9 +17716,9 @@
     },
     {
       "id": "chisel",
-      "title": "Стамеска",
-      "es": "formón",
-      "description": "Контролируемая ручная выборка.",
+      "title": "Стамески и набор резцов для резьбы по дереву",
+      "es": "formones y gubias / kit de tallado en madera",
+      "description": "Столярные стамески и набор резцов для фигурной резьбы по дереву, выборки пазов и чистовой подгонки соединений.",
       "branchIds": [
         "wood"
       ]
@@ -17786,9 +17786,9 @@
     },
     {
       "id": "shears",
-      "title": "Ножницы под материал",
-      "es": "tijeras",
-      "description": "Текстиль и металл требуют разной оснастки.",
+      "title": "Ножницы хозяйственные и ножницы по металлу",
+      "es": "tijeras multiuso y tijeras para chapa",
+      "description": "Универсальные ножницы и ручные ножницы по металлу для резки жести, сетки, пластика и листовых материалов.",
       "branchIds": [
         "textile",
         "metal"
@@ -17888,9 +17888,9 @@
     },
     {
       "id": "trowel",
-      "title": "Шпатели и кельма",
-      "es": "espátula / llana",
-      "description": "Нанесение растворов и выравнивание.",
+      "title": "Шпатели малярные и строительные",
+      "es": "espátulas de acero",
+      "description": "Средний стальной шпатель для шпаклёвки, нанесения смесей, клея и зачистки поверхностей.",
       "branchIds": [
         "mineral"
       ]
@@ -17942,9 +17942,9 @@
     },
     {
       "id": "multimeter",
-      "title": "Мультиметр",
-      "es": "multímetro",
-      "description": "Старт — на безопасном низком напряжении.",
+      "title": "Мультиметр цифровой (UNI-T UT89X)",
+      "es": "multímetro digital (UNI-T UT89X)",
+      "description": "Цифровой мультиметр: измерение напряжения, тока, сопротивления, ёмкости, температуры, прозвонка цепей и бесконтактный детектор поля NCV (в мастерской: UNI-T UT89X).",
       "branchIds": [
         "electrical",
         "electronics",
@@ -18112,9 +18112,9 @@
     },
     {
       "id": "brush",
-      "title": "Кисть и малярная оснастка",
-      "es": "pincel / rodillo",
-      "description": "Пробный выкрас до основного изделия.",
+      "title": "Малярные кисти разного размера",
+      "es": "pinceles / brochas",
+      "description": "Набор плоских и малярных кистей для нанесения лазури, клеев, грунтовки и масел.",
       "branchIds": [
         "finish"
       ]
@@ -18196,9 +18196,9 @@
     },
     {
       "id": "wood.mallet",
-      "title": "Киянка и молоток",
-      "es": "mazo de carpintero / martillo",
-      "description": "Удар по стамеске, сборка на шкантах, подбивка деталей без повреждений.",
+      "title": "Молоток столярный с гвоздодёром и киянка",
+      "es": "martillo de carpintero con uña / mazo",
+      "description": "Столярный молоток с деревянной рукояткой и загнутой частью для вытаскивания гвоздей, а также киянка для сборки и работы со стамесками.",
       "branchIds": [
         "wood",
         "base"
@@ -18243,9 +18243,9 @@
     },
     {
       "id": "base.bits",
-      "title": "Набор свёрл по материалам",
-      "es": "juego de brocas (madera, metal, concreto)",
-      "description": "Разные свёрла для дерева, металла, бетона и плитки.",
+      "title": "Набор свёрл (по дереву, металлу, бетону) и зенковка",
+      "es": "juego de brocas (madera, metal, mampostería) y avellanador",
+      "description": "Свёрла по дереву (включая длинное), свёрла по металлу и кирпичу/бетону, а также коническая зенковка под потайные головки саморезов.",
       "branchIds": [
         "base",
         "wood"
@@ -18319,9 +18319,9 @@
     },
     {
       "id": "metal.pliers",
-      "title": "Плоскогубцы, круглогубцы и кусачки",
-      "es": "alicates y pinzas de corte",
-      "description": "Гибка и резка проволоки и тонкого прутка.",
+      "title": "Щипцы, тонкогубцы и плоскогубцы",
+      "es": "alicates de punta fina / pinzas",
+      "description": "Маленькие острые щипцы (тонкогубцы) и плоскогубцы для мелкой слесарной работы, удержания деталей и загиба проволоки.",
       "branchIds": [
         "metal"
       ]
@@ -18457,9 +18457,9 @@
     },
     {
       "id": "mechanics.lube",
-      "title": "Смазки",
-      "es": "lubricantes / grasa / grafito",
-      "description": "Жидкое масло, консистентная и сухая смазка, проникающее средство — каждая для своего узла.",
+      "title": "Проникающая смазка WD-40 и смазочные материалы",
+      "es": "lubricante multiuso WD-40 y grasas",
+      "description": "Проникающий аэрозоль WD-40 для расклинивания прикипевших соединений, вытеснения влаги и очистки, а также смазки для механизмов.",
       "branchIds": [
         "mechanics",
         "building"
@@ -18506,9 +18506,9 @@
     },
     {
       "id": "land.hose",
-      "title": "Садовый шланг и соединители",
-      "es": "manguera y acoples rápidos",
-      "description": "Шланг, быстросъёмы, переходник на кран и насадка для полива.",
+      "title": "Шланг гибкий с адаптером на кран",
+      "es": "manguera flexible con conector de canilla",
+      "description": "Гибкий прозрачный шланг и резьбовой переходник на кран для залива, слива и подачи воды.",
       "branchIds": [
         "land",
         "mechanics"
@@ -18895,6 +18895,120 @@
         "textile",
         "transport"
       ]
+    },
+    {
+      "id": "wood.sawhorses",
+      "title": "Рабочие козлы и съёмная столешница (мобильный верстак)",
+      "es": "caballetes de trabajo y tablero desmontable",
+      "description": "Пара прочных деревянных козлов и съёмная рабочая столешница для безопасного пиления, шлифовки, струбцинной сборки и мобильного верстака в мастерской.",
+      "branchIds": [
+        "wood",
+        "base"
+      ]
+    },
+    {
+      "id": "finish.floor_cleaning",
+      "title": "Инвентарь для уборки пола (щётка, совок, швабра с отжимом)",
+      "es": "escoba con mango, pala y escurridor de mopa",
+      "description": "Щётка для пола на длинной ручке, совок на длинной ручке и насадка-корзина для отжима швабры для поддержания чистоты в мастерской и доме.",
+      "branchIds": [
+        "finish",
+        "base"
+      ]
+    },
+    {
+      "id": "electrical.extension",
+      "title": "Удлинитель и разветвитель питания",
+      "es": "prolongador eléctrico y adaptador múltiple",
+      "description": "Силовой сетевой удлинитель и раздвоитель розетки для подключения электроинструмента, освещения и зарядных устройств в любой точке мастерской.",
+      "branchIds": [
+        "electrical",
+        "base"
+      ]
+    },
+    {
+      "id": "mechanics.heater",
+      "title": "Кипятильник (погружной электронагреватель)",
+      "es": "calentador de agua por inmersión",
+      "description": "Погружной электрический кипятильник для нагрева воды в ведре или баке для хозяйственных нужд, мытья и стирки.",
+      "branchIds": [
+        "mechanics",
+        "electrical"
+      ]
+    },
+    {
+      "id": "wood.dowels",
+      "title": "Шканты (8 мм) и кондуктор для шкантов",
+      "es": "tarugos de madera 8 mm y plantilla guía de espigado",
+      "description": "Деревянные рифлёные шканты диаметром 8 мм и кондуктор для соосного сверления точных отверстий при сборке мебельных щитов и каркасов.",
+      "branchIds": [
+        "wood"
+      ]
+    },
+    {
+      "id": "base.nails",
+      "title": "Гвозди строительные и столярные",
+      "es": "clavos medianos para madera",
+      "description": "Средние строительные и столярные гвозди для сборки черновых каркасов, временных настилов, козлов и демонтажно-монтажных работ.",
+      "branchIds": [
+        "base",
+        "wood",
+        "building"
+      ]
+    },
+    {
+      "id": "finish.solvent",
+      "title": "Уайт-спирит (растворитель / обезжириватель)",
+      "es": "aguarrás mineral / solvente desengrasante",
+      "description": "Органический растворитель уайт-спирит для очистки малярного инструмента и кистей, обезжиривания оснований, смывки масел и разбавления лазурей.",
+      "branchIds": [
+        "finish",
+        "base",
+        "wood"
+      ]
+    },
+    {
+      "id": "finish.masking_tape",
+      "title": "Малярная лента (бумажный скотч)",
+      "es": "cinta de enmascarar / cinta de pintor",
+      "description": "Бумажная клейкая лента для защиты смежных зон при окраске, временной фиксации деталей, разметки и защиты кромок от сколов при пилении.",
+      "branchIds": [
+        "finish",
+        "wood",
+        "base"
+      ]
+    },
+    {
+      "id": "base.magnets",
+      "title": "Магниты для фиксации и оснастки",
+      "es": "imanes de neodimio / imanes de sujeción",
+      "description": "Комплект небольших неодимовых магнитов для быстрого удержания крепежа, бит, фиксации направляющих и самодельных приспособлений мастерской.",
+      "branchIds": [
+        "base",
+        "metal",
+        "wood"
+      ]
+    },
+    {
+      "id": "glue.ca",
+      "title": "Цианакрилатный суперклей",
+      "es": "pegamento instantáneo cianoacrilato",
+      "description": "Быстротвердеющий цианакрилатный клей (секундный клей) для точечного склеивания, срочного ремонта пластика и дерева, а также фиксации заготовок на двухсторонний скотч.",
+      "branchIds": [
+        "base",
+        "wood",
+        "composite"
+      ]
+    },
+    {
+      "id": "wood.pencil",
+      "title": "Разметочный столярный карандаш",
+      "es": "lápiz de carpintero",
+      "description": "Графитный карандаш для столярной разметки, проведения базовых линий реза, засечек и маркировки деталей.",
+      "branchIds": [
+        "base",
+        "wood"
+      ]
     }
   ],
   "events": [
@@ -19131,7 +19245,34 @@
     "finish.neutral_cleaner": "have",
     "finish.rags": "have",
     "finish.soft_brush": "have",
-    "clamp": "have"
+    "clamp": "have",
+    "hacksaw": "want",
+    "router": "have",
+    "guide": "have",
+    "level": "have",
+    "pry": "have",
+    "multimeter": "have",
+    "handsaw": "have",
+    "trowel": "have",
+    "shears": "have",
+    "wood.mallet": "have",
+    "base.bits": "have",
+    "wrench": "have",
+    "mechanics.lube": "have",
+    "land.hose": "have",
+    "chisel": "have",
+    "metal.pliers": "have",
+    "wood.sawhorses": "have",
+    "finish.floor_cleaning": "have",
+    "electrical.extension": "have",
+    "mechanics.heater": "have",
+    "wood.dowels": "have",
+    "base.nails": "have",
+    "finish.solvent": "have",
+    "finish.masking_tape": "have",
+    "base.magnets": "have",
+    "glue.ca": "have",
+    "wood.pencil": "have"
   },
   "focus": [
     "wood",
