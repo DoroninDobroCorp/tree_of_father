@@ -19009,6 +19009,16 @@
         "base",
         "wood"
       ]
+    },
+    {
+      "id": "wood.corner_jig",
+      "title": "Уголок для выставления досок под 90 градусов (самодельный)",
+      "es": "escuadra de posicionamiento a 90° (casera)",
+      "description": "Самодельный угловой кондуктор / накладной уголок для точного выставления и фиксации досок под прямым углом 90° струбцинами при сборке мебели, рамок и каркасов без долгой примерки.",
+      "branchIds": [
+        "wood",
+        "base"
+      ]
     }
   ],
   "events": [
@@ -19272,7 +19282,8 @@
     "finish.masking_tape": "have",
     "base.magnets": "have",
     "glue.ca": "have",
-    "wood.pencil": "have"
+    "wood.pencil": "have",
+    "wood.corner_jig": "have"
   },
   "focus": [
     "wood",
