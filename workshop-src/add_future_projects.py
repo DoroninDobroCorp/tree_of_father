@@ -9,7 +9,7 @@ items={}
 def cost(i,title,low,high,basis,refs=None,quote=None):
     items[i]=dict(title=title,low=low,high=high,basis=basis,references=refs or [],quote=quote)
 refs={
- 'mule-r1':dict(title='MULE · исходный план R1',url='https://tree.54-38-65-155.sslip.io/workshop/mule-plan-r1.pdf',amount=None,currency='USD',access='document',checked='2026-10-10',note='Пользовательский план от 05.10.2026. Цены V1/V2 — диапазоны автора; часы интеграции оценены отдельно.'),
+ 'mule-r1':dict(title='MULE · исходный план R1',url='https://tree.31-220-90-37.sslip.io/workshop/mule-plan-r1.pdf',amount=None,currency='USD',access='document',checked='2026-10-10',note='Пользовательский план от 05.10.2026. Цены V1/V2 — диапазоны автора; часы интеграции оценены отдельно.'),
  'mule-motor':dict(title='Lüsqtoff · LM200',url='https://www.lusqtoff.com.ar/productos/motor-naftero-196-cc-o-65-hp-lm200',amount=242699,currency='ARS',access='page',checked='2026-10-10',note='PVP производителя. Вал 20 мм; совместимость сцепления подтвердить. Цена изменилась относительно R1. Доставка отдельно.'),
  'mule-axle':dict(title='Imperkart · ось 30 мм',url='https://www.imperkart.com.ar/productos/eje-de-30mm-importado-3mm/',amount=179548,currency='ARS',access='page',checked='2026-10-10',note='Одна ось как ценовой ориентир, не полный комплект ходовой и не доказательство пригодности для MULE. Скидка переводом не использована.'),
  'roof-ar':dict(title='Easy Argentina · chapa C27, 4,50 м',url='https://www.easy.com.ar/e116-e155-plancha-acanalada-c27-x-4-5-m/p',amount=63990,currency='ARS',access='search',checked='2026-10-10',note='Цена из индекса страницы продавца за один лист. Прямой просмотр не подтвердил; перепроверить. Толщину и крепления выбирает проектировщик. Не стоимость всей крыши.'),

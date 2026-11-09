@@ -10629,7 +10629,7 @@
       "x-maintenance-06"
     ]
   },
-  "treeURL": "https://tree.54-38-65-155.sslip.io/",
+  "treeURL": "https://tree.31-220-90-37.sslip.io/",
   "expansions": [
     {
       "id": "all-directions-v1",
@@ -12607,7 +12607,7 @@
       },
       "mule-r1": {
         "title": "MULE · исходный план R1",
-        "url": "https://tree.54-38-65-155.sslip.io/workshop/mule-plan-r1.pdf",
+        "url": "https://tree.31-220-90-37.sslip.io/workshop/mule-plan-r1.pdf",
         "amount": null,
         "currency": "USD",
         "access": "document",
