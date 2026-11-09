@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="ru"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Дорожная карта · $1500 в месяц</title><meta name="robots" content="noindex">
+<style>
+:root{--bg:#ecefe9;--paper:#fafbf7;--ink:#202a30;--muted:#59666c;--line:#cbd3cc;--accent:#24548c;--soft:#e0eaf3;--green:#2e694b;--greenbg:#e2eee4;--red:#a53e2e;--redbg:#f6e7df;--yellow:#e4bf40;--shadow:0 12px 45px #20303017;--s1:#2a78d6;--s2:#eb6834;--s3:#1baf7a;--s4:#eda100;--s5:#e87ba4;--s6:#008300;color-scheme:light}
+:root[data-theme=dark]{--bg:#10171a;--paper:#182125;--ink:#e5ece8;--muted:#a3b1b5;--line:#354147;--accent:#95c1ee;--soft:#20384b;--green:#8fd0a6;--greenbg:#20382b;--red:#ffae93;--redbg:#422b28;--yellow:#d5b34b;--shadow:0 12px 45px #0004;--s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--s6:#008300;color-scheme:dark}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#10171a;--paper:#182125;--ink:#e5ece8;--muted:#a3b1b5;--line:#354147;--accent:#95c1ee;--soft:#20384b;--green:#8fd0a6;--greenbg:#20382b;--red:#ffae93;--redbg:#422b28;--yellow:#d5b34b;--shadow:0 12px 45px #0004;--s1:#3987e5;--s2:#d95926;--s3:#199e70;--s4:#c98500;--s5:#d55181;--s6:#008300;color-scheme:dark}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button,input,select{font:inherit;color:inherit}button,a,input{touch-action:manipulation}button{cursor:pointer}
+a{color:var(--accent);text-underline-offset:3px}
+button,input,select{border:1px solid var(--line);background:var(--paper);border-radius:5px;padding:9px 12px}
+button:hover{border-color:var(--accent);background:var(--soft)}
+button.primary{background:var(--accent);color:var(--paper);border-color:var(--accent)}
+button.small{font-size:13px;padding:6px 9px}
+input[type=checkbox]{width:19px;height:19px;accent-color:var(--accent);padding:0;flex:none}
+input[type=number]{font-variant-numeric:tabular-nums;width:110px}
+button:focus-visible,a:focus-visible,input:focus-visible,summary:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+[hidden]{display:none!important}
+.page{max-width:1280px;margin:auto;padding:28px 32px 64px}
+.eyebrow,.mono{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}
+.eyebrow{color:var(--accent);font-size:12px;text-transform:uppercase;letter-spacing:.13em;margin:0 0 12px}
+.header{display:grid;grid-template-columns:1fr 310px;background:var(--paper);border:1.5px solid var(--ink)}
+.header-main{padding:28px 30px}
+.header h1{font-size:clamp(28px,4.1vw,48px);line-height:1.06;letter-spacing:-.04em;margin:0 0 15px;max-width:680px}
+.header p.lead{font-size:16px;max-width:650px;margin:0;color:var(--muted)}
+.stamp{border-left:1.5px solid var(--ink);display:grid;align-content:start}
+.stamp-row{padding:12px 16px;border-bottom:1px solid var(--line);font-size:13px;display:grid;grid-template-columns:90px 1fr;gap:10px}
+.stamp-row:last-child{border-bottom:0}
+.stamp-row span:first-child{color:var(--muted);font-size:11px;text-transform:uppercase;font-family:ui-monospace,monospace}
+.header-bottom{grid-column:1/-1;border-top:1.5px solid var(--ink);padding:12px 20px;display:flex;justify-content:space-between;gap:10px;align-items:center;font-size:13px;flex-wrap:wrap}
+.row{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.spread{justify-content:space-between}.grow{flex:1}
+.subtle{color:var(--muted)}.smalltext{font-size:13px}.nowrap{white-space:nowrap}
+.nav{position:sticky;top:0;z-index:5;display:flex;gap:6px;padding:16px 0 12px;background:var(--bg);border-bottom:1px solid var(--line);overflow-x:auto}
+.nav button{white-space:nowrap;background:transparent;border-color:transparent;font-size:14px;padding:10px 14px}
+.nav button[aria-selected=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.panel{padding-top:26px}
+h2{font-size:26px;line-height:1.2;letter-spacing:-.02em;margin:0 0 8px}h3{font-size:18px;line-height:1.3;margin:0 0 8px}p{margin:0 0 12px}
+.lede{max-width:850px;color:var(--muted);margin:0 0 22px}
+.metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line);background:var(--paper);margin:20px 0}
+.metric{padding:18px 20px;border-right:1px solid var(--line);min-width:0}.metric:last-child{border:0}
+.metric-label{font-size:12px;color:var(--muted);margin-bottom:7px}
+.metric-value{font-size:26px;font-weight:650;font-variant-numeric:tabular-nums;line-height:1.2;overflow-wrap:anywhere}
+.metric-note{font-size:12px;color:var(--muted);margin-top:7px}
+.positive{color:var(--green)}.negative{color:var(--red)}
+.two-col{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:22px}
+.box{background:var(--paper);border:1px solid var(--line);border-radius:5px;padding:20px;margin-bottom:20px;min-width:0}
+.box h3{margin-bottom:12px}
+.notice{padding:13px 16px;background:var(--soft);font-size:14px;border-left:3px solid var(--accent);margin:16px 0}
+.notice.warn{background:var(--redbg);border-color:var(--red)}
+.list{padding-left:20px;margin:8px 0}.list li{margin:5px 0;font-size:14px}
+.mini{list-style:none;padding:0;margin:0}.mini li{padding:10px 0;border-top:1px solid var(--line);font-size:14px}.mini li:first-child{border-top:0}
+.tablewrap{overflow:auto;background:var(--paper);border:1px solid var(--line);border-radius:5px;margin:12px 0}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{padding:11px 13px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line)}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600}
+tr:last-child td{border-bottom:0}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.price{font-family:ui-monospace,monospace;font-weight:650}
+tfoot td{font-weight:650;background:var(--soft)}
+.pill{display:inline-block;background:var(--soft);color:var(--accent);font-size:11px;padding:2px 7px;border-radius:4px;white-space:nowrap}
+.pill.ok{background:var(--greenbg);color:var(--green)}.pill.warn{background:var(--redbg);color:var(--red)}.pill.opt{background:transparent;border:1px dashed var(--muted);color:var(--muted)}
+/* gantt */
+.ganttwrap{overflow-x:auto;background:var(--paper);border:1px solid var(--line);border-radius:5px}
+.gantt{min-width:940px}
+.lane{display:grid;grid-template-columns:150px 1fr;border-bottom:1px solid var(--line)}
+.lane:last-child{border-bottom:0}
+.lname{padding:12px 12px;font-size:13px;font-weight:600;border-right:1px solid var(--line);display:flex;gap:8px;align-items:flex-start}
+.lname i{width:10px;height:10px;border-radius:2px;margin-top:5px;flex:none;background:var(--lc)}
+.area{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));grid-auto-rows:34px;gap:5px 0;padding:6px 0;background-image:linear-gradient(to right,var(--line) 1px,transparent 1px);background-size:calc(100%/12) 100%}
+.area.months,.area.seasons{grid-auto-rows:auto;padding:0;gap:0}
+.mcell{padding:8px 4px;text-align:center;font-size:12px;color:var(--muted)}
+.mcell.now{color:var(--ink);font-weight:700;background:var(--soft)}
+.scell{padding:5px 8px;font-size:11px;color:var(--muted);border-top:1px solid var(--line);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.scell.warm{background:color-mix(in srgb,var(--yellow) 18%,var(--paper))}.scell.cold{background:color-mix(in srgb,var(--accent) 14%,var(--paper))}.scell.mid{background:color-mix(in srgb,var(--green) 10%,var(--paper))}
+.bar{border:0;border-left:4px solid var(--lc);border-radius:4px;background:color-mix(in srgb,var(--lc) 22%,var(--paper));text-align:left;padding:4px 8px;margin:0 3px;font-size:12px;line-height:1.25;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;min-width:0;color:var(--ink)}
+.bar:hover{background:color-mix(in srgb,var(--lc) 38%,var(--paper))}
+.bar.opt{border-left-style:dashed;background:transparent;box-shadow:inset 0 0 0 1px var(--line)}
+.bar.done{opacity:.6}
+.bar b{font-family:ui-monospace,monospace;margin-right:6px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.chip{font-size:12px;padding:4px 9px;border:1px solid var(--line);border-radius:999px;background:var(--paper)}
+/* stages */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 16px}
+.filters button{font-size:13px;padding:7px 11px}
+.filters button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.filters .dot{display:inline-block;width:9px;height:9px;border-radius:2px;background:var(--lc);margin-right:6px}
+details.stage{background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--lc);border-radius:5px;margin-bottom:12px}
+details.stage>summary{list-style:none;cursor:pointer;padding:14px 18px;display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center}
+details.stage>summary::-webkit-details-marker{display:none}
+details.stage>summary::after{content:"▾";color:var(--muted);grid-column:4}
+.scode{font-family:ui-monospace,monospace;font-weight:700;color:var(--ink);font-size:18px}
+.stitle{font-weight:650;line-height:1.3}.smeta{font-size:12px;color:var(--muted);margin-top:2px}
+.sbody{padding:4px 18px 18px;border-top:1px solid var(--line)}
+.sbody h4{margin:18px 0 6px;font-size:12px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.gate{background:var(--soft);border-left:3px solid var(--accent);padding:11px 14px;font-size:14px;margin-top:14px}
+.stage.donecard .stitle{text-decoration:line-through;opacity:.7}
+.check{display:flex;align-items:center;gap:8px;font-size:13px}
+/* charts */
+.chart{margin:14px 0}
+svg.chart-svg{width:100%;height:auto;display:block;overflow:visible}
+.chart-svg .grid line{stroke:var(--line);stroke-width:1}
+.chart-svg .axis text{fill:var(--muted);font-size:11px}
+.chart-svg .base{stroke:var(--muted);stroke-width:1}
+.chart-svg .tgt{stroke:var(--ink);stroke-width:1.5;stroke-dasharray:5 4}
+.chart-svg .tgt-label{fill:var(--ink);font-size:11px}
+.chart-svg .val{fill:var(--ink);font-size:12px;font-weight:600}
+.chart-svg .hit{fill:transparent;cursor:default}
+.chart-svg .hit:hover+*,.chart-svg .hit:focus+*{filter:brightness(1.12)}
+.legend{display:flex;gap:16px;font-size:12px;color:var(--muted);flex-wrap:wrap;margin-top:6px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:6px;vertical-align:-1px}
+#tip{position:fixed;z-index:50;pointer-events:none;background:var(--ink);color:var(--bg);font-size:12px;line-height:1.4;padding:7px 10px;border-radius:5px;max-width:260px;box-shadow:var(--shadow)}
+details.tblview{margin-top:8px}details.tblview summary{cursor:pointer;color:var(--accent);font-size:13px}
+.fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin:12px 0}
+label.field{display:grid;gap:5px;font-size:12px;color:var(--muted)}label.field input{color:var(--ink);font-size:15px;width:100%}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{border:0;border-radius:0;border-right:1px solid var(--line);background:var(--paper)}
+.seg button:last-child{border-right:0}
+.seg button[aria-pressed=true]{background:var(--ink);color:var(--bg)}
+.tiers{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px;margin:12px 0}
+.tiers button{display:grid;gap:3px;text-align:left;padding:10px 12px;font-size:12px;line-height:1.3}
+.tiers button b{font-size:13px}.tiers button span{color:var(--muted)}
+.tiers button.in{background:var(--soft);border-color:var(--accent)}
+.tiers button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}.tiers button[aria-pressed=true] span{color:var(--bg);opacity:.8}
+.quick{display:flex;gap:6px;flex-wrap:wrap;margin-top:2px}.quick button[aria-pressed=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.checks{display:flex;gap:6px 22px;flex-wrap:wrap}
+tr.dim>td{opacity:.5}
+tr.cut td{background:var(--redbg);color:var(--red);font-weight:600;font-size:13px;text-align:center;opacity:1}
+footer{border-top:1px solid var(--line);margin-top:35px;padding-top:16px;font-size:12px;color:var(--muted);display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+@media(max-width:950px){.tiers{grid-template-columns:repeat(3,minmax(0,1fr))}.page{padding:18px}.header{grid-template-columns:1fr 260px}.two-col{grid-template-columns:1fr}.metrics{grid-template-columns:1fr 1fr}.metric{border-bottom:1px solid var(--line)}}
+@media(max-width:640px){.tiers{grid-template-columns:repeat(2,minmax(0,1fr))}.page{padding:12px 12px 40px}.header{grid-template-columns:1fr}.header-main{padding:20px}.stamp{border-left:0;border-top:1px solid var(--ink)}.nav{margin:0 -12px;padding:10px 12px;gap:2px}.nav button{font-size:13px;padding:9px 11px}.box{padding:16px}details.stage>summary{grid-template-columns:1fr auto}.scode{display:none}.metric-value{font-size:22px}}
+@media print{:root{--bg:#fff;--paper:#fff;--ink:#000;--muted:#444;--line:#bbb;--soft:#eee}.nav,button,.header-bottom{display:none}.panel[hidden]{display:block!important}details.stage{break-inside:avoid}details>*{display:block!important}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style></head><body><div class="page">
+<header class="header">
+<div class="header-main"><p class="eyebrow">Личный план · 12 месяцев · Эль-Болсон</p><h1>От инструментов<br>к $1500 в месяц</h1>
+<p class="lead">Шесть параллельных дорожек вместо лестницы: дерево и первые продажи, документы, металл и электроника, 3D-печать и ЧПУ, бревно в доску, стеклопластик и кружок. Каждая покупка привязана к условию «начинай, когда…», а не к дате.</p></div>
+<div class="stamp" id="stamp"></div>
+<div class="header-bottom"><span id="save-status" role="status">Отметки хранятся в этом браузере</span>
+<div class="row"><a class="small" href="/">Дерево навыков ↗</a><a class="small" href="/workshop/">План мастерской ↗</a><a class="small" href="/tech/">Дерево технологий ↗</a><button class="small" data-act="theme" aria-label="Переключить тему">Тема</button></div></div>
+</header>
+<nav class="nav" role="tablist" aria-label="Разделы" id="nav"></nav>
+<main id="main"></main>
+<footer><span>Суммы в USD, цены в ARS пересчитаны по курсу из вкладки «Деньги». Это планировочные оценки, а не прайс.</span><span id="foot-date"></span></footer>
+</div><div id="tip" role="tooltip" hidden></div>
+<script id="rm-data" type="application/json">__DATA__</script>
+<script>
+(function(){
+"use strict";
+var D=JSON.parse(document.getElementById('rm-data').textContent);
+var KEY='roadmap-v1';
+function defaults(){return {fx:D.meta.fx,scn:'base',tab:'map',lane:'all',showOpt:true,done:{},bought:{},inc:{},m12:{},unit:{},imp:{},open:{},shop:{}};}
+var S=load();
+function load(){try{var r=JSON.parse(localStorage.getItem(KEY)||'null');return Object.assign(defaults(),r||{});}catch(e){return defaults();}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+function $(s,r){return (r||document).querySelector(s);}
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+var nf=new Intl.NumberFormat('ru-RU',{maximumFractionDigits:0});
+function usd(n){n=Math.round(n);return (n<0?'−$':'$')+nf.format(Math.abs(n));}
+function ars(n){return 'ARS '+nf.format(Math.round(n));}
+function rng(a,b,f){f=f||usd;return Math.round(a)===Math.round(b)?f(a):f(a)+'–'+f(b).replace(/^[^\d]*/,'');}
+function sum(a){return a.reduce(function(x,y){return x+y;},0);}
+function lane(id){return D.lanes.filter(function(l){return l.id===id;})[0];}
+function stage(id){return D.stages.filter(function(s){return s.id===id;})[0];}
+function fx(){var v=+S.fx;return v>0?v:D.meta.fx;}
+function mlabel(m){return D.months[Math.max(1,Math.min(12,m))-1];}
+function itemRange(it){return it.usd?it.usd:[it.ars[0]/fx(),it.ars[1]/fx()];}
+function included(s){return (s.id in S.inc)?!!S.inc[s.id]:!s.optional;}
+function stageCost(s){var lo=0,hi=0;s.buys.forEach(function(b){var r=itemRange(b);lo+=r[0];hi+=r[1];});return [lo,hi];}
+function orderMonth(b,s){var sh=(b.lead||0)>=3?Math.ceil(b.lead/4.3):0;return Math.max(1,s.start-sh);}
+var SRC={local:'Аргентина',china:'Импорт',diy:'Своими руками',service:'Услуга'};
+var CONF={found:['ok','✓ найдено'],est:['','≈ оценка'],hyp:['warn','? гипотеза']};
+function confPill(c){var x=CONF[c]||CONF.est;return '<span class="pill '+x[0]+'">'+x[1]+'</span>';}
+
+/* ---------- расчёты ---------- */
+function cash(){
+  var lo=Array(12).fill(0),hi=Array(12).fill(0),rec=Array(12).fill(0);
+  D.stages.filter(included).forEach(function(s){s.buys.forEach(function(b){var r=itemRange(b),m=orderMonth(b,s)-1;lo[m]+=r[0];hi[m]+=r[1];});});
+  D.recurring.forEach(function(r){var u=[r.ars[0]/fx(),r.ars[1]/fx()];for(var m=r.from-1;m<12;m++)rec[m]+=(u[0]+u[1])/2;});
+  return {lo:lo,hi:hi,rec:rec};
+}
+function totals(){
+  var c=cash(),lo=sum(c.lo),hi=sum(c.hi),res=D.meta.reservePercent/100,mid=(lo+hi)/2,rec=sum(c.rec);
+  return {c:c,lo:lo,hi:hi,mid:mid,res:res,withRes:mid*(1+res),loRes:lo*(1+res),hiRes:hi*(1+res),rec:rec};
+}
+function scn(){return D.scenarios.filter(function(x){return x.id===S.scn;})[0]||D.scenarios[1];}
+function tgt(st){return S.m12[st.id]!=null?+S.m12[st.id]:st.m12;}
+function streamVal(st,m){if(m<st.start)return 0;return tgt(st)*(m-st.start+1)/(12-st.start+1)*scn().f;}
+function incomeSeries(){var a=[];for(var m=1;m<=12;m++){a.push(sum(D.streams.map(function(st){return streamVal(st,m);})));}return a;}
+function balanceSeries(){
+  var T=totals(),inc=incomeSeries(),bal=[],acc=0;
+  for(var i=0;i<12;i++){var spend=(T.c.lo[i]+T.c.hi[i])/2*(1+T.res)+T.c.rec[i];acc+=inc[i]-spend;bal.push(acc);}
+  return bal;
+}
+function hoursM12(){return sum(D.streams.map(function(st){return streamVal(st,12)/st.rate;}));}
+
+/* ---------- графики ---------- */
+function niceMax(v){if(v<=0)return 1;var p=Math.pow(10,Math.floor(Math.log10(v))),n=v/p;var k=n<=1?1:n<=2?2:n<=2.5?2.5:n<=5?5:10;return k*p;}
+function barChart(o){
+  var W=720,H=o.h||240,L=52,R=14,T=16,B=30,iw=W-L-R,ih=H-T-B;
+  var max=niceMax(Math.max.apply(null,o.vals.concat([o.target||0])));
+  var n=o.vals.length,bw=iw/n,w=Math.min(38,bw*0.62),s='';
+  s+='<svg class="chart-svg" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+esc(o.aria)+'">';
+  s+='<g class="grid axis">';
+  for(var i=0;i<=4;i++){var y=T+ih-ih*i/4;s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y+'" y2="'+y+'"/><text x="'+(L-8)+'" y="'+(y+4)+'" text-anchor="end">'+o.fmt(max*i/4)+'</text>';}
+  s+='</g><line class="base" x1="'+L+'" x2="'+(W-R)+'" y1="'+(T+ih)+'" y2="'+(T+ih)+'"/>';
+  o.vals.forEach(function(v,i){
+    var x=L+bw*i+(bw-w)/2,h=ih*v/max,y=T+ih-h;
+    if(h>0.5){var r=Math.min(4,w/2,h);s+='<path d="M'+x+','+(y+h)+'L'+x+','+(y+r)+'Q'+x+','+y+' '+(x+r)+','+y+'L'+(x+w-r)+','+y+'Q'+(x+w)+','+y+' '+(x+w)+','+(y+r)+'L'+(x+w)+','+(y+h)+'Z" fill="'+o.color+'"/>';}
+    s+='<rect class="hit" x="'+(L+bw*i)+'" y="'+T+'" width="'+bw+'" height="'+ih+'" tabindex="0" data-tip="'+esc(o.tip(i,v))+'"/>';
+    s+='<text class="axis" style="fill:var(--muted);font-size:11px" x="'+(L+bw*i+bw/2)+'" y="'+(H-10)+'" text-anchor="middle">'+esc(o.labels[i])+'</text>';
+  });
+  if(o.target){var ty=T+ih-ih*o.target/max;s+='<line class="tgt" x1="'+L+'" x2="'+(W-R)+'" y1="'+ty+'" y2="'+ty+'"/><text class="tgt-label" x="'+(L+6)+'" y="'+(ty-6)+'">'+esc(o.targetLabel)+'</text>';}
+  var last=o.vals[n-1];if(last>0){var ly=T+ih-ih*last/max;s+='<text class="val" x="'+(L+bw*(n-1)+bw/2)+'" y="'+(ly-6)+'" text-anchor="middle">'+o.fmt(last)+'</text>';}
+  return s+'</svg>';
+}
+function lineChart(o){
+  var W=720,H=o.h||240,L=56,R=16,T=16,B=30,iw=W-L-R,ih=H-T-B;
+  var mn=Math.min(0,Math.min.apply(null,o.vals)),mx=Math.max(0,Math.max.apply(null,o.vals));
+  var span=niceMax(Math.max(mx,-mn,1));var lo=mn<0?-span:0,hi=mx>0?span:0;if(lo===0&&hi===0)hi=span;
+  function Y(v){return T+ih-(v-lo)/(hi-lo)*ih;}
+  var n=o.vals.length,step=iw/(n-1||1);
+  var s='<svg class="chart-svg" viewBox="0 0 '+W+' '+H+'" role="img" aria-label="'+esc(o.aria)+'"><g class="grid axis">';
+  for(var i=0;i<=4;i++){var v=lo+(hi-lo)*i/4,y=Y(v);s+='<line x1="'+L+'" x2="'+(W-R)+'" y1="'+y+'" y2="'+y+'"/><text x="'+(L-8)+'" y="'+(y+4)+'" text-anchor="end">'+o.fmt(v)+'</text>';}
+  s+='</g><line class="base" x1="'+L+'" x2="'+(W-R)+'" y1="'+Y(0)+'" y2="'+Y(0)+'"/>';
+  var pts=o.vals.map(function(v,i){return (L+step*i)+','+Y(v);});
+  s+='<polyline fill="none" stroke="'+o.color+'" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round" points="'+pts.join(' ')+'"/>';
+  o.vals.forEach(function(v,i){var x=L+step*i,y=Y(v);
+    s+='<circle cx="'+x+'" cy="'+y+'" r="4" fill="'+o.color+'" stroke="var(--paper)" stroke-width="2"/>';
+    s+='<circle class="hit" cx="'+x+'" cy="'+y+'" r="13" tabindex="0" data-tip="'+esc(o.tip(i,v))+'"/>';
+    s+='<text class="axis" style="fill:var(--muted);font-size:11px" x="'+x+'" y="'+(H-10)+'" text-anchor="middle">'+esc(o.labels[i])+'</text>';});
+  return s+'</svg>';
+}
+function tblView(head,rows){
+  return '<details class="tblview"><summary>Показать таблицей</summary><div class="tablewrap"><table><thead><tr>'+head.map(function(h){return '<th>'+esc(h)+'</th>';}).join('')+'</tr></thead><tbody>'+rows.map(function(r){return '<tr>'+r.map(function(c){return '<td>'+esc(c)+'</td>';}).join('')+'</tr>';}).join('')+'</tbody></table></div></details>';
+}
+
+/* ---------- шапка ---------- */
+function renderStamp(){
+  var T=totals();
+  var rows=[['Цель','$'+nf.format(D.meta.target)+' чистыми в мес. к 12-му месяцу'],['Горизонт','12 месяцев, с '+D.meta.startLabel],['Бюджет',usd(T.loRes)+'–'+usd(T.hiRes).slice(1)+' с резервом '+D.meta.reservePercent+'%'],['Курс',nf.format(fx())+' ARS/USD'],['Цены','Аргентина · '+D.meta.pricesDate]];
+  $('#stamp').innerHTML=rows.map(function(r){return '<div class="stamp-row"><span>'+r[0]+'</span><span>'+esc(r[1])+'</span></div>';}).join('');
+}
+var TABS=[['map','Карта'],['stages','Этапы'],['shop','Закупки'],['money','Деньги'],['income','Доход'],['import','Ввоз'],['rules','Правила']];
+function renderNav(){
+  $('#nav').innerHTML=TABS.map(function(t){return '<button role="tab" data-act="tab" data-v="'+t[0]+'" aria-selected="'+(S.tab===t[0])+'">'+t[1]+'</button>';}).join('');
+}
+
+/* ---------- Карта ---------- */
+function tabMap(){
+  var h='<section class="panel"><h2>Карта на 12 месяцев</h2><p class="lede">Дорожки идут одновременно. Полоса — период, когда этап «живёт»; штриховая рамка — опциональный этап, который включается только по условию. Нажми на полосу, чтобы открыть этап.</p>';
+  h+='<div class="ganttwrap"><div class="gantt">';
+  h+='<div class="lane"><div class="lname"></div><div class="area months">'+D.months.map(function(m,i){return '<div class="mcell'+(i===0?' now':'')+'">'+esc(m)+(i===0?'<br><small>сейчас</small>':'')+'</div>';}).join('')+'</div></div>';
+  h+='<div class="lane"><div class="lname" style="font-weight:400;color:var(--muted)">Сезон</div><div class="area seasons">'+D.seasons.map(function(x){return '<div class="scell '+x.kind+'" style="grid-column:'+x.from+' / '+(x.to+1)+'">'+esc(x.label)+'</div>';}).join('')+'</div></div>';
+  D.lanes.forEach(function(l){
+    var st=D.stages.filter(function(s){return s.lane===l.id;}).sort(function(a,b){return a.start-b.start||a.end-b.end;});
+    var ends=[];var placed=st.map(function(s){var r=ends.findIndex(function(e){return e<s.start;});if(r<0){r=ends.length;ends.push(s.end);}else ends[r]=s.end;return {s:s,r:r};});
+    h+='<div class="lane" style="--lc:var(--s'+l.slot+')"><div class="lname"><i></i><span>'+esc(l.name)+'</span></div><div class="area">';
+    placed.forEach(function(p){var s=p.s,c=stageCost(s);
+      h+='<button class="bar'+(s.optional?' opt':'')+(S.done[s.id]?' done':'')+'" data-act="goto" data-v="'+s.id+'" style="grid-column:'+s.start+' / '+(s.end+1)+';grid-row:'+(p.r+1)+'" title="'+esc(s.id+' · '+s.title+' · '+mlabel(s.start)+' – '+mlabel(s.end)+' · '+rng(c[0],c[1]))+'"><b>'+s.id+'</b>'+esc(s.title)+'</button>';});
+    h+='</div></div>';
+  });
+  h+='</div></div>';
+  h+='<div class="chips" aria-label="События спроса">'+D.events.map(function(e){return '<span class="chip">'+esc(mlabel(e.m)+(e.to?'–'+mlabel(e.to):''))+' · '+esc(e.label)+'</span>';}).join('')+'</div>';
+  var nowSt=D.stages.filter(function(s){return s.start<=2&&!s.optional;});
+  var orders=[];D.stages.filter(included).forEach(function(s){s.buys.forEach(function(b){if((b.lead||0)>=3&&orderMonth(b,s)<=2)orders.push({s:s,b:b});});});
+  h+='<div class="two-col" style="margin-top:22px"><div><div class="box"><h3>Начать в первые два месяца</h3><ul class="mini">'+nowSt.map(function(s){return '<li><b>'+s.id+' · '+esc(s.title)+'</b><div class="subtle smalltext">'+esc(s.gate)+'</div></li>';}).join('')+'</ul></div>';
+  h+='<div class="box"><h3>Заказы с долгой доставкой</h3><p class="subtle smalltext">Если условие этапа выполнено, эти позиции нужно заказывать за 6–8 недель до старта этапа.</p><ul class="mini">'+(orders.length?orders.map(function(o){var r=itemRange(o.b);return '<li><b>'+esc(o.b.n)+'</b><div class="subtle smalltext">Этап '+o.s.id+' · заказать к '+esc(mlabel(orderMonth(o.b,o.s)))+' · '+rng(r[0],r[1])+'</div></li>';}).join(''):'<li>Нет</li>')+'</ul></div></div>';
+  h+='<div><div class="box"><h3>Принципы</h3><ul class="list">'+D.principles.map(function(p){return '<li>'+esc(p)+'</li>';}).join('')+'</ul></div>';
+  h+='<div class="box"><h3>Стартовая точка</h3><h4 class="subtle smalltext" style="margin:0 0 4px">Уже есть</h4><ul class="list">'+D.start.have.map(function(p){return '<li>'+esc(p)+'</li>';}).join('')+'</ul><h4 class="subtle smalltext" style="margin:10px 0 4px">Чего нет</h4><ul class="list">'+D.start.missing.map(function(p){return '<li>'+esc(p)+'</li>';}).join('')+'</ul><h4 class="subtle smalltext" style="margin:10px 0 4px">Сделано</h4><ul class="list">'+D.start.done.map(function(p){return '<li>'+esc(p)+'</li>';}).join('')+'</ul><div class="notice warn">'+esc(D.start.note)+'</div></div></div></div></section>';
+  return h;
+}
+
+/* ---------- Этапы ---------- */
+function stageCard(s){
+  var l=lane(s.lane),c=stageCost(s),done=!!S.done[s.id];
+  var open=(s.id in S.open)?S.open[s.id]:(s.start<=2&&!s.optional);
+  var h='<details class="stage'+(done?' donecard':'')+'" id="st-'+s.id+'" data-stage="'+s.id+'" style="--lc:var(--s'+l.slot+')"'+(open?' open':'')+'>';
+  h+='<summary><span class="scode">'+s.id+'</span><span><span class="stitle">'+esc(s.title)+'</span><div class="smeta">'+esc(l.short)+' · '+esc(mlabel(s.start))+' – '+esc(mlabel(s.end))+(s.optional?' · <span class="pill opt">опционально</span>':'')+'</div></span><span class="price nowrap">'+rng(c[0],c[1])+'</span></summary>';
+  h+='<div class="sbody"><p style="margin-top:14px">'+esc(s.summary)+'</p><div class="gate"><b>Начинай, когда: </b>'+esc(s.gate)+'</div>';
+  h+='<label class="check" style="margin-top:12px"><input type="checkbox" data-chk="done" data-id="'+s.id+'"'+(done?' checked':'')+'> Этап пройден</label>';
+  h+='<h4>Что покупаем</h4><div class="tablewrap"><table><thead><tr><th></th><th>Позиция</th><th>Откуда</th><th class="num">Цена</th></tr></thead><tbody>';
+  s.buys.forEach(function(b,i){var r=itemRange(b),key=s.id+':'+i;
+    h+='<tr><td><input type="checkbox" data-chk="bought" data-id="'+key+'"'+(S.bought[key]?' checked':'')+' aria-label="Куплено"></td><td><b>'+esc(b.n)+'</b> <span class="pill" title="'+esc((D.tiers[tierOf(b)-1]||{}).name||'')+'">P'+tierOf(b)+'</span>'+((b.lead||0)>=3?' <span class="pill">заказать к '+esc(mlabel(orderMonth(b,s)))+'</span>':'')+(b.note?'<div class="subtle smalltext">'+esc(b.note)+'</div>':'')+'</td><td>'+esc(SRC[b.src]||'')+'<div>'+confPill(b.conf)+'</div></td><td class="num price">'+rng(r[0],r[1])+(b.ars?'<div class="subtle smalltext">'+rng(b.ars[0],b.ars[1],ars)+'</div>':'')+'</td></tr>';});
+  h+='</tbody><tfoot><tr><td></td><td colspan="2">Итого по этапу</td><td class="num price">'+rng(c[0],c[1])+'</td></tr></tfoot></table></div>';
+  h+='<h4>Чему учимся</h4><ul class="list">'+s.learn.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>';
+  h+='<h4>Что это даёт в деньгах</h4><p>'+esc(s.earn)+'</p>';
+  h+='<h4>Этап закрыт, когда</h4><ul class="list">'+s.done.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>';
+  h+='<h4>Риски</h4><ul class="list">'+s.risks.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div></details>';
+  return h;
+}
+function tabStages(){
+  var h='<section class="panel"><h2>Этапы по дорожкам</h2><p class="lede">У каждого этапа есть условие старта, список покупок с источником и достоверностью цены, чему учимся и когда этап считается закрытым. Отмечай купленное и пройденное: отметки сохраняются в этом браузере.</p>';
+  h+='<div class="chips"><span class="chip">'+confPill('found')+' цена найдена в объявлении</span><span class="chip">'+confPill('est')+' пересчёт или мой разумный диапазон</span><span class="chip">'+confPill('hyp')+' нужна проверка у поставщика</span></div>';
+  h+='<div class="filters" role="group" aria-label="Фильтр дорожек"><button data-act="lane" data-v="all" aria-pressed="'+(S.lane==='all')+'">Все</button>'+D.lanes.map(function(l){return '<button data-act="lane" data-v="'+l.id+'" style="--lc:var(--s'+l.slot+')" aria-pressed="'+(S.lane===l.id)+'"><span class="dot"></span>'+esc(l.short)+'</button>';}).join('')+'</div>';
+  var list=D.stages.filter(function(s){return S.lane==='all'||s.lane===S.lane;}).sort(function(a,b){return a.start-b.start;});
+  h+=list.map(stageCard).join('')+'</section>';
+  return h;
+}
+
+/* ---------- Закупки ---------- */
+var SRCG=[['local','Купить в Аргентине'],['china','Импорт: слоты курьера'],['diy','Сделать самому'],['service','Услуги и документы']];
+function cfg(){var s=S.shop||{};if(s.v!==2)s={v:2};S.shop=Object.assign({group:'prio',only:true,tier:D.tiers.length,budget:0,hi:false,fill:false,hide:false},s);return S.shop;}
+function tierOf(b){return Math.min(D.tiers.length,Math.max(1,b.prio||D.tiers.length));}
+function cost(x){return cfg().hi?x.hi:(x.lo+x.hi)/2;}
+function shopItems(){
+  var a=[];
+  D.stages.forEach(function(s){if(!included(s))return;s.buys.forEach(function(b,i){var r=itemRange(b),key=s.id+':'+i;a.push({s:s,b:b,key:key,om:orderMonth(b,s),lo:r[0],hi:r[1],pr:tierOf(b),bought:!!S.bought[key]});});});
+  return a;
+}
+/* Порядок покупки: ступень приоритета → месяц заказа → цена. Бюджет считается по этому порядку. */
+function shopEval(){
+  var c=cfg(),all=shopItems();
+  all.sort(function(a,b){return a.pr-b.pr||a.om-b.om||cost(a)-cost(b)||a.b.n.localeCompare(b.b.n,'ru');});
+  var spent=0;all.forEach(function(x){if(x.bought)spent+=cost(x);});
+  var cap=c.budget>0?c.budget:Infinity,rem=cap-spent,run=0,stop=false,firstOver=null;
+  all.forEach(function(x){
+    if(x.bought){x.st='bought';return;}
+    if(x.pr>c.tier){x.st='tier';return;}
+    var k=cost(x);
+    if(!stop&&run+k<=rem+1e-9){run+=k;x.st='in';x.cum=run;}
+    else{x.st='over';if(!c.fill)stop=true;if(!firstOver)firstOver=x;}
+  });
+  var tierCum=[];for(var t=1;t<=D.tiers.length;t++){tierCum.push(sum(all.filter(function(x){return !x.bought&&x.pr<=t;}).map(cost)));}
+  var sel=all.filter(function(x){return x.st==='in';}),over=all.filter(function(x){return x.st==='over';}),below=all.filter(function(x){return x.st==='tier';});
+  return {all:all,spent:spent,cap:cap,rem:rem,run:run,firstOver:firstOver,tierCum:tierCum,sel:sel,over:over,below:below};
+}
+function statusPill(x){
+  if(x.st==='in')return '<span class="pill ok">в списке</span>';
+  if(x.st==='over')return '<span class="pill warn">не влезло</span>';
+  if(x.st==='tier')return '<span class="pill opt">ниже границы</span>';
+  return '<span class="pill">куплено</span>';
+}
+function shopRows(items,E,mode){
+  var c=cfg(),h='';
+  items.forEach(function(x){var b=x.b;
+    if(mode==='prio'&&!c.fill&&E.firstOver===x&&isFinite(E.cap))h+='<tr class="cut"><td colspan="6">Бюджет '+usd(E.cap)+' исчерпан'+(E.spent?' (уже куплено на '+usd(E.spent)+')':'')+': всё ниже не влезло</td></tr>';
+    var dim=(x.st==='in'||x.st==='bought')?'':' class="dim"';
+    var meta=mode==='month'?esc(b.cat):mode==='prio'?esc(mlabel(x.om))+' · '+esc(b.cat):esc(mlabel(x.om));
+    h+='<tr'+dim+'><td><input type="checkbox" data-chk="bought" data-id="'+x.key+'"'+(x.bought?' checked':'')+' aria-label="Куплено"></td><td'+(x.bought?' style="text-decoration:line-through"':'')+'><b>'+esc(b.n)+'</b>'+(b.note?'<div class="subtle smalltext">'+esc(b.note)+'</div>':'')+'<div class="smalltext"><a href="#" data-act="goto" data-v="'+x.s.id+'">'+x.s.id+' · '+esc(x.s.title)+'</a>'+(x.s.optional?' <span class="pill opt">опц.</span>':'')+'</div></td><td class="smalltext">'+statusPill(x)+'<div class="subtle" style="margin-top:4px">'+meta+'</div></td><td class="smalltext">'+esc(SRC[b.src]||'')+'<div>'+confPill(b.conf)+'</div></td><td class="num price">'+rng(x.lo,x.hi)+(b.ars?'<div class="subtle smalltext">'+rng(b.ars[0],b.ars[1],ars)+'</div>':'')+'</td><td class="num smalltext subtle">'+(x.st==='in'?usd(x.cum):'')+'</td></tr>';});
+  return h;
+}
+function shopGroups(E,forceIn){
+  var c=cfg(),list=E.all.slice();
+  if(forceIn)list=list.filter(function(x){return x.st==='in';});
+  else{if(c.only)list=list.filter(function(x){return !x.bought;});if(c.hide)list=list.filter(function(x){return x.st==='in'||x.st==='bought';});}
+  var g=[];
+  function mk(title,items,desc){if(!items.length)return;g.push({title:title,desc:desc||'',items:items,lo:sum(items.map(function(x){return x.lo;})),hi:sum(items.map(function(x){return x.hi;}))});}
+  if(c.group==='prio')D.tiers.forEach(function(t){mk('P'+t.n+' · '+t.name,list.filter(function(x){return x.pr===t.n;}),t.desc);});
+  else{
+    var by=function(a,b){return a.om-b.om||a.b.n.localeCompare(b.b.n,'ru');};
+    if(c.group==='cat')D.cats.forEach(function(k){mk(k,list.filter(function(x){return x.b.cat===k;}).sort(by));});
+    else if(c.group==='src')SRCG.forEach(function(k){mk(k[1],list.filter(function(x){return x.b.src===k[0];}).sort(by));});
+    else for(var m=1;m<=12;m++)mk((m===1?'Сейчас · ':'')+D.months[m-1],list.filter(function(x){return x.om===m;}).sort(by));
+  }
+  return g;
+}
+function tabShop(){
+  var c=cfg(),E=shopEval(),n=D.tiers.length;
+  var h='<section class="panel"><h2>Закупки: всё, что ещё нужно купить</h2><p class="lede">Единый список из всех этапов: основное оборудование и мелочи, защита и измерительный инструмент. Позиции стоят в порядке приоритета, от самого базового к необязательному. Выбери границу приоритета и общий бюджет: список покажет, что в него входит. Отмеченное купленным уходит из списка, но входит в потраченное.</p>';
+  /* ступени */
+  h+='<div class="box"><h3>Граница приоритета</h3><div class="tiers" role="group" aria-label="Граница приоритета">'+D.tiers.map(function(t,i){return '<button data-act="tier" data-v="'+t.n+'" title="'+esc(t.desc)+'" aria-pressed="'+(c.tier===t.n)+'" class="'+(t.n<c.tier?'in':'')+'"><b>P'+t.n+' · '+esc(t.name)+'</b><span>всё до сюда: '+usd(E.tierCum[i])+'</span></button>';}).join('')+'</div>';
+  h+='<details class="tblview"><summary>Что значат приоритеты</summary><ul class="list">'+D.tiers.map(function(t){return '<li><b>P'+t.n+' · '+esc(t.name)+'.</b> '+esc(t.desc)+'</li>';}).join('')+'</ul></details>';
+  h+='<div class="fields" style="margin-top:16px"><label class="field">Бюджет всего до, $ (0 — без лимита)<input type="number" min="0" step="100" value="'+(c.budget||0)+'" data-in="budget"></label><div class="field">Быстрый выбор<div class="quick">'+[1000,2500,5000,7500,10000,0].map(function(v){return '<button class="small" data-act="budget" data-v="'+v+'" aria-pressed="'+(c.budget===v)+'">'+(v?usd(v):'Без лимита')+'</button>';}).join('')+'</div></div></div>';
+  h+='<div class="checks"><label class="check"><input type="checkbox" data-chk="shopbasis"'+(c.hi?' checked':'')+'> Считать по верхней цене диапазона</label><label class="check"><input type="checkbox" data-chk="shopfill"'+(c.fill?' checked':'')+'> Не останавливаться на первой, что не влезла</label></div></div>';
+  /* итоги */
+  var lim=isFinite(E.cap);
+  h+='<div class="metrics"><div class="metric"><div class="metric-label">Входит в список</div><div class="metric-value">'+E.sel.length+'</div><div class="metric-note">на '+usd(E.run)+(lim?' из '+usd(E.cap):'')+'</div></div><div class="metric"><div class="metric-label">'+(lim?'Остаток бюджета':'Бюджет')+'</div><div class="metric-value '+(lim&&E.rem-E.run<0?'negative':'')+'">'+(lim?usd(Math.max(0,E.rem-E.run)):'без лимита')+'</div><div class="metric-note">'+(lim?(E.rem<0?'бюджет уже превышен покупками':'после списка и купленного'):'укажи сумму выше')+'</div></div><div class="metric"><div class="metric-label">Не влезло в бюджет</div><div class="metric-value">'+E.over.length+'</div><div class="metric-note">на '+usd(sum(E.over.map(cost)))+'</div></div><div class="metric"><div class="metric-label">Ниже границы / куплено</div><div class="metric-value">'+E.below.length+' / '+E.all.filter(function(x){return x.bought;}).length+'</div><div class="metric-note">потрачено '+usd(E.spent)+'</div></div></div>';
+  if(lim&&E.firstOver&&c.fill)h+='<div class="notice">Не влезают '+E.over.length+' поз. на '+usd(sum(E.over.map(cost)))+'. Самая приоритетная из них — <b>«'+esc(E.firstOver.b.n)+'»</b> (P'+E.firstOver.pr+', '+usd(cost(E.firstOver))+'). Остальные позиции добраны дешёвыми из списка ниже.</div>';
+  else if(lim&&E.firstOver)h+='<div class="notice">Бюджет закрывает всё по приоритету до позиции <b>«'+esc(E.firstOver.b.n)+'»</b> (P'+E.firstOver.pr+', '+usd(cost(E.firstOver))+'): она уже не влезает, и список на ней останавливается.</div>';
+  else if(lim&&!E.over.length&&E.sel.length)h+='<div class="notice">Бюджета хватает на всё до выбранной границы. Остаётся '+usd(E.rem-E.run)+'.</div>';
+  /* вид и действия */
+  h+='<div class="row spread" style="margin-bottom:14px"><div class="row"><span class="smalltext subtle">Группировать:</span><div class="seg" role="group" aria-label="Группировка">'+[['prio','По приоритету'],['month','По месяцам'],['cat','По типам'],['src','По источнику']].map(function(x){return '<button data-act="sgroup" data-v="'+x[0]+'" aria-pressed="'+(c.group===x[0])+'">'+x[1]+'</button>';}).join('')+'</div><label class="check"><input type="checkbox" data-chk="shoponly"'+(c.only?' checked':'')+'> Без купленного</label><label class="check"><input type="checkbox" data-chk="shophide"'+(c.hide?' checked':'')+'> Скрыть не вошедшее</label></div><div class="row"><button class="small" data-act="copy">Скопировать список</button><button class="small" data-act="print">Печать</button></div></div>';
+  var skipped=D.stages.filter(function(s){return s.optional&&!included(s);});
+  if(skipped.length)h+='<div class="notice">Не включены опциональные этапы: '+skipped.map(function(s){return '<b>'+s.id+'</b> '+esc(s.title);}).join('; ')+'. Они появятся в списке после включения. <button class="small" data-act="incl-all">Включить</button></div>';
+  var G=shopGroups(E,false);
+  if(!G.length)h+='<div class="notice">Показывать нечего: всё куплено или скрыто фильтрами.</div>';
+  G.forEach(function(g){
+    var open=g.items.filter(function(x){return !x.bought;});
+    h+='<div class="box"><div class="row spread"><h3>'+esc(g.title)+'</h3><span class="price">'+rng(g.lo,g.hi)+'</span></div>'+(g.desc?'<p class="subtle smalltext">'+esc(g.desc)+'</p>':'')+'<div class="tablewrap"><table><thead><tr><th></th><th>Позиция</th><th>Статус</th><th>Откуда</th><th class="num">Цена</th><th class="num">Σ</th></tr></thead><tbody>'+shopRows(g.items,E,c.group)+'</tbody></table></div></div>';
+  });
+  h+='<p class="subtle smalltext">Порядок внутри приоритета: сначала то, что нужно раньше (месяц заказа), при равенстве — дешёвое. Для долгой доставки месяц заказа на 6–8 недель раньше старта этапа. Столбец «Σ» — накопленная сумма по списку. Расчёт идёт по '+(c.hi?'верхней':'средней')+' цене диапазона.</p></section>';
+  return h;
+}
+function shopText(){
+  var c=cfg(),E=shopEval(),G=shopGroups(E,true),t='Список закупок · Эль-Болсон · цены в USD (курс '+nf.format(fx())+' ARS)\n';
+  t+='Граница приоритета: до P'+c.tier+' «'+D.tiers[c.tier-1].name+'»'+(isFinite(E.cap)?', бюджет всего до '+usd(E.cap)+(E.spent?' (куплено на '+usd(E.spent)+')':''):', без лимита бюджета')+'. Итого к покупке: '+usd(E.run)+' ('+E.sel.length+' поз.)\n';
+  G.forEach(function(g){t+='\n== '+g.title+' · '+rng(g.lo,g.hi)+' ==\n';g.items.forEach(function(x){t+='[ ] '+x.b.n+' — '+rng(x.lo,x.hi)+' ('+x.s.id+', к '+mlabel(x.om)+')\n';});});
+  return t;
+}
+function copyText(t,btn){
+  function ok(){var o=btn.textContent;btn.textContent='Скопировано ✓';setTimeout(function(){btn.textContent=o;},1800);}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(ok,function(){fallback();});}else fallback();
+  function fallback(){var ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');ok();}catch(e){btn.textContent='Не удалось';}document.body.removeChild(ta);}
+}
+
+/* ---------- Деньги ---------- */
+function tabMoney(){
+  var T=totals(),h='<section class="panel"><h2>Деньги</h2><p class="lede">Ожидаемая сумма — середина диапазонов по включённым этапам. Резерв '+D.meta.reservePercent+'% сверху, как в «Плане мастерской». Цены, найденные в аргентинских объявлениях, пересчитываются по курсу ниже.</p>';
+  h+='<div class="fields"><label class="field">Курс ARS за 1 USD<input type="number" min="1" step="5" value="'+fx()+'" data-in="fx"></label></div><p class="subtle smalltext">'+esc(D.meta.fxNote)+'</p>';
+  h+='<div class="metrics"><div class="metric"><div class="metric-label">Минимум</div><div class="metric-value">'+usd(T.lo)+'</div><div class="metric-note">без резерва</div></div><div class="metric"><div class="metric-label">Ожидаемо</div><div class="metric-value">'+usd(T.mid)+'</div><div class="metric-note">≈ '+ars(T.mid*fx())+'</div></div><div class="metric"><div class="metric-label">Максимум</div><div class="metric-value">'+usd(T.hi)+'</div><div class="metric-note">без резерва</div></div><div class="metric"><div class="metric-label">С резервом '+D.meta.reservePercent+'%</div><div class="metric-value">'+usd(T.withRes)+'</div><div class="metric-note">+ '+usd(T.rec)+' monotributo за год</div></div></div>';
+  var bought=0;D.stages.forEach(function(s){s.buys.forEach(function(b,i){if(S.bought[s.id+':'+i]){var r=itemRange(b);bought+=(r[0]+r[1])/2;}});});
+  h+='<p class="smalltext subtle">Отмечено купленным: <b>'+usd(bought)+'</b> по середине диапазона.</p>';
+  var spend=T.c.lo.map(function(v,i){return (v+T.c.hi[i])/2*(1+T.res)+T.c.rec[i];});
+  h+='<div class="box"><h3>Траты по месяцам</h3><p class="subtle smalltext">Позиция попадает в месяц заказа: этап стартует в месяце N, а длинная доставка заказывается за 6–8 недель. Показано ожидаемое значение с резервом и ежемесячным monotributo.</p><div class="chart">'+barChart({vals:spend,labels:D.months,color:'var(--s2)',fmt:usd,aria:'Траты по месяцам',tip:function(i,v){return D.months[i]+': '+usd(v)+' (диапазон '+usd(T.c.lo[i])+'–'+usd(T.c.hi[i]).slice(1)+' без резерва)';}})+'</div>'+tblView(['Месяц','Минимум','Максимум','Ожидаемо с резервом'],spend.map(function(v,i){return [D.months[i],usd(T.c.lo[i]),usd(T.c.hi[i]),usd(v)];}))+'</div>';
+  var pk=spend.indexOf(Math.max.apply(null,spend));
+  h+='<div class="box"><h3>Если денег в начале меньше</h3><p class="smalltext">Расходы первых двух месяцев — <b>'+usd(spend[0]+spend[1])+'</b> с резервом. Самый дорогой месяц — '+esc(D.months[pk])+' ('+usd(spend[pk])+').</p><p class="smalltext subtle">'+esc(D.cuts[0])+'</p><ul class="list">'+D.cuts.slice(1).map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div>';
+  h+='<div class="box"><h3>По дорожкам</h3><div class="tablewrap"><table><thead><tr><th>Дорожка</th><th class="num">Минимум</th><th class="num">Максимум</th></tr></thead><tbody>';
+  D.lanes.forEach(function(l){var lo=0,hi=0;D.stages.filter(function(s){return s.lane===l.id&&included(s);}).forEach(function(s){var c=stageCost(s);lo+=c[0];hi+=c[1];});h+='<tr style="--lc:var(--s'+l.slot+')"><td><span class="legend"><span><i style="background:var(--lc)"></i>'+esc(l.name)+'</span></span></td><td class="num price">'+usd(lo)+'</td><td class="num price">'+usd(hi)+'</td></tr>';});
+  h+='</tbody></table></div></div>';
+  h+='<div class="box"><h3>По приоритетам</h3><p class="subtle smalltext">Сколько стоит каждая ступень и всё до неё. Границу и бюджет выбираются на вкладке «Закупки».</p><div class="tablewrap"><table><thead><tr><th>Ступень</th><th class="num">Позиций</th><th class="num">Диапазон</th><th class="num">Всё до неё (середина)</th></tr></thead><tbody>';
+  var acc=0;D.tiers.forEach(function(tr){var its=shopItems().filter(function(x){return x.pr===tr.n;}),lo=sum(its.map(function(x){return x.lo;})),hi=sum(its.map(function(x){return x.hi;}));acc+=(lo+hi)/2;h+='<tr><td><b>P'+tr.n+' · '+esc(tr.name)+'</b></td><td class="num">'+its.length+'</td><td class="num price">'+rng(lo,hi)+'</td><td class="num price">'+usd(acc)+'</td></tr>';});
+  h+='</tbody></table></div></div>';
+  h+='<div class="box"><h3>Что входит в расчёт</h3><p class="subtle smalltext">Сними галочку, чтобы убрать этап из сумм и графика. Опциональные этапы выключены по умолчанию.</p><div class="tablewrap"><table><thead><tr><th></th><th>Этап</th><th>Когда</th><th class="num">Диапазон</th></tr></thead><tbody>';
+  D.stages.slice().sort(function(a,b){return a.start-b.start;}).forEach(function(s){var c=stageCost(s);h+='<tr><td><input type="checkbox" data-chk="inc" data-id="'+s.id+'"'+(included(s)?' checked':'')+' aria-label="Включить в расчёт"></td><td><b>'+s.id+'</b> · '+esc(s.title)+(s.optional?' <span class="pill opt">опционально</span>':'')+'</td><td class="nowrap">'+esc(mlabel(s.start))+' – '+esc(mlabel(s.end))+'</td><td class="num price">'+rng(c[0],c[1])+'</td></tr>';});
+  h+='</tbody></table></div></div>';
+  h+='<div class="box"><h3>Ежемесячные расходы</h3><ul class="mini">'+D.recurring.map(function(r){var u=[r.ars[0]/fx(),r.ars[1]/fx()];return '<li><b>'+esc(r.n)+'</b> · с месяца '+r.from+' · '+rng(u[0],u[1])+' в месяц ('+rng(r.ars[0],r.ars[1],ars)+') '+confPill(r.conf)+'<div class="subtle smalltext">'+esc(r.note)+'</div></li>';}).join('')+'</ul></div></section>';
+  return h;
+}
+
+/* ---------- Доход ---------- */
+function unitCalc(){
+  var u=Object.assign({},D.unit,S.unit);['price','materials','feePct','packaging','shipping','hours'].forEach(function(k){u[k]=+u[k]||0;});
+  var fee=u.price*u.feePct/100,ml=u.price-u.materials-fee-u.packaging-u.shipping,loc=u.price-u.materials-0.5;
+  return {u:u,ml:ml,loc:loc,mlH:u.hours?ml/u.hours:0,locH:u.hours?loc/u.hours:0};
+}
+function tabIncome(){
+  var inc=incomeSeries(),bal=balanceSeries(),T=totals(),sc=scn(),y1=sum(inc),m12=inc[11],hrs=hoursM12();
+  var h='<section class="panel"><h2>Доход: как дойти до $'+nf.format(D.meta.target)+'</h2><p class="lede">Модель из шести потоков. Каждый стартует в своём месяце и линейно растёт до цели к 12-му месяцу. Это <b>чистый доход</b> после материалов и комиссии площадки, до налога monotributo. Цифры потоков — гипотезы: меняй их и смотри итог.</p>';
+  h+='<div class="seg" role="group" aria-label="Сценарий">'+D.scenarios.map(function(x){return '<button data-act="scn" data-v="'+x.id+'" aria-pressed="'+(S.scn===x.id)+'">'+esc(x.n)+' ×'+x.f+'</button>';}).join('')+'</div><p class="subtle smalltext" style="margin-top:8px">'+esc(sc.note)+'</p>';
+  var reach=m12>=D.meta.target;
+  h+='<div class="metrics"><div class="metric"><div class="metric-label">Чистыми в 12-м месяце</div><div class="metric-value '+(reach?'positive':'negative')+'">'+usd(m12)+'</div><div class="metric-note">цель '+usd(D.meta.target)+'</div></div><div class="metric"><div class="metric-label">За первый год</div><div class="metric-value">'+usd(y1)+'</div><div class="metric-note">сумма 12 месяцев</div></div><div class="metric"><div class="metric-label">Баланс на конец года</div><div class="metric-value '+(bal[11]>=0?'positive':'negative')+'">'+usd(bal[11])+'</div><div class="metric-note">доход минус инвестиции и monotributo</div></div><div class="metric"><div class="metric-label">Часов в мастерской в мес.</div><div class="metric-value">'+nf.format(hrs)+'</div><div class="metric-note">в плане мастерской заложено 50</div></div></div>';
+  if(!reach&&m12>=0.9*D.meta.target)h+='<div class="notice">К 12-му месяцу выходит '+usd(m12)+' при цели '+usd(D.meta.target)+': почти, но с нулевым запасом. Запас даст ещё один поток или лишние часы.</div>';
+  else if(!reach)h+='<div class="notice warn">В этом сценарии к 12-му месяцу цель не достигается: '+usd(m12)+' против '+usd(D.meta.target)+'. Это не провал плана, а картина: цель потребует либо больше потоков, либо больше часов, либо ещё года.</div>';
+  h+='<div class="box"><h3>Чистый доход по месяцам</h3><div class="chart">'+barChart({vals:inc,labels:D.months,color:'var(--s1)',fmt:usd,target:D.meta.target,targetLabel:'Цель '+usd(D.meta.target),aria:'Чистый доход по месяцам',tip:function(i,v){return D.months[i]+': '+usd(v);}})+'</div>'+tblView(['Месяц','Чистыми'].concat(D.streams.map(function(s){return s.id;})),inc.map(function(v,i){return [D.months[i],usd(v)].concat(D.streams.map(function(st){return usd(streamVal(st,i+1));}));}))+'</div>';
+  h+='<div class="box"><h3>Накопленный баланс: доход минус инвестиции</h3><p class="subtle smalltext">Показывает, когда вложения в инструменты начинают отбиваться. Инвестиции берутся по ожидаемому значению с резервом, плюс ежемесячный monotributo.</p><div class="chart">'+lineChart({vals:bal,labels:D.months,color:'var(--s1)',fmt:usd,aria:'Накопленный баланс',tip:function(i,v){return D.months[i]+': '+(v<0?'−':'')+usd(Math.abs(v));}})+'</div>'+tblView(['Месяц','Баланс'],bal.map(function(v,i){return [D.months[i],usd(v)];}))+'</div>';
+  h+='<div class="box"><h3>Потоки дохода</h3><p class="subtle smalltext">Колонка «Цель 12-го месяца» редактируется (до коэффициента сценария). «Чистых $/час» — допущение о том, сколько ты зарабатываешь за час мастерской.</p><div class="tablewrap"><table><thead><tr><th>Поток</th><th>Старт</th><th class="num">Цель 12-го мес., $</th><th class="num">$/час</th><th class="num">Ч/мес в конце</th></tr></thead><tbody>';
+  D.streams.forEach(function(st){h+='<tr><td>'+esc(st.n)+'</td><td class="nowrap">'+esc(mlabel(st.start))+'</td><td class="num"><input type="number" min="0" step="10" value="'+tgt(st)+'" data-in="m12" data-id="'+st.id+'" aria-label="Цель потока"></td><td class="num">'+st.rate+'</td><td class="num">'+nf.format(streamVal(st,12)/st.rate)+'</td></tr>';});
+  h+='</tbody><tfoot><tr><td colspan="2">Итого в 12-м месяце</td><td class="num">'+usd(m12)+'</td><td></td><td class="num">'+nf.format(hrs)+'</td></tr></tfoot></table></div>';
+  h+='<div class="notice"><b>Про время.</b> '+nf.format(hrs)+' часов в месяц в мастерской — это примерно '+nf.format(hrs/4.3)+' часов в неделю, а продажи, фото, переписка и доставка добавят ещё около трети. В «Плане мастерской» сейчас стоит 50 часов в месяц: для цели $1500 темп придётся поднять к осени–зиме.</div></div>';
+  var uc=unitCalc(),u=uc.u,needML=uc.ml>0?D.meta.target/uc.ml:0,needLoc=uc.loc>0?D.meta.target/uc.loc:0;
+  h+='<div class="box"><h3>Экономика одного изделия</h3><p class="subtle smalltext">'+esc(D.unit.note)+'</p><div class="fields">'+[['price','Цена, $'],['materials','Материал, $'],['feePct','Комиссия площадки, %'],['packaging','Упаковка, $'],['shipping','Доставка за счёт продавца, $'],['hours','Часов на изделие']].map(function(f){return '<label class="field">'+f[1]+'<input type="number" min="0" step="0.5" value="'+u[f[0]]+'" data-in="unit" data-id="'+f[0]+'"></label>';}).join('')+'</div>';
+  h+='<div class="tablewrap"><table><thead><tr><th>Канал</th><th class="num">Чистыми за штуку</th><th class="num">В час</th><th class="num">Штук в мес. на $'+nf.format(D.meta.target)+'</th></tr></thead><tbody><tr><td>Mercado Libre (комиссия и доставка)</td><td class="num price">'+usd(uc.ml)+'</td><td class="num price">'+usd(uc.mlH)+'</td><td class="num">'+(needML?nf.format(needML):'—')+'</td></tr><tr><td>Локально: ферия, соседи, туристы (без комиссии и доставки)</td><td class="num price">'+usd(uc.loc)+'</td><td class="num price">'+usd(uc.locH)+'</td><td class="num">'+(needLoc?nf.format(needLoc):'—')+'</td></tr></tbody></table></div>';
+  h+='<p class="smalltext">Вывод: из одних дешёвых досок на $1500 не выйти по штукам. Нужны изделия дороже и заказы под клиента, а на Mercado Libre — компактные вещи, которые не дорого отправлять.</p></div></section>';
+  return h;
+}
+
+/* ---------- Ввоз ---------- */
+function impState(){
+  var I=D.import,s=S.imp||{};
+  return {fr:s.fr!=null?+s.fr:I.franchise,duty:s.duty!=null?+s.duty:I.dutyOnExcessPct,iva:s.iva!=null?+s.iva:I.ivaPct,
+    slots:I.slots.map(function(x,i){var o=(s.slots&&s.slots[i])||{};return {n:x.n,fob:o.fob!=null?+o.fob:x.fob,ship:o.ship!=null?+o.ship:x.ship,localArs:x.localArs,localNote:x.localNote};})};
+}
+function landed(fob,ship,p){if(!fob)return {duty:0,iva:0,total:0};var duty=Math.max(0,fob-p.fr)*p.duty/100,iva=(fob+duty)*p.iva/100;return {duty:duty,iva:iva,total:fob+duty+iva+ship};}
+function tabImport(){
+  var p=impState(),I=D.import,h='<section class="panel"><h2>Ввоз из Китая и таможня</h2><p class="lede">Режим pequeños envíos / courier: до '+I.slotsPerYear+' отправок в год на человека, франшиза $'+I.franchise+' FOB на отправку. Поэтому дорогие и лёгкие вещи (принтер, комплект LowRider, электроника) ввозим, а тяжёлое покупаем в Аргентине. Правила ниже — из вторичных источников, см. вкладку «Правила».</p>';
+  h+='<div class="notice warn"><b>Калькулятор оценочный.</b> Ставка пошлины на превышение франшизы зависит от товара, а в источниках разошлась (одна называет 50%, другая — «налоги общего режима»). Я заложил 50% как осторожное допущение. Перед оплатой спроси точный расчёт у курьера или в ARCA.</div>';
+  h+='<div class="box"><h3>Параметры</h3><div class="fields"><label class="field">Франшиза, $ FOB<input type="number" min="0" step="10" value="'+p.fr+'" data-in="imp" data-id="fr"></label><label class="field">Пошлина на превышение, %<input type="number" min="0" step="5" value="'+p.duty+'" data-in="imp" data-id="duty"></label><label class="field">НДС, %<input type="number" min="0" step="0.5" value="'+p.iva+'" data-in="imp" data-id="iva"></label></div>';
+  h+='<div class="tablewrap"><table><thead><tr><th>Слот</th><th class="num">Цена FOB, $</th><th class="num">Доставка, $</th><th class="num">Пошлина</th><th class="num">НДС</th><th class="num">Итого с ввозом</th><th class="num">Локально</th></tr></thead><tbody>';
+  var totF=0,totT=0;
+  p.slots.forEach(function(x,i){var L=landed(x.fob,x.ship,p);totF+=x.fob;totT+=L.total;
+    h+='<tr><td><b>'+(i+1)+'.</b> '+esc(x.n)+'</td><td class="num"><input type="number" min="0" step="10" value="'+x.fob+'" data-in="impslot" data-id="'+i+'" data-k="fob" aria-label="Цена FOB"></td><td class="num"><input type="number" min="0" step="5" value="'+x.ship+'" data-in="impslot" data-id="'+i+'" data-k="ship" aria-label="Доставка"></td><td class="num">'+usd(L.duty)+'</td><td class="num">'+usd(L.iva)+'</td><td class="num price">'+usd(L.total)+'</td><td class="num">'+(x.localArs?usd(x.localArs/fx())+'<div class="subtle smalltext">'+esc(x.localNote)+'</div>':'<span class="subtle smalltext">'+esc(x.localNote||'—')+'</span>')+'</td></tr>';});
+  h+='</tbody><tfoot><tr><td>Итого за 5 слотов</td><td class="num">'+usd(totF)+'</td><td></td><td></td><td></td><td class="num">'+usd(totT)+'</td><td></td></tr></tfoot></table></div></div>';
+  h+='<div class="two-col"><div class="box"><h3>Что где покупать</h3><div class="tablewrap"><table><thead><tr><th>Что</th><th>Где</th><th>Почему</th></tr></thead><tbody>'+I.channels.map(function(c){return '<tr><td><b>'+esc(c.item)+'</b></td><td>'+esc(c.where)+'</td><td class="subtle">'+esc(c.why)+'</td></tr>';}).join('')+'</tbody></table></div></div>';
+  h+='<div><div class="box"><h3>Сроки (оценка)</h3><p class="subtle smalltext">Источники сроков не называют. Это мои ориентиры, проверь у перевозчика.</p><ul class="mini">'+I.timing.map(function(t){return '<li><b>'+esc(t.n)+'</b><div class="subtle smalltext">'+esc(t.t)+'</div></li>';}).join('')+'</ul><div class="notice">Планируй <b>6–8 недель</b> от заказа до руки. Принтер заказывается в декабре, чтобы быть в феврале.</div></div></div></div></section>';
+  return h;
+}
+
+/* ---------- Правила ---------- */
+function tabRules(){
+  var h='<section class="panel"><h2>Правила, риски и источники</h2><p class="lede">Короткая справка по тому, что влияет на план. Это не юридическая консультация: цифры из открытых источников, перед решением сверяй с ARCA, муниципалитетом и поставщиком.</p><div class="two-col"><div>';
+  D.rules.forEach(function(r){h+='<div class="box"><h3>'+esc(r.title)+'</h3><ul class="list">'+r.items.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div>';});
+  h+='</div><div><div class="box"><h3>Не удалось проверить</h3><ul class="list">'+D.open.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div><div class="box"><h3>Источники</h3><ul class="list">'+D.sources.map(function(s){return '<li><a href="'+esc(s.u)+'" target="_blank" rel="noopener noreferrer">'+esc(s.t)+'</a></li>';}).join('')+'</ul></div></div></div></section>';
+  return h;
+}
+
+/* ---------- отрисовка ---------- */
+var VIEWS={map:tabMap,stages:tabStages,shop:tabShop,money:tabMoney,income:tabIncome,import:tabImport,rules:tabRules};
+function render(keepScroll){
+  var y=window.scrollY;
+  renderNav();renderStamp();
+  $('#main').innerHTML=(VIEWS[S.tab]||tabMap)();
+  if(keepScroll)window.scrollTo(0,y);
+}
+function setTab(t,noScroll){S.tab=t;save();render(false);if(!noScroll)window.scrollTo(0,0);}
+function gotoStage(id){S.tab='stages';S.lane='all';S.open[id]=true;save();render(false);var el=document.getElementById('st-'+id);if(el){el.setAttribute('open','');el.scrollIntoView({block:'start'});}}
+
+document.addEventListener('click',function(e){
+  var t=e.target.closest('[data-act]');if(!t)return;var a=t.dataset.act,v=t.dataset.v;if(t.tagName==='A')e.preventDefault();
+  if(a==='tab')setTab(v);
+  else if(a==='goto')gotoStage(v);
+  else if(a==='lane'){S.lane=v;save();render(true);}
+  else if(a==='scn'){S.scn=v;save();render(true);}
+  else if(a==='sgroup'){cfg().group=v;save();render(true);}
+  else if(a==='tier'){cfg().tier=+v;save();render(true);}
+  else if(a==='budget'){cfg().budget=+v;save();render(true);}
+  else if(a==='copy'){copyText(shopText(),t);}
+  else if(a==='print'){window.print();}
+  else if(a==='incl-all'){D.stages.forEach(function(s){if(s.optional)S.inc[s.id]=true;});save();render(true);}
+  else if(a==='theme'){var cur=document.documentElement.getAttribute('data-theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light');var nx=cur==='dark'?'light':'dark';document.documentElement.setAttribute('data-theme',nx);try{localStorage.setItem('roadmap-theme',nx);}catch(x){}}
+});
+document.addEventListener('change',function(e){
+  var t=e.target;
+  if(t.dataset.chk){var id=t.dataset.id;
+    if(t.dataset.chk==='done')S.done[id]=t.checked;
+    else if(t.dataset.chk==='bought')S.bought[id]=t.checked;
+    else if(t.dataset.chk==='inc')S.inc[id]=t.checked;
+    else if(t.dataset.chk==='shoponly')cfg().only=t.checked;
+    else if(t.dataset.chk==='shophide')cfg().hide=t.checked;
+    else if(t.dataset.chk==='shopbasis')cfg().hi=t.checked;
+    else if(t.dataset.chk==='shopfill')cfg().fill=t.checked;
+    save();render(true);return;}
+  if(t.dataset.in){var k=t.dataset.in,val=parseFloat(t.value);if(isNaN(val)||val<0)val=0;
+    if(k==='fx')S.fx=val||D.meta.fx;
+    else if(k==='m12')S.m12[t.dataset.id]=val;
+    else if(k==='unit')S.unit[t.dataset.id]=val;
+    else if(k==='budget')cfg().budget=val;
+    else if(k==='imp'){S.imp=S.imp||{};S.imp[t.dataset.id]=val;}
+    else if(k==='impslot'){S.imp=S.imp||{};S.imp.slots=S.imp.slots||[];var i=+t.dataset.id;S.imp.slots[i]=S.imp.slots[i]||{};S.imp.slots[i][t.dataset.k]=val;}
+    save();render(true);}
+});
+document.addEventListener('toggle',function(e){var d=e.target;if(d.dataset&&d.dataset.stage){S.open[d.dataset.stage]=d.open;save();}},true);
+/* подсказки */
+var tip=$('#tip');
+function showTip(el,x,y){var t=el.getAttribute('data-tip');if(!t)return;tip.textContent=t;tip.hidden=false;var r=tip.getBoundingClientRect();var nx=Math.min(x+14,innerWidth-r.width-8),ny=Math.max(8,y-r.height-12);tip.style.left=nx+'px';tip.style.top=ny+'px';}
+document.addEventListener('pointermove',function(e){var el=e.target.closest&&e.target.closest('[data-tip]');if(el)showTip(el,e.clientX,e.clientY);else tip.hidden=true;});
+document.addEventListener('focusin',function(e){var el=e.target.closest&&e.target.closest('[data-tip]');if(el){var b=el.getBoundingClientRect();showTip(el,b.left+b.width/2,b.top);}});
+document.addEventListener('focusout',function(){tip.hidden=true;});
+document.addEventListener('scroll',function(){tip.hidden=true;},{passive:true});
+try{var th=localStorage.getItem('roadmap-theme');if(th)document.documentElement.setAttribute('data-theme',th);}catch(e){}
+$('#foot-date').textContent='Цены: '+D.meta.pricesDate;
+render(false);
+})();
+</script></body></html>
