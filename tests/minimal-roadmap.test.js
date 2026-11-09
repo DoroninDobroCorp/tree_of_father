@@ -69,7 +69,7 @@ const memory2=new Map([["roadmap-minimal-v2",previousMarks],["roadmap-v1",old]])
 const context2={...sandbox,window:{scrollY:0,scrollTo(){}},localStorage:{getItem:k=>memory2.get(k)||null,setItem:(k,v)=>memory2.set(k,v)},document:{...document,getElementById(id){if(!nodes2.has(id))nodes2.set(id,{textContent:id==="rm-data"?JSON.stringify(data):"",innerHTML:"",scrollIntoView(){}});return nodes2.get(id);},addEventListener(){}}};
 vm.createContext(context2);vm.runInContext(script,context2);
 const migrated=context2.window.MinimalWorkshop.getState();
-assert.strictEqual(migrated.ownerRevision,4);assert.strictEqual(migrated.printer,"k2");assert.strictEqual(migrated.sizeX,1250);assert.strictEqual(migrated.status.dust,"ordered");assert.strictEqual(migrated.prices.dust,255);
+assert.strictEqual(migrated.ownerRevision,5);assert.strictEqual(migrated.printer,"k2");assert.strictEqual(migrated.sizeX,1250);assert.strictEqual(migrated.status.dust,"ordered");assert.strictEqual(migrated.prices.dust,255);
 console.log("PASS: owner migration preserves marks/prices; full-sheet materials scale; tables and MIG alternatives do not double count");
 
 const narrow=plain(app.roomGeometry(1600,3050,"wall")),wide=plain(app.roomGeometry(2200,3050,"wall")),centered=plain(app.roomGeometry(1600,3050,"center"));
@@ -79,3 +79,26 @@ assert.strictEqual(migrated.sizeY,2660);assert.strictEqual(migrated.welding,"mig
 assert.strictEqual(app.dimensions(1250,2660,6.35).belt,7829);assert.strictEqual(app.dimensions(1860,2660,6.35).belt,8439);
 for(const cuts of [[2980,2980],[1500,1500,1500,730,730],[1500,1500,730,730,730,730]])assert(cuts.reduce((a,b)=>a+b,0)+cuts.length*3<=6000,"Stock cut fits with 3 mm kerf");
 console.log("PASS: room clearances, long narrow CNC, regular-welding migration and preliminary stock cuts");
+
+// Revision 5 must preserve deliberate revision-4 choices and all progress.
+const rev4={schema:2,ownerRevision:4,printer:"ff",table:"wood",welding:"none",sizeX:1860,sizeY:2660,roomPreset:"wide",roomPlacement:"center",done:{B0:true},status:{dust:"ordered"},prices:{dust:333}};
+const memory3=new Map([["roadmap-minimal-v2",JSON.stringify(rev4)],["roadmap-v1",old]]),nodes3=new Map();
+const context3={...sandbox,window:{scrollY:0,scrollTo(){}},localStorage:{getItem:k=>memory3.get(k)||null,setItem:(k,v)=>memory3.set(k,v)},document:{...document,getElementById(id){if(!nodes3.has(id))nodes3.set(id,{textContent:id==="rm-data"?JSON.stringify(data):"",innerHTML:"",scrollIntoView(){}});return nodes3.get(id);},addEventListener(){}}};
+vm.createContext(context3);vm.runInContext(script,context3);
+const upgraded=context3.window.MinimalWorkshop.getState();
+for(const key of ["printer","table","welding","sizeX","sizeY","roomPreset","roomPlacement"])assert.strictEqual(upgraded[key],rev4[key],"Preserve revision-4 choice "+key);
+assert.strictEqual(upgraded.ownerRevision,5);assert.strictEqual(upgraded.roomBarrier,"curtain");assert(upgraded.done.B0);assert.strictEqual(upgraded.status.dust,"ordered");assert.strictEqual(upgraded.prices.dust,333);
+assert.strictEqual(memory3.get("roadmap-v1"),old);
+change({setting:"roomBarrier"},"curtain");const curtainTotal=app.total();assert(needed("room-curtain"));assert(!needed("room-panels"));assert(needed("air-outlet"));assert(needed("room-exhaust"));
+change({setting:"roomBarrier"},"panels");const panelTotal=app.total();assert(!needed("room-curtain"));assert(needed("room-panels"));
+assert(Math.abs(panelTotal[0]-curtainTotal[0]-60)<1e-6);assert(Math.abs(panelTotal[1]-curtainTotal[1]-120)<1e-6);
+change({status:"room-panels"},"bought");assert(!needed("room-panels"));change({setting:"roomBarrier"},"curtain");assert(needed("room-curtain"));change({setting:"roomBarrier"},"panels");assert(!needed("room-panels"),"Switching alternative preserves purchase status");
+assert.strictEqual(narrow.opening,2700);assert.strictEqual(narrow.openingOffsetKnown,false);assert.strictEqual(narrow.accessConfirmed,false);assert.strictEqual(wide.accessConfirmed,false);
+assert(data.stages.find(x=>x.id==="D3").deps.includes("B2"),"Room trial precedes table fabrication");
+console.log("PASS: revision-5 migration keeps choices/progress; portable barriers are exclusive; ventilation counted once; opening does not certify access");
+console.log("Default remaining scenarios with 15% reserve:",JSON.stringify({launch:context2.window.MinimalWorkshop.scenarioCost({status:{},prices:{}},true),complete:context2.window.MinimalWorkshop.scenarioCost({status:{},prices:{}},false)}));
+
+assert.strictEqual(narrow.cabinetClearance,300);assert.strictEqual(wide.cabinetClearance,-300);assert.strictEqual(centered.cabinetClearance,-50);
+assert.strictEqual(app.roomGeometry(1600,3050,"wall","moved").cabinetClearance,800);
+click({tab:"room"});change({setting:"roomCabinet"},"moved");assert(elements.get("main").innerHTML.includes("Напротив шкафа"));assert(elements.get("main").innerHTML.includes("800 мм"));
+console.log("PASS: cabinet section calculations; moved storage changes clearance without claiming a final layout");
