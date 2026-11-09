@@ -22,12 +22,12 @@ function change(dataset,value,type="select-one"){events.change({target:{dataset,
 function plain(x){return JSON.parse(JSON.stringify(x));}
 assert.deepStrictEqual(plain(app.dimensions(600,900,6.35)),{strut:769,xrail:766,yrail:1155,xbelt:949,ybelt:1355,belt:3659,tableX:891.7,tableY:1213});
 assert.strictEqual(app.dimensions(1220,2440,6.35).belt,7359);
-for(const tab of ["map","stages","shop","cnc","printer","welding","wood","supply","sources"]){
+for(const tab of ["map","room","stages","shop","cnc","printer","welding","wood","supply","sources"]){
  click({tab});assert(elements.get("main").innerHTML.length>1000,tab+" rendered");
  assert(!/\b(?:NaN|undefined)\b/.test(elements.get("main").innerHTML),tab+" has no invalid values");
 }
 function needed(id){return app.needed(data.items.find(i=>i.id===id));}
-assert(!needed("print-service"));assert(!needed("printer-ff"));assert(!needed("printer-p1"));assert(needed("printer-k2"));assert(needed("filament"));assert.strictEqual(app.getState().sizeX,1250);assert.strictEqual(app.getState().sizeY,2500);assert.strictEqual(app.getState().budget,5000);assert(needed("cnc-table-steel"));assert(!needed("cnc-table"));
+assert(!needed("print-service"));assert(!needed("printer-ff"));assert(!needed("printer-p1"));assert(needed("printer-k2"));assert(needed("filament"));assert.strictEqual(app.getState().sizeX,1250);assert.strictEqual(app.getState().sizeY,2660);assert.strictEqual(app.getState().budget,5000);assert(needed("cnc-table-steel"));assert(!needed("cnc-table"));
 change({setting:"printer"},"ff");assert(!needed("print-service"));assert(needed("printer-ff"));assert(needed("filament"));assert(!needed("printer-p1"));
 change({setting:"printer"},"p1");assert(!needed("printer-ff"));assert(needed("printer-p1"));
 change({setting:"motion"},"kit");assert(needed("motion-kit"));assert(!needed("motion-china"));assert(!needed("xz"));assert(needed("controller"));
@@ -46,7 +46,7 @@ click({size:"1220,2440"});assert.strictEqual(app.getState().sizeY,2440);
 click({action:"wood-fixed"});assert(app.getState().wood.fixed>0);
 change({wood:"yield"},"0","number");assert.strictEqual(app.woodCalc().usable,0);assert.strictEqual(app.woodCalc().unit,null);assert.strictEqual(app.woodCalc().breakEven,null);
 assert.strictEqual(storage.get("roadmap-v1"),old,"Legacy marks preserved");
-console.log("PASS: all 9 views render; dimensions, exclusive choices, inventory, statuses, overrides, currency, wood calculator, legacy preservation");
+console.log("PASS: all 10 views render; dimensions, exclusive choices, inventory, statuses, overrides, currency, wood calculator, legacy preservation");
 
 
 change({setting:"printer"},"k2");change({setting:"table"},"steel");change({setting:"welding"},"none");
@@ -69,5 +69,13 @@ const memory2=new Map([["roadmap-minimal-v2",previousMarks],["roadmap-v1",old]])
 const context2={...sandbox,window:{scrollY:0,scrollTo(){}},localStorage:{getItem:k=>memory2.get(k)||null,setItem:(k,v)=>memory2.set(k,v)},document:{...document,getElementById(id){if(!nodes2.has(id))nodes2.set(id,{textContent:id==="rm-data"?JSON.stringify(data):"",innerHTML:"",scrollIntoView(){}});return nodes2.get(id);},addEventListener(){}}};
 vm.createContext(context2);vm.runInContext(script,context2);
 const migrated=context2.window.MinimalWorkshop.getState();
-assert.strictEqual(migrated.ownerRevision,3);assert.strictEqual(migrated.printer,"k2");assert.strictEqual(migrated.sizeX,1250);assert.strictEqual(migrated.status.dust,"ordered");assert.strictEqual(migrated.prices.dust,255);
+assert.strictEqual(migrated.ownerRevision,4);assert.strictEqual(migrated.printer,"k2");assert.strictEqual(migrated.sizeX,1250);assert.strictEqual(migrated.status.dust,"ordered");assert.strictEqual(migrated.prices.dust,255);
 console.log("PASS: owner migration preserves marks/prices; full-sheet materials scale; tables and MIG alternatives do not double count");
+
+const narrow=plain(app.roomGeometry(1600,3050,"wall")),wide=plain(app.roomGeometry(2200,3050,"wall")),centered=plain(app.roomGeometry(1600,3050,"center"));
+assert.strictEqual(narrow.left,100);assert.strictEqual(narrow.right,800);assert.strictEqual(narrow.end,1275);
+assert.strictEqual(wide.left+wide.right,300);assert.strictEqual(wide.right,200);assert.strictEqual(centered.left,450);assert.strictEqual(centered.right,450);
+assert.strictEqual(migrated.sizeY,2660);assert.strictEqual(migrated.welding,"mig");
+assert.strictEqual(app.dimensions(1250,2660,6.35).belt,7829);assert.strictEqual(app.dimensions(1860,2660,6.35).belt,8439);
+for(const cuts of [[2980,2980],[1500,1500,1500,730,730],[1500,1500,730,730,730,730]])assert(cuts.reduce((a,b)=>a+b,0)+cuts.length*3<=6000,"Stock cut fits with 3 mm kerf");
+console.log("PASS: room clearances, long narrow CNC, regular-welding migration and preliminary stock cuts");
