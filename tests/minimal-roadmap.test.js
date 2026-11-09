@@ -102,3 +102,9 @@ assert.strictEqual(narrow.cabinetClearance,300);assert.strictEqual(wide.cabinetC
 assert.strictEqual(app.roomGeometry(1600,3050,"wall","moved").cabinetClearance,800);
 click({tab:"room"});change({setting:"roomCabinet"},"moved");assert(elements.get("main").innerHTML.includes("Напротив шкафа"));assert(elements.get("main").innerHTML.includes("800 мм"));
 console.log("PASS: cabinet section calculations; moved storage changes clearance without claiming a final layout");
+
+const controllerOrder=data.items.find(i=>i.id==="controller"),mechanicsOrder=data.items.find(i=>i.id==="motion-china"),tableOrder=data.items.find(i=>i.id==="cnc-table-steel");
+assert.strictEqual(controllerOrder.stage,"D32");assert.strictEqual(app.purchasePhase(controllerOrder),1);
+assert(app.purchasePhase(controllerOrder)<app.purchasePhase(tableOrder),"Controller is ordered before table fabrication, despite installation in D32");
+assert.strictEqual(app.purchasePhase(controllerOrder),app.purchasePhase(mechanicsOrder),"Controller and long-lead mechanics share early order window");
+console.log("PASS: procurement order is separate from installation stage; controller joins early mechanics order");
