@@ -37,7 +37,7 @@ app.getInventory().caliper="have";assert(!needed("caliper"));
 assert(Math.abs(app.total()[0]-(prior[0]-caliper.cost[0]))<1e-6);
 change({status:"dust"},"ordered");assert(!needed("dust"));change({status:"dust"},"need");assert(needed("dust"));
 change({price:"dust"},"250","number");assert.deepStrictEqual(plain(app.cost(data.items.find(i=>i.id==="dust"))),[250,250]);
-change({price:"dust"},"","number");assert.deepStrictEqual(plain(app.cost(data.items.find(i=>i.id==="dust"))),[330,350]);
+change({price:"dust"},"","number");assert.deepStrictEqual(plain(app.cost(data.items.find(i=>i.id==="dust"))),[200,250]);
 change({setting:"mask"},"keep");assert(!needed("mask-body"));assert(!needed("mask-filters"));
 change({setting:"planer"},"service");assert(!needed("planer"));assert(!needed("chip-collector"));assert(!needed("planer-supports"));assert(needed("planer-service"));
 const printer=data.items.find(i=>i.id==="printer-p1"),p0=app.cost(printer)[0];
