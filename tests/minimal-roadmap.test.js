@@ -37,7 +37,7 @@ app.getInventory().caliper="have";assert(!needed("caliper"));
 assert(Math.abs(app.total()[0]-(prior[0]-caliper.cost[0]))<1e-6);
 change({status:"dust"},"ordered");assert(!needed("dust"));change({status:"dust"},"need");assert(needed("dust"));
 change({price:"dust"},"250","number");assert.deepStrictEqual(plain(app.cost(data.items.find(i=>i.id==="dust"))),[250,250]);
-change({price:"dust"},"","number");assert.deepStrictEqual(plain(app.cost(data.items.find(i=>i.id==="dust"))),[200,400]);
+change({price:"dust"},"","number");assert.deepStrictEqual(plain(app.cost(data.items.find(i=>i.id==="dust"))),[330,350]);
 change({setting:"mask"},"keep");assert(!needed("mask-body"));assert(!needed("mask-filters"));
 change({setting:"planer"},"service");assert(!needed("planer"));assert(!needed("chip-collector"));assert(!needed("planer-supports"));assert(needed("planer-service"));
 const printer=data.items.find(i=>i.id==="printer-p1"),p0=app.cost(printer)[0];
@@ -91,7 +91,7 @@ assert.strictEqual(upgraded.ownerRevision,5);assert.strictEqual(upgraded.roomBar
 assert.strictEqual(memory3.get("roadmap-v1"),old);
 change({setting:"roomBarrier"},"curtain");const curtainTotal=app.total();assert(needed("room-curtain"));assert(!needed("room-panels"));assert(needed("air-outlet"));assert(needed("room-exhaust"));
 change({setting:"roomBarrier"},"panels");const panelTotal=app.total();assert(!needed("room-curtain"));assert(needed("room-panels"));
-assert(Math.abs(panelTotal[0]-curtainTotal[0]-60)<1e-6);assert(Math.abs(panelTotal[1]-curtainTotal[1]-120)<1e-6);
+assert(Math.abs(panelTotal[0]-curtainTotal[0]-80)<1e-6);assert(Math.abs(panelTotal[1]-curtainTotal[1]-180)<1e-6);
 change({status:"room-panels"},"bought");assert(!needed("room-panels"));change({setting:"roomBarrier"},"curtain");assert(needed("room-curtain"));change({setting:"roomBarrier"},"panels");assert(!needed("room-panels"),"Switching alternative preserves purchase status");
 assert.strictEqual(narrow.opening,2700);assert.strictEqual(narrow.openingOffsetKnown,false);assert.strictEqual(narrow.accessConfirmed,false);assert.strictEqual(wide.accessConfirmed,false);
 assert(data.stages.find(x=>x.id==="D3").deps.includes("B2"),"Room trial precedes table fabrication");
