@@ -5685,6 +5685,9 @@
 "s",
 "k90xxo"
 ],
+"tools:base.bits.bahco_km6750": [
+"yrk5ff"
+],
 "tools:base.brackets": [
 "1axdlbs",
 "1",
@@ -5800,6 +5803,9 @@
 "1",
 "l",
 "t"
+],
+"tools:base.screws.roofing": [
+"1e69p58"
 ],
 "tools:bike": [
 "1vvnnbd",
@@ -5924,6 +5930,9 @@
 "q",
 "6"
 ],
+"tools:composite.pe_sheet": [
+"1t8r1bd"
+],
 "tools:compressor": [
 "637ly3",
 "6",
@@ -5990,6 +5999,9 @@
 "t",
 "w"
 ],
+"tools:electrical.wire_sockets": [
+"100oqjd"
+],
 "tools:electronics.desolder": [
 "dwvizc",
 "d",
@@ -6055,7 +6067,8 @@
 "h",
 "f",
 "3",
-"z"
+"z",
+"1u41cdc"
 ],
 "tools:finish.masking_tape": [
 "15amv44"
@@ -6342,6 +6355,9 @@
 "e",
 "a"
 ],
+"tools:mechanics.pvc_pipes": [
+"cib4ho"
+],
 "tools:mechanics.snake": [
 "gx48qh",
 "g",
@@ -6387,6 +6403,12 @@
 "k",
 "u",
 "c"
+],
+"tools:metal.galvanized_roof_sheet": [
+"1100wwd"
+],
+"tools:metal.heavy_brackets": [
+"1j3wryx"
 ],
 "tools:metal.layout": [
 "1o18l90",
@@ -6442,6 +6464,9 @@
 "a",
 "u",
 "s"
+],
+"tools:mineral.concrete_blocks": [
+"g9sj80"
 ],
 "tools:mineral.grouttools": [
 "1enny30",
@@ -6598,7 +6623,8 @@
 "c",
 "y",
 "9",
-"5"
+"5",
+"7mihyg"
 ],
 "tools:pry": [
 "pjl9rl",

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 4,
-  "catalogVersion": 11,
+  "catalogVersion": 12,
   "revision": 0,
   "branches": [
     {
@@ -18103,11 +18103,13 @@
     },
     {
       "id": "printer3d",
-      "title": "3D-принтер или печать на заказ",
-      "es": "impresora 3D",
-      "description": "Покупка не обязательна для первых моделей.",
+      "title": "3D-принтер (Creality K1 Max)",
+      "es": "impresora 3D (Creality K1 Max)",
+      "description": "Скоростной FDM 3D-принтер с закрытой термокамерой и большой областью печати 300×300×300 мм для прототипирования, печати точных функциональных деталей, корпусов, кондукторов и переходников (в мастерской: Creality K1 Max).",
       "branchIds": [
-        "digital"
+        "digital",
+        "composite",
+        "base"
       ]
     },
     {
@@ -18787,9 +18789,9 @@
     },
     {
       "id": "finish.lasur",
-      "title": "Лазурь и защитная пропитка для дерева",
-      "es": "lasur / protector para maderas",
-      "description": "Атмосферостойкое защитно-декоративное покрытие для древесины: защита от ультрафиолета, влаги и биопоражений с сохранением видимой текстуры волокон.",
+      "title": "Лазурь и лак для дерева (защитная пропитка)",
+      "es": "lasur / barniz / protector para maderas",
+      "description": "Атмосферостойкое защитно-декоративное покрытие для древесины (лазурь / лак): защита от ультрафиолета, влаги и биопоражений с сохранением видимой текстуры волокон.",
       "branchIds": [
         "finish",
         "wood",
@@ -19019,6 +19021,94 @@
         "wood",
         "base"
       ]
+    },
+    {
+      "id": "composite.pe_sheet",
+      "title": "Листовой полиэтилен / плотная плёнка (остатки)",
+      "es": "láminas de polietileno / film plástico grueso (restos)",
+      "description": "Отрезы и листы плотного полиэтилена для гидро- и влагозащиты, укрытия оборудования и поверхностей от пыли и краски, а также использования в качестве разделительного слоя при склейке и формовке композитов.",
+      "branchIds": [
+        "composite",
+        "building",
+        "base"
+      ]
+    },
+    {
+      "id": "metal.galvanized_roof_sheet",
+      "title": "Оцинкованная кровельная сталь (листовая / остатки)",
+      "es": "chapa de acero galvanizado para techos (recortes / láminas)",
+      "description": "Отрезки и листы кровельной оцинкованной стали для жестяных работ, защитных фартуков, отливов, экранов и обшивки рабочих поверхностей мастерской.",
+      "branchIds": [
+        "metal",
+        "building",
+        "base"
+      ]
+    },
+    {
+      "id": "metal.heavy_brackets",
+      "title": "Массивные стальные уголки (2 шт.)",
+      "es": "escuadras pesadas de acero / angulares estructurales (2 u.)",
+      "description": "Массивные толстостенные стальные силовые монтажные уголки (2 шт.) для надёжного усиления тяжелонагруженных конструкций, полок, рамы верстака или направляющих.",
+      "branchIds": [
+        "metal",
+        "building",
+        "base"
+      ]
+    },
+    {
+      "id": "mechanics.pvc_pipes",
+      "title": "Трубы ПВХ разного диаметра (обрезки / остатки)",
+      "es": "tubos de PVC de varios diámetros (restos / sobrantes)",
+      "description": "Отрезки пластиковых канализационных и водопроводных труб ПВХ разного диаметра для сантехники, органайзеров, кабельных каналов и самодельной оснастки мастерской.",
+      "branchIds": [
+        "mechanics",
+        "building",
+        "base"
+      ]
+    },
+    {
+      "id": "electrical.wire_sockets",
+      "title": "Электропровода и розетки (2 шт.)",
+      "es": "cables eléctricos y tomacorrientes (2 u.)",
+      "description": "Отрезки монтажного электрического силового кабеля и две розетки для временного или стационарного подключения оборудования, изготовления удлинителей и распределения питания.",
+      "branchIds": [
+        "electrical",
+        "building",
+        "base"
+      ]
+    },
+    {
+      "id": "mineral.concrete_blocks",
+      "title": "Тяжёлые бетонные блоки / кирпичи (4 шт.)",
+      "es": "bloques pesados de hormigón / adoquines de cemento (4 u.)",
+      "description": "Крупные массивные строительные бетонные блоки/кирпичи (4 шт.) для использования в качестве надёжного балласта, пригруза при склеивании мебельных щитов, устойчивых опор или временных фундаментных блоков.",
+      "branchIds": [
+        "mineral",
+        "building",
+        "base"
+      ]
+    },
+    {
+      "id": "base.screws.roofing",
+      "title": "Кровельные саморезы со сверлом (пресс-шайба + EPDM-прокладка)",
+      "es": "tornillos autoperforantes para techos (arandela y goma EPDM)",
+      "description": "Оцинкованные саморезы по металлу и дереву с буром-сверлом, шестигранной головкой, металлической пресс-шайбой и атмосферостойкой уплотнительной резиновой прокладкой EPDM для надёжного и герметичного крепления листового металла и кровли.",
+      "branchIds": [
+        "building",
+        "metal",
+        "base"
+      ]
+    },
+    {
+      "id": "base.bits.bahco_km6750",
+      "title": "Магнитная торцевая бита-насадка Bahco (серия KM6750)",
+      "es": "bocallave magnética para atornillador Bahco KM6750",
+      "description": "Магнитная шестигранная торцевая насадка (бита 1/4\" Bahco серии KM6750) для быстрого, соосного и надёжного закручивания кровельных саморезов и шестигранного крепежа шуруповёртом.",
+      "branchIds": [
+        "base",
+        "building",
+        "metal"
+      ]
     }
   ],
   "events": [
@@ -19241,7 +19331,7 @@
     "sander": "have",
     "brush": "have",
     "wood.combi_square": "have",
-    "finish.lasur": "have",
+    "finish.lasur": "want",
     "land.trowel": "have",
     "land.cultivator": "have",
     "composite.epoxy_putty": "have",
@@ -19283,7 +19373,16 @@
     "base.magnets": "have",
     "glue.ca": "have",
     "wood.pencil": "have",
-    "wood.corner_jig": "have"
+    "wood.corner_jig": "have",
+    "printer3d": "have",
+    "composite.pe_sheet": "have",
+    "metal.galvanized_roof_sheet": "have",
+    "metal.heavy_brackets": "have",
+    "mechanics.pvc_pipes": "have",
+    "electrical.wire_sockets": "have",
+    "mineral.concrete_blocks": "have",
+    "base.screws.roofing": "have",
+    "base.bits.bahco_km6750": "have"
   },
   "focus": [
     "wood",
