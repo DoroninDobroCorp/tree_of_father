@@ -1,6 +1,6 @@
 {
   "schemaVersion": 4,
-  "catalogVersion": 12,
+  "catalogVersion": 13,
   "revision": 0,
   "branches": [
     {
@@ -19109,6 +19109,28 @@
         "building",
         "metal"
       ]
+    },
+    {
+      "id": "digital.filament_pla",
+      "title": "Филамент PLA для 3D-печати (1 кг)",
+      "es": "filamento PLA para impresión 3D (1 kg)",
+      "description": "Катушка термопластичного полимера PLA (1 кг, 1.75 мм) для точной 3D-печати прототипов, шаблонов, кондукторов и деталей оснастки без термоусадки и резкого запаха.",
+      "branchIds": [
+        "digital",
+        "composite",
+        "base"
+      ]
+    },
+    {
+      "id": "digital.filament_abs",
+      "title": "Филамент ABS для 3D-печати (1 кг)",
+      "es": "filamento ABS para impresión 3D (1 kg)",
+      "description": "Катушка конструкционного ударопрочного пластика ABS (1 кг, 1.75 мм) для печати термостойких, прочных функциональных корпусов, адаптеров и деталей механизмов в закрытой термокамере Creality K1 Max.",
+      "branchIds": [
+        "digital",
+        "composite",
+        "base"
+      ]
     }
   ],
   "events": [
@@ -19382,7 +19404,9 @@
     "electrical.wire_sockets": "have",
     "mineral.concrete_blocks": "have",
     "base.screws.roofing": "have",
-    "base.bits.bahco_km6750": "have"
+    "base.bits.bahco_km6750": "have",
+    "digital.filament_pla": "have",
+    "digital.filament_abs": "have"
   },
   "focus": [
     "wood",

@@ -1,12 +1,12 @@
 {
   "app": "svoya-masterskaya",
   "version": 4,
-  "savedAt": "2026-11-14T16:56:26.958355+00:00",
-  "note": "Обновление инвентаря: Creality K1 Max, кровельные саморезы, бита Bahco, провода с розетками, трубы ПВХ, полиэтилен, оцинкованная сталь, уголки, бетонные блоки; лак отмечен want",
+  "savedAt": "2026-11-14T17:27:56.447671+00:00",
+  "note": "Добавлен пластик для 3D-печати: 1 кг PLA и 1 кг ABS",
   "state": {
     "schemaVersion": 4,
-    "catalogVersion": 12,
-    "revision": 324,
+    "catalogVersion": 13,
+    "revision": 325,
     "branches": [
       {
         "id": "base",
@@ -20265,6 +20265,28 @@
           "building",
           "metal"
         ]
+      },
+      {
+        "id": "digital.filament_pla",
+        "title": "Филамент PLA для 3D-печати (1 кг)",
+        "es": "filamento PLA para impresión 3D (1 kg)",
+        "description": "Катушка термопластичного полимера PLA (1 кг, 1.75 мм) для точной 3D-печати прототипов, шаблонов, кондукторов и деталей оснастки без термоусадки и резкого запаха.",
+        "branchIds": [
+          "digital",
+          "composite",
+          "base"
+        ]
+      },
+      {
+        "id": "digital.filament_abs",
+        "title": "Филамент ABS для 3D-печати (1 кг)",
+        "es": "filamento ABS para impresión 3D (1 kg)",
+        "description": "Катушка конструкционного ударопрочного пластика ABS (1 кг, 1.75 мм) для печати термостойких, прочных функциональных корпусов, адаптеров и деталей механизмов в закрытой термокамере Creality K1 Max.",
+        "branchIds": [
+          "digital",
+          "composite",
+          "base"
+        ]
       }
     ],
     "events": [
@@ -21698,7 +21720,9 @@
       "electrical.wire_sockets": "have",
       "mineral.concrete_blocks": "have",
       "base.screws.roofing": "have",
-      "base.bits.bahco_km6750": "have"
+      "base.bits.bahco_km6750": "have",
+      "digital.filament_pla": "have",
+      "digital.filament_abs": "have"
     },
     "focus": [
       "wood",
@@ -21712,11 +21736,6 @@
       "theme": "light"
     },
     "audit": [
-      {
-        "id": "change-bf643797-adf9-428d-b909-adfdf88e17fd",
-        "date": "2026-10-24T01:03:49.157Z",
-        "label": "Добавлен опыт: убрать мастерскую, нашу будущую спальню и первая удобная раскладка инструмента в мастерской"
-      },
       {
         "id": "change-af1d024a-8978-4f5c-a060-3ad9860db54f",
         "date": "2026-10-25T03:38:37.787Z",
@@ -22211,6 +22230,11 @@
         "id": "change-330724ec-9820-449f-9559-87cfa81a9710",
         "date": "2026-11-14T16:56:26.958445+00:00",
         "label": "Обновление набора инструментов и материалов мастерской"
+      },
+      {
+        "id": "change-a6b51c16-bac8-457b-bf37-d1a0407b1f33",
+        "date": "2026-11-14T17:27:56.447755+00:00",
+        "label": "Добавлены расходники 3D-печати: 1 кг PLA и 1 кг ABS"
       }
     ],
     "appliedProposalIds": [],
